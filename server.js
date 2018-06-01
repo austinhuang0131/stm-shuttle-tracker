@@ -13,10 +13,9 @@ var listener = app.listen(process.env.PORT, function () {
 });
 
 app.get("/", (req, res) => {
-  snekfetch.get("https://www.fanfiction.net/s/12954493/1/What-makes-me-feel-this-way").then(r => {
+  snekfetch.get("https://www.fanfiction.net/s/12954493").then(r => {
     var $ = cheerio.load(r.body);
     var chapters = $("#chap_select option");
-    var a = [];
-    chapters.map()
+    res.send((chapters.length / 2).toString());
   });
 })
