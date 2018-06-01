@@ -4,26 +4,19 @@
 // init project
 var express = require('express');
 var app = express();
-var fs = require("fs")
-var db = JSON.parse(fs.readFileSync("./database.json", "utf8"));
-
-app.use(express.static('public'));
-
-app.post("/database", function (request, response) {
-  db.push(request.query);
-  if (db.find(a => {return a.user === request.query.user})) db.slice(db.indexOf(db.find(a => {return a.user === request.query.user})), 0);
-  fs.writeFile("./database.json", JSON.stringify(db), "utf8");
-  response.sendStatus(200);
-});
-app.get("/database", function (request, response) {
-  if (db.find(a => {return a.user === request.query.user}) === undefined) {
-    var o = {user: request.query.user, goal: 60};
-    db.push(o);
-    response.send(o);
-  }
-  else response.send(db.find(a => {return a.user === request.query.user}));
-});
+var fs = require("fs");
+var cheerio = require("cheerio");
+var snekfetch = require("snekfetch");
 
 var listener = app.listen(process.env.PORT, function () {
   console.log('Your app is listening on port ' + listener.address().port);
 });
+
+app.get("/", (req, res) => {
+  snekfetch.get("https://www.fanfiction.net/s/12954493/1/What-makes-me-feel-this-way").then(r => {
+    var $ = cheerio.load(r.body);
+    var chapters = $("#chap_select option");
+    var a = [];
+    chapters.map()
+  });
+})
