@@ -23,5 +23,5 @@ app.get("/", (req, res) => {
   });
 */
   var now = moment();
-  res.send(moment.duration(76400000).format("d [days] hh [hours] mm [minutes]"));
+  res.send(moment.duration(Date.now()).format("d [days] hh [hours] mm [minutes]"));
 })
