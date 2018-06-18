@@ -15,7 +15,8 @@
     "snekfetch": "4.0.4",
     "moment": "^2.22.2",
     "moment-duration-format": "^2.2.2",
-    "request": "^2.87.0"
+    "request": "^2.87.0",
+    "body-parser": "^1.18.3"
   },
   "engines": {
     "node": "8.x"
