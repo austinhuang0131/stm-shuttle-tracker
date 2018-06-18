@@ -26,8 +26,5 @@ app.get("/", (req, res) => {
   var now = moment();
   res.send(moment.duration(Date.now()).format("d [days] hh [hours] mm [minutes]"));
   */
-  snekfetch.get("https://discoin.sidetrip.xyz/transactions", {headers: {Authorization: "80ab72d40aef21028dbf4e68326b6e1cecceeca37347a9e84eda1a8386fbe463"}}).then(r =>
-    res.send(r.body)
-  ).catch(e => res.send(e));
-  /*request("https://discoin.sidetrip.xyz/transactions", {headers: {"Authorization": "80ab72d40aef21028dbf4e68326b6e1cecceeca37347a9e84eda1a8386fbe463"}}, (err, resn, body) => res.send(body))*/
+  request("https://discoin.sidetrip.xyz/transactions", {headers: {"Authorization": req.get("Authorization")}}, (err, resn, body) => res.send(body))
 })
