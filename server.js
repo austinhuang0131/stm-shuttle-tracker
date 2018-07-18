@@ -20,20 +20,8 @@ var listener = app.listen(process.env.PORT, function () {
 app.use(bodyParser.json());
 
 app.get("/", (req, res) => {
-/*  snekfetch.get("https://www.fanfiction.net/s/12954493").then(r => {
-    var $ = cheerio.load(r.body);
-    var chapters = $("#chap_select option");
+  snekfetch.get("https://www.fanfiction.net/s/12954493").then(r => {
+    var chapters = cheerio.load(r.body)("#chap_select option");
     res.send((chapters.length / 2).toString());
   });
-
-  var now = moment();
-  res.send(moment.duration(Date.now()).format("d [days] hh [hours] mm [minutes]"));
-  */
-  res.set('Content-Type', 'application/json');
-  request("https://discoin.sidetrip.xyz/transactions", {headers: {"Authorization": req.get("Authorization")}}, (err, resn, body) => res.send(body))
 })
-
-app.post("/transaction", (req, res) => {
-  res.set('Content-Type', 'application/json');
-  request.post("https://discoin.sidetrip.xyz/transactions", {headers: {"Authorization": req.get("Authorization")}, body: req.body}, (err, resn, body) => res.send(body))
-});
