@@ -3,6 +3,7 @@
 
 // init project
 var express = require('express');
+express.json();
 var app = express();
 var fs = require("fs");
 var request = require("request");
@@ -20,8 +21,8 @@ var listener = app.listen(process.env.PORT, function () {
 app.use(bodyParser.json());
 
 app.get("/", (req, res) => {
-  snekfetch.get("https://www.fanfiction.net/s/12954493").then(r => {
+  /*snekfetch.get("https://www.fanfiction.net/s/12954493").then(r => {
     var chapters = cheerio.load(r.body)("#chap_select option");
     res.send((chapters.length / 2).toString());
-  });
+  });*/
 })
