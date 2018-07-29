@@ -6,13 +6,9 @@ var express = require('express');
 express.json();
 var app = express();
 var fs = require("fs");
-var request = require("request");
-var cheerio = require("cheerio");
 var snekfetch = require("snekfetch");
-var moment = require("moment");
+var request = require("request");
 var bodyParser = require('body-parser');
-
-require("moment-duration-format")(moment);
 
 var listener = app.listen(process.env.PORT, function () {
   console.log('Your app is listening on port ' + listener.address().port);
@@ -21,8 +17,12 @@ var listener = app.listen(process.env.PORT, function () {
 app.use(bodyParser.json());
 
 app.get("/", (req, res) => {
-  snekfetch.get("https://www.fanfiction.net/s/9876543210").then(r => {
-    var chapters = cheerio.load(r.body)("#chap_select option");
-    res.send((chapters.length / 2).toString());
-  });
+  request.post("https://oauth.secure.pixiv.net/auth/token", {form: {
+    "grant_type":"password",
+    "username":"austinhuang0131@icloud.com",
+    "password":"metagon123",
+    "get_secure_url":"1",
+    "client_id":"KzEZED7aC0vird8jWyHM38mXjNTY",
+    "client_secret":"W9JZoJe00qPvJsiyCGT3CCtC6ZUtdpKpzMbNlUGP"
+  }}, (e, r, b) => {console.log(b)})
 })
