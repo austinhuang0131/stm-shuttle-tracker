@@ -14,7 +14,8 @@
     "request": "^2.87.0",
     "body-parser": "^1.18.3",
     "pixiv-app-api": "^0.11.1",
-    "pixiv-img": "^0.3.1"
+    "pixiv-img": "^0.3.1",
+    "cloudinary": "^1.11.0"
   },
   "engines": {
     "node": "8.x"
