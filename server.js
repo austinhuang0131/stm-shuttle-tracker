@@ -19,5 +19,5 @@ var listener = app.listen(process.env.PORT, function () {
 app.use(bodyParser.json());
 
 app.get("/", (req, res) => {
-//  pixiv.searchIllust("succubus").then(r => pixivImg(r.illusts[Math.floor(Math.random() * r.illusts.length)].imageUrls.large).then(output => {cloudinary.v2.uploader.upload(output, (e, r) => {res.send(r)})}));
+  pixiv.searchIllust("manga").then(r => res.send(r.illusts[Math.floor(Math.random() * r.illusts.length)]));
 })
