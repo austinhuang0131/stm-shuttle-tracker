@@ -18,5 +18,5 @@ var listener = app.listen(process.env.PORT, function () {
 app.use(bodyParser.json());
 
 app.get("/", (req, res) => {
-  pixiv.searchIllust("Succubus", {per_page: 100, mode: "tag"}).then(a => res.send(a));
+  res.send(req.get("Accept-Language"));
 })
