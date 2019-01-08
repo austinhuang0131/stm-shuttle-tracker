@@ -18,5 +18,5 @@ var listener = app.listen(process.env.PORT, function () {
 app.use(bodyParser.json());
 
 app.get("/", (req, res) => {
-  res.send(req.get("Accept-Language"));
+  res.send(req.get("x-forwarded-for"));
 })
