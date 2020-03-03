@@ -17,7 +17,6 @@ app.use(bodyParser.json());
 app.get("/", (req, res) => {
   request("https://api.stm.info/pub/od/gtfs-rt/ic/v1/vehiclePositions", {method: "POST", headers: {apikey: "l7xx37a10aa967e44c2690c564d094e6abc7"}, encoding: null}, (e,r,b) => {
     let feed = GtfsRealtimeBindings.FeedMessage.decode(b);
-    console.log(feed.entity.filter(f => f.vehicle.trip.route_id === "12")[0])
-    res.send(feed.entity.filter(f => f.vehicle.trip.route_id === "12").map(r => "Bus number " + r.id + " is currently at stop sequence " + r.vehicle.current_stop_sequence + " ("+r.vehicle.position.latitude + ", " + r.vehicle.position.longitude + ")").join("<br>"));
+    res.send(feed.entity.filter(f => f.vehicle.trip.route_id === "12").map(r => "Bus number " + r.id + " is currently "+(r.vehicle.current_status === 2 ? "going to" : "at")+" stop no. " + r.vehicle.current_stop_sequence + " ("+r.vehicle.position.latitude + ", " + r.vehicle.position.longitude + ") with trip #"+r.vehicle.trip.id).join("<br>")+"<br><br>"+JSON.stringify(feed.entity.filter(f => f.vehicle.trip.route_id === "12")));
   })
 })
