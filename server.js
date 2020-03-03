@@ -3,7 +3,7 @@
 
 // init project
 var express = require('express');
-var fetch = require('request-promise');
+var request = require('request');
 express.json();
 var app = express();
 var bodyParser = require('body-parser');
@@ -13,13 +13,11 @@ var listener = app.listen(process.env.PORT, function () {
 });
 
 app.use(bodyParser.json());
-console.log(GtfsRealtimeBindings)
 
 app.get("/", (req, res) => {
-  fetch("https://api.stm.info/pub/od/gtfs-rt/ic/v1/tripUpdates", {method: "POST", headers: {apikey: "l7xx37a10aa967e44c2690c564d094e6abc7"}})
-  .then(body => {
-    res.send(body)
-    let feed = GtfsRealtimeBindings.FeedMessage.decode(body.toString("base64"));
+  request("https://api.stm.info/pub/od/gtfs-rt/ic/v1/tripUpdates", {method: "POST", headers: {apikey: "l7xx37a10aa967e44c2690c564d094e6abc7", encoding: null}}, (e,r,b) => {
+    res.send(b)
+    let feed = GtfsRealtimeBindings.FeedMessage.decode(Buffer.from(b));
     console.log(feed.entity)
   })
 })
