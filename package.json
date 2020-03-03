@@ -13,7 +13,7 @@
     "express": "^4.17.1",
     "request": "^2.88.2",
     "body-parser": "^1.19.0",
-    "gtfs-realtime-bindings": "^0.0.5"
+    "gtfs-realtime-bindings": "0.0.4"
   },
   "engines": {
     "node": "10.x"
