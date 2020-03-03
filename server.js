@@ -3,14 +3,11 @@
 
 // init project
 var express = require('express');
+var fetch = require('request-promise');
 express.json();
 var app = express();
-var fs = require("fs");
-var Pixiv = require("pixiv-app-api");
-var pixiv = new Pixiv("austinhuang0131@icloud.com", "metagon123");
-var pixivImg = require("pixiv-img");
 var bodyParser = require('body-parser');
-var cloudinary = require('cloudinary');
+var GtfsRealtimeBindings = require('gtfs-realtime-bindings');
 var listener = app.listen(process.env.PORT, function () {
   console.log('Your app is listening on port ' + listener.address().port);
 });
@@ -18,5 +15,10 @@ var listener = app.listen(process.env.PORT, function () {
 app.use(bodyParser.json());
 
 app.get("/", (req, res) => {
-  res.send(req.get("x-forwarded-for"));
+  fetch("https://api.stm.info/pub/od/gtfs-rt/ic/v1/tripUpdates", {method: "POST", headers: {apikey: "l7xx37a10aa967e44c2690c564d094e6abc7"}})
+  .then(body => {
+    console.log(body)
+    let feed = GtfsRealtimeBindings.transit_realtime.TripUpdate.decode(body);
+    res.send(feed)
+  })
 })
