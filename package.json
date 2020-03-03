@@ -1,10 +1,8 @@
 {
-  "//1": "describes your app and its dependencies",
-  "//2": "https://docs.npmjs.com/files/package.json",
-  "//3": "updating this file will download and update your packages",
-  "name": "my-glitch-app",
+  "name": "maribus",
   "version": "0.0.1",
-  "description": "What am I about?",
+  "author": "Austin Huang <im@austinhuang.me> (https://austinhuang.me)",
+  "description": "Checks STM shuttle buses (mainly in Marianopolis)",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"
@@ -12,19 +10,9 @@
   "dependencies": {
     "express": "^4.17.1",
     "request": "^2.88.2",
-    "body-parser": "^1.19.0",
     "gtfs-realtime-bindings": "0.0.4"
   },
   "engines": {
     "node": "10.x"
-  },
-  "repository": {
-    "url": "https://glitch.com/edit/#!/welcome-project"
-  },
-  "license": "MIT",
-  "keywords": [
-    "node",
-    "glitch",
-    "express"
-  ]
+  }
 }
