@@ -15,8 +15,8 @@ var listener = app.listen(process.env.PORT, function () {
 app.use(bodyParser.json());
 
 app.get("/", (req, res) => {
-  request("https://api.stm.info/pub/od/gtfs-rt/ic/v1/tripUpdates", {method: "POST", headers: {apikey: "l7xx37a10aa967e44c2690c564d094e6abc7"}, encoding: null}, (e,r,b) => {
+  request("https://api.stm.info/pub/od/gtfs-rt/ic/v1/vehiclePositions", {method: "POST", headers: {apikey: "l7xx37a10aa967e44c2690c564d094e6abc7"}, encoding: null}, (e,r,b) => {
     let feed = GtfsRealtimeBindings.FeedMessage.decode(b);
-    res.send(feed)
+    res.send(feed/*.entity.filter(f => f.trip.route_id === "470")[0]*/)
   })
 })
