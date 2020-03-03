@@ -17,7 +17,7 @@
     "request-promise": "^4.2.5"
   },
   "engines": {
-    "node": "10.x"
+    "node": "8.x"
   },
   "repository": {
     "url": "https://glitch.com/edit/#!/welcome-project"
