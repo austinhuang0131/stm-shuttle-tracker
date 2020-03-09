@@ -10,7 +10,8 @@
   "dependencies": {
     "express": "^4.17.1",
     "request": "^2.88.2",
-    "gtfs-realtime-bindings": "0.0.4"
+    "gtfs-realtime-bindings": "0.0.4",
+    "quick.db": "^6.3.2"
   },
   "engines": {
     "node": "10.x"

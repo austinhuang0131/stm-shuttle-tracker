@@ -24,5 +24,5 @@ app.get("/:route", (req, res) => {
 });
 
 app.get("/", (req, res) => {
-  res.send("")
+  res.send("Work in progress... Contact im[at]austinhuang.me")
 })
