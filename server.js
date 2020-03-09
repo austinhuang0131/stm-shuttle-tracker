@@ -30,6 +30,7 @@ setInterval(() => {
 
 app.get("/:school", (req, res) => {
   routes.fetch(req.params.school).then(async x => {
+    let t = await DB.fetch("time");
     if (!x) res.send("You sure you're typing the school name right?");
     else if (x.length === 0) res.send("No buses are online.")
     else res.send(x.map(r => {
@@ -39,7 +40,8 @@ app.get("/:school", (req, res) => {
         " bus, scheduled at <b>" + list[r.id].time +
         "</b>, is " + 
         (r.vehicle.current_status === 2 ? "going to " : "at ") +
-        routes(req.params.school).stops[(list[r.id].up ? "u" : "d") + r.vehicle.current_stop_sequence] + ".";
+        routes(req.params.school).stops[(list[r.id].up ? "u" : "d") + r.vehicle.current_stop_sequence] +
+        "at " + new Date(t).toString().split(" ")[4] + ".";
       else return "Bus number " + r.id + " is currently "+(r.vehicle.current_status === 2 ? "going to" : "at")+" stop no. " + r.vehicle.current_stop_sequence + " ("+r.vehicle.position.latitude + ", " + r.vehicle.position.longitude + ") with trip #"+r.vehicle.trip.trip_id
     }).join("<br><br>"))
   })
