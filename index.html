@@ -6,8 +6,21 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-  <div>
-    
+  <script>
+    if (new Date().getUTCHours() > 23 || new Date().getUTCHours() < 11) {
+        $('#closed').css('display','inline');
+        $('#open').css('display','none')
+    }
+  </script>
+  <div id="closed" style="display:none">
+    <p>
+      Cette outil est seulement disponible <b>entre 7:00 et 20:00</b>, à la heure de l'Est.
+    </p>
+    <p>
+      This tracker is only available <b>between 7:00am and 8:00pm</b>, Eastern Standard Time.
+    </p>
+  </div>
+  <div id="open">
     <p>Track STM "École" buses.</p>
     <p>This unofficial service is offered to the following cégeps:</p>
     <ul>

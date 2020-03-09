@@ -16,6 +16,20 @@
 <body>
 
 [OLD]
+  <script>
+    if (new Date().getUTCHours() > 23 || new Date().getUTCHours() < 11) {
+        $('#closed').css('display','inline');
+        $('#mapid').css('display','none')
+    }
+  </script>
+  <div id="closed" style="display:none">
+    <p>
+      Cette outil est seulement disponible <b>entre 7:00 et 20:00</b>, à la heure de l'Est.
+    </p>
+    <p>
+      This tracker is only available <b>during 7:00am ~ 8:00pm</b>, Eastern Standard Time.
+    </p>
+  </div>
 
 <div id="mapid" style="width: 100%; height: 400px;"></div>
 <p><a href="./">Back to homepage</a>. Made by <a href="https://austinhuang.me">Austin Huang</a>.</p>
