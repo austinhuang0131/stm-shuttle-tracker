@@ -11,8 +11,13 @@
     <li><a href="/marianopolis">Marianopolis</a> (Includes direction & stop interpreter)</li>
     <li><a href="/andre-laurendeau">André-Laurendeau</a> (Just raw data at this moment)</li>
   </ul>
+  <p>Notes:</p>
+  <ul>
+    <li>This tracker pings the STM API every <b>45</b> seconds.</li>
+    <li>This tracker <b>will NOT update</b> between 7:00pm and 7:00am. This is necessary to respect the API ratelimits imposed by the STM.</li>
+    <li>Trip IDs <b>may be guessed.</b> If there is any inaccuracies regarding the direction of a bus ("It's going to the metro station but tracker says it's going to the school???"), <a href="https://austinhuang.me/contact">report them to me.</a></li>
+  </ul>
   <p>Made by <a href="https://austinhuang.me">Austin Huang</a>.</p>
-  <br />
-  <p><small>By using this tool, you agree to <a href="http://www.stm.info/en/about/developers/terms-use">The STM’s Terms of use for GTFS and API</a>. Data are sourced directly from the STM and are for reference only.</small></p>
+  <p><small>By using this tool, you agree to the terms and conditions imposed by <a href="http://www.stm.info/en/about/developers/terms-use">the STM</a>, <a href="https://glitch.com/legal/">Glitch</a>, and <a href="https://www.cloudflare.com/terms/">Cloudflare</a>. Data are sourced directly from the STM and are for reference only.</small></p>
 </body>
 </html>
