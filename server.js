@@ -27,10 +27,13 @@ setInterval(() => {
   );
 }, 90000);
 
-// feed.entity.filter(f => f.vehicle.trip.route_id === req.params.route
-
 app.get("/:school", (req, res) => {
-  routes.get(req.params.school)
+  routes.fetch(req.params.school).then(r => {
+    if (!r) res.send("No data available.");
+    res.send(r.map(b => 
+      "The bus, " + 
+    ))
+  })
 });
 
 app.get("/", (req, res) => {
