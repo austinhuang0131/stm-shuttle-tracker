@@ -28,13 +28,18 @@ setInterval(() => {
 }, 90000);
 
 app.get("/:school", (req, res) => {
-  routes.fetch(req.params.school).then(r => {
-    if (!r) res.send("No data available.");
-    res.send(r.map(b => 
-      "The bus, " + 
+  routes.fetch(req.params.school).then(x => {
+    if (!x) res.send("No data available.");
+    res.send(x.map(r => 
+      "This " + 
+      (list[r.id].up ? "school-bound" : "home-bound") +
+      " bus, scheduled at <b>" + list[r.id].time +
+      "</b>, is currently at " + routes(req.params.school)
     ))
   })
 });
+
+//     res.send(feed.entity.filter(f => f.vehicle.trip.route_id === req.params.route).map(r => "Bus number " + r.id + " is currently "+(r.vehicle.current_status === 2 ? "going to" : "at")+" stop no. " + r.vehicle.current_stop_sequence + " ("+r.vehicle.position.latitude + ", " + r.vehicle.position.longitude + ") with trip #"+r.vehicle.trip.trip_id).join("<br><br>"));
 
 app.get("/", (req, res) => {
   res.send("Work in progress... Contact im[at]austinhuang.me")
