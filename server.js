@@ -82,7 +82,12 @@ app.get("/:school", (req, res) => {
                     ] +
                     "</b> (" +
                     r.vehicle.current_stop_sequence +
-                    ').");'
+                    ") at "+
+                    new Date(t).toLocaleString("en-US", {
+                      timeZone: "America/Montreal",
+                      hour12: false
+                    }).split(" ")[1]
+                    +'.");'
                   );
                 else
                   return (
@@ -128,5 +133,5 @@ app.get("/:school", (req, res) => {
 });
 
 app.get("/", (req, res) => {
-  res.send("Work in progress... Contact im[at]austinhuang.me");
+  res.sendFile(__dirname + "/index.html");
 });
