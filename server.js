@@ -1,13 +1,16 @@
 const express = require("express"),
       request = require("request"),
       GtfsRealtimeBindings = require("gtfs-realtime-bindings"),
-      fs = require("fs");
+      DB = require("quick.db"),
+      routes = new DB.table("routes"),
+      list = require("./list.json"),
+      routelist = require("./routes.json");
 var app = express();
 var listener = app.listen(process.env.PORT, function() {
   console.log("Your app is listening on port " + listener.address().port);
 });
 
-app.get("/:route", (req, res) => {
+setInterval(() => {
   request(
     "https://api.stm.info/pub/od/gtfs-rt/ic/v1/vehiclePositions",
     {
@@ -17,10 +20,17 @@ app.get("/:route", (req, res) => {
     },
     (e, r, b) => {
       let feed = GtfsRealtimeBindings.FeedMessage.decode(b);
-      res.send(
-      );
+      Object.keys(routelist).map(s => {
+        routes.set(s, feed.entity.filter(f => f.vehicle.trip.route_id === routelist[s]));
+      });
     }
   );
+}, 90000);
+
+// feed.entity.filter(f => f.vehicle.trip.route_id === req.params.route
+
+app.get("/:school", (req, res) => {
+  routes.get(req.params.school)
 });
 
 app.get("/", (req, res) => {
