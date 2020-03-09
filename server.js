@@ -11,6 +11,7 @@ var listener = app.listen(process.env.PORT, function() {
 });
 
 setInterval(() => {
+  DB.set("time", Date.now());
   request(
     "https://api.stm.info/pub/od/gtfs-rt/ic/v1/vehiclePositions",
     {
@@ -28,14 +29,19 @@ setInterval(() => {
 }, 90000);
 
 app.get("/:school", (req, res) => {
-  routes.fetch(req.params.school).then(x => {
-    if (!x) res.send("No data available.");
-    res.send(x.map(r => 
-      "This " + 
-      (list[r.id].up ? "school-bound" : "home-bound") +
-      " bus, scheduled at <b>" + list[r.id].time +
-      "</b>, is currently at " + routes(req.params.school)
-    ))
+  routes.fetch(req.params.school).then(async x => {
+    if (!x) res.send("You sure you're typing the school name right?");
+    else if (x.length === 0) res.send("No buses are online.")
+    else res.send(x.map(r => {
+      if (list[r.id])
+        return "This " + 
+        (list[r.id].up ? "school-bound" : "home-bound") +
+        " bus, scheduled at <b>" + list[r.id].time +
+        "</b>, is " + 
+        (r.vehicle.current_status === 2 ? "going to " : "at ") +
+        routes(req.params.school).stops[(list[r.id].up ? "u" : "d") + r.vehicle.current_stop_sequence] + ".";
+      else return "Bus number " + r.id + " is currently "+(r.vehicle.current_status === 2 ? "going to" : "at")+" stop no. " + r.vehicle.current_stop_sequence + " ("+r.vehicle.position.latitude + ", " + r.vehicle.position.longitude + ") with trip #"+r.vehicle.trip.trip_id
+    }).join("<br><br>"))
   })
 });
 

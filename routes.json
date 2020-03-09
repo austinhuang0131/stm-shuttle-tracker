@@ -2,8 +2,8 @@
   "marianopolis": {
     "route": "124E",
     "stops": {
-      "1": "Vendôme Metro",
-      "2": "Marianopolis"
-    },
+      "u1": "Vendôme Metro",
+      "u2": "Marianopolis"
+    }
   }
 }
