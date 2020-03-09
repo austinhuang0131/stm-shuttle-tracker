@@ -1,6 +1,7 @@
 {
   "marianopolis": {
     "route": "124E",
+    "center": "45.4764, -73.6082",
     "stops": {
       "u1": "Vendôme Metro",
       "u2": "Marianopolis",

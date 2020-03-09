@@ -3,7 +3,7 @@ const express = require("express"),
       GtfsRealtimeBindings = require("gtfs-realtime-bindings"),
       DB = require("quick.db"),
       fs = require("fs"),
-      sample = fs.readFileSync("./sample.txt"),
+      sample = fs.readFileSync("./sample.txt", "utf8"),
       routes = new DB.table("routes"),
       list = require("./list.json"),
       routelist = require("./routes.json");
@@ -38,6 +38,7 @@ app.get("/:school", (req, res) => {
     let t = await DB.fetch("time");
     if (!x) res.send("You sure you're typing the school name right?");
     else if (x.length === 0) res.send("No buses are online.<br><i>List updated at " + t + ".</i>")
+    /*
     else res.send(x.map(r => {
       if (list[r.vehicle.trip.trip_id])
         return "This " + 
@@ -50,27 +51,24 @@ app.get("/:school", (req, res) => {
     }).join("<br><br>") + 
         "<br><br><i>List updated at " + t + ".</i>")
   })
-  
-/*
+  */
     else res.send(sample
       .replace("[BUSES]", x.map(r => {
-      if (list[r.vehicle.trip.trip_id])
-        return "This " + 
-        (list[r.vehicle.trip.trip_id].up ? "school-bound" : "home-bound") +
-        " bus, which departs at <b>" + list[r.vehicle.trip.trip_id].time +
-        "</b>, is " + 
-        (r.vehicle.current_status === 2 ? "going to " : "at ") +
-        routelist[req.params.school].stops[(list[r.vehicle.trip.trip_id].up ? "u" : "d") + r.vehicle.current_stop_sequence] + ".";
-      else return "Bus number " + r.id + " is currently "+(r.vehicle.current_status === 2 ? "going to" : "at")+" stop no. " + r.vehicle.current_stop_sequence + " ("+r.vehicle.position.latitude + ", " + r.vehicle.position.longitude + ") with trip #"+r.vehicle.trip.trip_id
-    })
-    
-    
-    .join("<br><br>") + 
-        "<br><br><i>List updated at " + t + ".</i>")
+        if (list[r.vehicle.trip.trip_id])
+          return "L.marker(["+r.vehicle.position.latitude + ", " + r.vehicle.position.longitude + "]).addTo(mymap).bindPopup(\"This " + 
+          (list[r.vehicle.trip.trip_id].up ? "school-bound" : "home-bound") +
+          " bus, which departs at <b>" + list[r.vehicle.trip.trip_id].time + "</b>, is " + 
+          (r.vehicle.current_status === 2 ? "going to " : "at ") +
+          routelist[req.params.school].stops[(list[r.vehicle.trip.trip_id].up ? "u" : "d") + r.vehicle.current_stop_sequence] + ".\");";
+        else return "L.marker(["+r.vehicle.position.latitude + ", " + r.vehicle.position.longitude + "]).addTo(mymap).bindPopup(\"Bus number " + r.id + " is currently "+(r.vehicle.current_status === 2 ? "going to" : "at")+" stop no. " + r.vehicle.current_stop_sequence + " with trip #"+r.vehicle.trip.trip_id+"\");";
+      }).join("\n"))
+      .replace("[TIME]", "<br><i>List updated at " + t + ".</i>")
+      .replace("[SCHOOL]", req.params.school)
+      .replace("[CENTER]", "["+routelist[req.params.school].center+"]")
+    );
   })
-*/
 });
 
 app.get("/", (req, res) => {
-  res.send("Work in progress... Contact im[at]austinhuang.me")
-})
+  res.send("Work in progress... Contact im[at]austinhuang.me");
+});
