@@ -17,5 +17,9 @@
   "andre-laurendeau": {
     "route": "113E",
     "center": "45.4404, -73.6059"
+  },
+  "rosemont": {
+    "route": "18E",
+    "center": "45.5564/-73.5699"
   }
 }

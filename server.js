@@ -30,7 +30,7 @@ function update() {
           );
           if (buses.length === 0) DB.set("old." + s, "yes");
           else {
-            DB.set("time", Date.now());
+            DB.set("time." + s, Date.now());
             DB.set("old." + s, "no");
             routes.set(s, buses);
           }
@@ -44,7 +44,7 @@ setInterval(update, 45000);
 
 app.get("/:school", (req, res) => {
   routes.fetch(req.params.school).then(async x => {
-    let t = await DB.fetch("time"),
+    let t = await DB.fetch("time." + req.params.school),
       old = await DB.fetch("old." + req.params.school);
     if (!x) res.send("You sure you're typing the school name right?");
     else if (x.length === 0)
@@ -121,7 +121,7 @@ app.get("/:school", (req, res) => {
           .replace(
             "[OLD]",
             old === "yes"
-              ? '<p>There are no buses running currently. This could mean that all the buses are being "En Transit", or a driver forgot to turn on his iBUS... Below are the data acquired ' +
+              ? '<p>There are no buses running currently. This could mean that all the buses are being "En Transit", or a driver forgot to turn on iBUS... Below are the data acquired ' +
                   humanizeDuration(Date.now() - t, { round: true }) +
                   " ago:</p>"
               : "<p>Below are the data acquired " +
