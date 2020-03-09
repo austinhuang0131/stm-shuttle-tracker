@@ -60,7 +60,7 @@ app.get("/:school", (req, res) => {
             "[BUSES]",
             x
               .map(r => {
-                if (list[r.vehicle.trip.trip_id])
+                if (list[req.params.school][r.vehicle.trip.trip_id])
                   return (
                     "L.marker([" +
                     r.vehicle.position.latitude +
@@ -69,15 +69,15 @@ app.get("/:school", (req, res) => {
                     '], {icon: greenIcon}).addTo(mymap).bindPopup("Bus #' +
                     r.id +
                     ", bound for " +
-                    (list[r.vehicle.trip.trip_id].up
+                    (list[req.params.school][r.vehicle.trip.trip_id].up
                       ? routelist[req.params.school].up
                       : routelist[req.params.school].down) +
                     ", which departs at <b>" +
-                    list[r.vehicle.trip.trip_id].time +
+                    list[req.params.school][r.vehicle.trip.trip_id].time +
                     "</b>, is <b>" +
                     (r.vehicle.current_status === 2 ? "going to " : "at ") +
                     routelist[req.params.school].stops[
-                      (list[r.vehicle.trip.trip_id].up ? "u" : "d") +
+                      (list[req.params.school][r.vehicle.trip.trip_id].up ? "u" : "d") +
                         r.vehicle.current_stop_sequence
                     ] +
                     "</b> (" +

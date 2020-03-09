@@ -3,23 +3,30 @@
     "route": "124E",
     "center": "45.4764, -73.6082",
     "stops": {
-      "u1": "Vendôme Metro",
+      "u1": "Métro Vendôme",
       "u2": "Marianopolis",
       "d1": "Marianopolis",
       "d2": "Claremont / Côte-Ste-Antoine",
       "d3": "Claremont / Windsor",
       "d4": "Claremont / Sherbrooke",
-      "d5": "Vendôme Metro"
+      "d5": "Métro Vendôme"
     },
     "up": "Marianopolis",
     "down": "Vendôme"
   },
   "andre-laurendeau": {
     "route": "113E",
-    "center": "45.4404, -73.6059"
+    "center": "45.4404, -73.6059",
+    "stops": {
+      "d1": "Cégep André-Laurendeau",
+      "d6": "Des Trinitaires / D'Aragon",
+      "d7": "Des Trinitaires / Jogues",
+      "d8": "Des Trinitaires / Lamont",
+      "d9": "Métro Angrignon"
+    }
   },
   "rosemont": {
     "route": "18E",
-    "center": "45.5564/-73.5699"
+    "center": "45.5564, -73.5699"
   }
 }
