@@ -3,6 +3,7 @@ const express = require("express"),
       GtfsRealtimeBindings = require("gtfs-realtime-bindings"),
       DB = require("quick.db"),
       fs = require("fs"),
+      humanizeDuration = require('humanize-duration'),
       sample = fs.readFileSync("./sample.txt", "utf8"),
       routes = new DB.table("routes"),
       list = require("./list.json"),
@@ -13,7 +14,6 @@ var listener = app.listen(process.env.PORT, function() {
 });
 
 function update() {
-  DB.set("time", new Date().toLocaleString("en-US", {timeZone: "America/Montreal"}));
   request(
     "https://api.stm.info/pub/od/gtfs-rt/ic/v1/vehiclePositions",
     {
@@ -24,9 +24,13 @@ function update() {
     (e, r, b) => {
       let feed = GtfsRealtimeBindings.FeedMessage.decode(b);
       Object.keys(routelist).map(s => {
-        console.log(s, feed.entity.filter(f => f.vehicle.trip.route_id === routelist[s].route));
-
-        routes.set(s, feed.entity.filter(f => f.vehicle.trip.route_id === routelist[s].route));
+        let buses = feed.entity.filter(f => f.vehicle.trip.route_id === routelist[s].route);
+        if (buses.length === 0) DB.set("old", true);
+        else {
+          DB.set("time", Date.now());
+          DB.set("old", false)
+          routes.set(s, buses);
+        }
       });
     }
   );
@@ -37,9 +41,10 @@ setInterval(update, 90000);
 
 app.get("/:school", (req, res) => {
   routes.fetch(req.params.school).then(async x => {
-    let t = await DB.fetch("time");
+    let t = await DB.fetch("time"),
+        old = await DB.fetch("old");
     if (!x) res.send("You sure you're typing the school name right?");
-    else if (x.length === 0) res.send("No buses are online.<br><i>List updated at " + t + ".</i>")
+    else if (x.length === 0) res.send("No buses are online. Note that buses out of service are simply not trackable.<br><i>List updated at " + t + ".</i>")
     else res.send(sample
       .replace("[BUSES]", x.map(r => {
         if (list[r.vehicle.trip.trip_id])
@@ -52,9 +57,10 @@ app.get("/:school", (req, res) => {
           r.vehicle.current_stop_sequence + ").\");";
         else return "L.marker(["+r.vehicle.position.latitude + ", " + r.vehicle.position.longitude + "], {icon: greenIcon}).addTo(mymap).bindPopup(\"Bus number " + r.id + " is currently "+(r.vehicle.current_status === 2 ? "going to" : "at")+" stop no. " + r.vehicle.current_stop_sequence + " with trip #"+r.vehicle.trip.trip_id+"\");";
       }).join("\n"))
-      .replace("[TIME]", "<br><i>List updated at " + t + ".</i>")
+      .replace("[TIME]", "<br><i>List updated at " + new Date(t).toLocaleString("en-US", {timeZone: "America/Montreal"}) + ".</i>")
       .replace("[SCHOOL]", req.params.school)
       .replace("[CENTER]", "["+routelist[req.params.school].center+"]")
+      .replace("[OLD]", old === true ? "<p>There are no buses running currently. This could mean that all the buses are being \"En Transit\", or a driver forgot to turn on his iBUS... Below are the data acquired "+humanizeDuration(Date.now() - t, { round: true })+" ago</p>" : "<p>Below are the data acquired "+humanizeDuration(Date.now() - t, { round: true })+" ago:</p>")
     );
   })
 });
