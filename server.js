@@ -14,7 +14,7 @@ var listener = app.listen(process.env.PORT, function() {
 });
 
 function update() {
-  if (new Date().getHours() >= 7 && new Date().getHours() <= 19)
+  if (new Date().getHours() >= 11 && new Date().getHours() <= 23)
     request(
       "https://api.stm.info/pub/od/gtfs-rt/ic/v1/vehiclePositions",
       {
@@ -46,7 +46,6 @@ app.get("/:school", (req, res) => {
   routes.fetch(req.params.school).then(async x => {
     let t = await DB.fetch("time"),
       old = await DB.fetch("old." + req.params.school);
-    console.log(old);
     if (!x) res.send("You sure you're typing the school name right?");
     else if (x.length === 0)
       res.send(
