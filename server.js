@@ -10,7 +10,7 @@ var listener = app.listen(process.env.PORT, function() {
   console.log("Your app is listening on port " + listener.address().port);
 });
 
-setInterval(() => {
+function update() {
   DB.set("time", new Date().toLocaleString("en-US", {timeZone: "America/Montreal"}));
   request(
     "https://api.stm.info/pub/od/gtfs-rt/ic/v1/vehiclePositions",
@@ -22,11 +22,14 @@ setInterval(() => {
     (e, r, b) => {
       let feed = GtfsRealtimeBindings.FeedMessage.decode(b);
       Object.keys(routelist).map(s => {
-        routes.set(s, feed.entity.filter(f => f.vehicle.trip.route_id === routelist[s]));
+        routes.set(s, feed.entity.filter(f => f.vehicle.trip.route_id === routelist[s].route));
       });
     }
   );
-}, 90000);
+};
+
+update();
+setInterval(update, 90000);
 
 app.get("/:school", (req, res) => {
   routes.fetch(req.params.school).then(async x => {
@@ -34,13 +37,13 @@ app.get("/:school", (req, res) => {
     if (!x) res.send("You sure you're typing the school name right?");
     else if (x.length === 0) res.send("No buses are online.<br><i>List updated at " + t + ".</i>")
     else res.send(x.map(r => {
-      if (list[r.id])
+      if (list[r.vehicle.trip.trip_id])
         return "This " + 
-        (list[r.id].up ? "school-bound" : "home-bound") +
-        " bus, scheduled at <b>" + list[r.id].time +
+        (list[r.vehicle.trip.trip_id].up ? "school-bound" : "home-bound") +
+        " bus, scheduled at <b>" + list[r.vehicle.trip.trip_id].time +
         "</b>, is " + 
         (r.vehicle.current_status === 2 ? "going to " : "at ") +
-        routes[req.params.school].stops[(list[r.id].up ? "u" : "d") + r.vehicle.current_stop_sequence] + ".";
+        routelist[req.params.school].stops[(list[r.vehicle.trip.trip_id].up ? "u" : "d") + r.vehicle.current_stop_sequence] + ".";
       else return "Bus number " + r.id + " is currently "+(r.vehicle.current_status === 2 ? "going to" : "at")+" stop no. " + r.vehicle.current_stop_sequence + " ("+r.vehicle.position.latitude + ", " + r.vehicle.position.longitude + ") with trip #"+r.vehicle.trip.trip_id
     }).join("<br><br>") + 
         "<br><br><i>List updated at " + t + ".</i>")

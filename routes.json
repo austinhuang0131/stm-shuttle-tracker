@@ -3,7 +3,8 @@
     "route": "124E",
     "stops": {
       "u1": "Vendôme Metro",
-      "u2": "Marianopolis"
+      "u2": "Marianopolis",
+      "d1": "Vendôme Metro"
     }
   },
   "andre-laurendeau": {
