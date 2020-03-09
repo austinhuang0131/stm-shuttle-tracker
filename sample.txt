@@ -24,7 +24,7 @@
 	var mymap = L.map('mapid').setView([CENTER], 15);
   
   var greenIcon = L.icon({
-      iconUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Autobusmontr%C3%A9al.svg/25px-Autobusmontr%C3%A9al.svg.png',
+      iconUrl: 'https://cdn.glitch.com/f760b15e-1eb8-484a-838a-6431059cae3c%2Fbus.png?v=1583781456239',
   });
 
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {

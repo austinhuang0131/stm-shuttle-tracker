@@ -43,11 +43,13 @@ app.get("/:school", (req, res) => {
     else res.send(sample
       .replace("[BUSES]", x.map(r => {
         if (list[r.vehicle.trip.trip_id])
-          return "L.marker(["+r.vehicle.position.latitude + ", " + r.vehicle.position.longitude + "], {icon: greenIcon}).addTo(mymap).bindPopup(\"This " + 
-          (list[r.vehicle.trip.trip_id].up ? "school-bound" : "home-bound") +
-          " bus, which departs at <b>" + list[r.vehicle.trip.trip_id].time + "</b>, is " + 
+          return "L.marker(["+r.vehicle.position.latitude + ", " + r.vehicle.position.longitude + "], {icon: greenIcon}).addTo(mymap).bindPopup(\"Bus #"
+          + r.id + ", bound for " + 
+          (list[r.vehicle.trip.trip_id].up ? routelist[req.params.school].up : routelist[req.params.school].down) +
+          ", which departs at <b>" + list[r.vehicle.trip.trip_id].time + "</b>, is <b>" + 
           (r.vehicle.current_status === 2 ? "going to " : "at ") +
-          routelist[req.params.school].stops[(list[r.vehicle.trip.trip_id].up ? "u" : "d") + r.vehicle.current_stop_sequence] + ".\");";
+          routelist[req.params.school].stops[(list[r.vehicle.trip.trip_id].up ? "u" : "d") + r.vehicle.current_stop_sequence] + "</b> (" +
+          r.vehicle.current_stop_sequence + ").\");";
         else return "L.marker(["+r.vehicle.position.latitude + ", " + r.vehicle.position.longitude + "], {icon: greenIcon}).addTo(mymap).bindPopup(\"Bus number " + r.id + " is currently "+(r.vehicle.current_status === 2 ? "going to" : "at")+" stop no. " + r.vehicle.current_stop_sequence + " with trip #"+r.vehicle.trip.trip_id+"\");";
       }).join("\n"))
       .replace("[TIME]", "<br><i>List updated at " + t + ".</i>")

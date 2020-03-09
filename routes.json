@@ -5,8 +5,14 @@
     "stops": {
       "u1": "Vendôme Metro",
       "u2": "Marianopolis",
-      "d1": "Marianopolis"
-    }
+      "d1": "Marianopolis",
+      "d2": "Claremont / Côte-Ste-Antoine",
+      "d3": "Claremont / Windsor",
+      "d4": "Claremont / Sherbrooke",
+      "d5": "Vendôme Metro"
+    },
+    "up": "Marianopolis",
+    "down": "Vendôme"
   },
   "andre-laurendeau": {
     "route": "113E",
