@@ -11,7 +11,7 @@ var listener = app.listen(process.env.PORT, function() {
 });
 
 setInterval(() => {
-  DB.set("time", Date.now());
+  DB.set("time", new Date().toLocaleString("en-US", {timeZone: "America/Montreal"}));
   request(
     "https://api.stm.info/pub/od/gtfs-rt/ic/v1/vehiclePositions",
     {
@@ -32,7 +32,7 @@ app.get("/:school", (req, res) => {
   routes.fetch(req.params.school).then(async x => {
     let t = await DB.fetch("time");
     if (!x) res.send("You sure you're typing the school name right?");
-    else if (x.length === 0) res.send("No buses are online.<br><i>List updated at " + new Date(t).toString().split(" ")[4] + ".</i>")
+    else if (x.length === 0) res.send("No buses are online.<br><i>List updated at " + t + ".</i>")
     else res.send(x.map(r => {
       if (list[r.id])
         return "This " + 
@@ -43,7 +43,7 @@ app.get("/:school", (req, res) => {
         routes[req.params.school].stops[(list[r.id].up ? "u" : "d") + r.vehicle.current_stop_sequence] + ".";
       else return "Bus number " + r.id + " is currently "+(r.vehicle.current_status === 2 ? "going to" : "at")+" stop no. " + r.vehicle.current_stop_sequence + " ("+r.vehicle.position.latitude + ", " + r.vehicle.position.longitude + ") with trip #"+r.vehicle.trip.trip_id
     }).join("<br><br>") + 
-        "<br><br><i>List updated at " + new Date(t).toString().split(" ")[4] + ".</i>")
+        "<br><br><i>List updated at " + t + ".</i>")
   })
 });
 
