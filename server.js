@@ -15,7 +15,12 @@ var listener = app.listen(process.env.PORT, function() {
 });
 
 function update() {
-  if ((time === "EDT" && new Date().getUTCHours() >= 11 && new Date().getUTCHours() <= 23) || (time === "EST" && new Date().getUTCHours() >= 12))
+  if (
+    (time === "EDT" &&
+      new Date().getUTCHours() >= 11 &&
+      new Date().getUTCHours() <= 23) ||
+    (time === "EST" && new Date().getUTCHours() >= 12)
+  )
     request(
       "https://api.stm.info/pub/od/gtfs-rt/ic/v1/vehiclePositions",
       {
@@ -50,7 +55,7 @@ app.get("/:school", (req, res) => {
     if (!x) res.send("You sure you're typing the school name right?");
     else if (x.length === 0)
       res.send(
-        "<p>Possible database damage detected. <a href=\"https://austinhuang.me/contact\">Contact Austin immediately!</a></p>"
+        '<p>Possible database damage detected. <a href="https://austinhuang.me/contact">Contact Austin immediately!</a></p>'
       );
     else
       res.send(
@@ -74,23 +79,73 @@ app.get("/:school", (req, res) => {
                     ", which departs at <b>" +
                     list[req.params.school][r.vehicle.trip.trip_id].time +
                     "</b>, is <b>" +
-                    (r.vehicle.current_status === 2 ? "going to " : "stopping at ") +
+                    (r.vehicle.current_status === 2
+                      ? "going to "
+                      : "stopping at ") +
                     routelist[req.params.school].stops[
-                      (list[req.params.school][r.vehicle.trip.trip_id].up ? "u" : "d") +
-                        r.vehicle.current_stop_sequence
+                      (list[req.params.school][r.vehicle.trip.trip_id].up
+                        ? "u"
+                        : "d") + r.vehicle.current_stop_sequence
                     ] +
                     "</b> (" +
                     r.vehicle.current_stop_sequence +
-                    ") at "+
-                    new Date(r.vehicle.timestamp.low * 1000).toLocaleString("en-US", {
-                      timeZone: "America/Montreal",
-                      hour12: false
-                    }).split(" ")[1]
-                    +((routelist[req.params.school].uptime && routelist[req.params.school].downtime) ? '.</p><p>The bus is predicted to arrive at '+routelist[req.params.school].up+' in '+humanizeDuration(new Date(new Date().toLocaleString("en-US", {
-                timeZone: "America/Montreal"
-              }).split(",")[0] + list[req.params.school][r.vehicle.trip.trip_id].time) Date.now() + (list[req.params.school][r.vehicle.trip.trip_id].up
-                      ? routelist[req.params.school].uptime
-                      : routelist[req.params.school].downtime)+'</p>");' : '.</p>");')
+                    ") at " +
+                    new Date(r.vehicle.timestamp.low * 1000)
+                      .toLocaleString("en-US", {
+                        timeZone: "America/Montreal",
+                        hour12: false
+                      })
+                      .split(" ")[1] +
+                    (routelist[req.params.school].uptime &&
+                    routelist[req.params.school].downtime
+                      ? ".</p><p>The bus is predicted to arrive at " +
+                        (list[req.params.school][r.vehicle.trip.trip_id].up
+                              ? routelist[req.params.school].up
+                              : routelist[req.params.school].down) +
+                        " in " +
+                        humanizeDuration(
+                          new Date(
+                            new Date()
+                              .toLocaleString("en-US", {
+                                timeZone: "America/Montreal"
+                              })
+                              .split(",")[0] +
+                              " " +
+                              list[req.params.school][r.vehicle.trip.trip_id]
+                                .time +
+                              " " +
+                              time
+                          ).getTime() -
+                            Date.now() +
+                            (list[req.params.school][r.vehicle.trip.trip_id].up
+                              ? routelist[req.params.school].uptime
+                              : routelist[req.params.school].downtime),
+                          { round: true }
+                        ) + ", and come back to " +
+                        (list[req.params.school][r.vehicle.trip.trip_id].up
+                              ? routelist[req.params.school].down
+                              : routelist[req.params.school].up) +
+                        " in " +
+                        humanizeDuration(
+                          new Date(
+                            new Date()
+                              .toLocaleString("en-US", {
+                                timeZone: "America/Montreal"
+                              })
+                              .split(",")[0] +
+                              " " +
+                              list[req.params.school][r.vehicle.trip.trip_id]
+                                .time +
+                              " " +
+                              time
+                          ).getTime() -
+                            Date.now() +
+                            +routelist[req.params.school].uptime
+                            +routelist[req.params.school].downtime,
+                          { round: true }
+                        ) +
+                        '.</p>");'
+                      : '.</p>");')
                   );
                 else
                   return (
