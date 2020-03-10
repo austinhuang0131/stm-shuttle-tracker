@@ -48,6 +48,14 @@ function update() {
 update();
 setInterval(update, 45000);
 
+app.get("/", (req, res) => {
+  res.sendFile(__dirname + "/index.html");
+});
+
+app.get("/changelog", (req, res) => {
+  res.sendFile(__dirname + "/changelog.txt");
+});
+
 app.get("/:school", (req, res) => {
   routes.fetch(req.params.school).then(async x => {
     let t = await DB.fetch("time." + req.params.school),
@@ -188,8 +196,4 @@ app.get("/:school", (req, res) => {
           )
       );
   });
-});
-
-app.get("/", (req, res) => {
-  res.sendFile(__dirname + "/index.html");
 });

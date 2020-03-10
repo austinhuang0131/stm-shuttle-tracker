@@ -1,6 +1,6 @@
 https://stm.austinhuang.me
 
-Inquiries? Feedback? Concerns?
+Inquiries? Feedbacks? Concerns?
 Instagram @austinhuang.me or https://austinhuang.me/contact
 
 === C H A N G E L O G ===
@@ -9,8 +9,11 @@ Version 0.0.3, 2020/03/10
 - Added trip prediction (Marianopolis only)
 
 Version 0.0.2, 2020/03/09
+- This tracker became a *real* thing!
 - Added map
 - Added index.html
 - Mapped trip IDs for Marianopolis
 
-Version 0.0.1, 2020/03/
+Version 0.0.1, 2020/03/03
+- This tracker became a thing...
+- Experimented with raw data.

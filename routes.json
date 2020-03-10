@@ -28,7 +28,15 @@
       "d6": "Des Trinitaires / D'Aragon",
       "d7": "Des Trinitaires / Jogues",
       "d8": "Des Trinitaires / Lamont",
-      "d9": "Métro Angrignon"
+      "d9": "Métro Angrignon",
+      "u8": "Lapierre / Jean-Chevalier",
+      "u7": "Lapierre / Leclerc",
+      "u6": "Cégep André-Laurendeau",
+      "u5": "de la Vérendrye / Ducas",
+      "u4": "Parc Angrignon",
+      "u3": "Des Trinitaires / Dumas",
+      "u2": "Des Trinitaires / Jogues",
+      "u1": "Métro Angrignon"
     },
     "up": "André-Laurendeau",
     "down": "Angrignon"
