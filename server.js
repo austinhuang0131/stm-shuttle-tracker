@@ -29,6 +29,7 @@ function update() {
         encoding: null
       },
       (e, r, b) => {
+        console.log(b)
         let feed = GtfsRealtimeBindings.FeedMessage.decode(b);
         Object.keys(routelist).map(s => {
           let buses = feed.entity.filter(
@@ -59,9 +60,9 @@ app.get("/changelog", (req, res) => {
 app.get("/:school", (req, res) => {
   if (
     (time === "EDT" &&
-      new Date().getUTCHours() >= 11 &&
-      new Date().getUTCHours() <= 23) ||
-    (time === "EST" && new Date().getUTCHours() >= 12)
+      new Date().getUTCHours() < 11 &&
+      new Date().getUTCHours() > 23) ||
+    (time === "EST" && new Date().getUTCHours() < 12)
   ) res.status(503).sendFile(__dirname + "/unavailable.html");
   else if (!list[req.params.school]) res.status(404).send("Invalid school.");
   else routes.fetch(req.params.school).then(async x => {
