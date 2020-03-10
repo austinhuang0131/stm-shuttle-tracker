@@ -12,7 +12,9 @@
       "d5": "Métro Vendôme"
     },
     "up": "Marianopolis",
-    "down": "Vendôme"
+    "down": "Vendôme",
+    "uptime": 600000,
+    "downtime": 600000
   },
   "andre-laurendeau": {
     "route": "113E",

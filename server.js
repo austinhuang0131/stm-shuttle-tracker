@@ -65,7 +65,7 @@ app.get("/:school", (req, res) => {
                     r.vehicle.position.latitude +
                     ", " +
                     r.vehicle.position.longitude +
-                    '], {icon: greenIcon}).addTo(mymap).bindPopup("Bus #' +
+                    '], {icon: greenIcon}).addTo(mymap).bindPopup("<p>Bus #' +
                     r.id +
                     ", bound for " +
                     (list[req.params.school][r.vehicle.trip.trip_id].up
@@ -86,7 +86,11 @@ app.get("/:school", (req, res) => {
                       timeZone: "America/Montreal",
                       hour12: false
                     }).split(" ")[1]
-                    +'.");'
+                    +((routelist[req.params.school].uptime && routelist[req.params.school].downtime) ? '.</p><p>The bus is predicted to arrive at '+routelist[req.params.school].up+' in '+humanizeDuration(new Date(new Date().toLocaleString("en-US", {
+                timeZone: "America/Montreal"
+              }).split(",")[0] + list[req.params.school][r.vehicle.trip.trip_id].time) Date.now() + (list[req.params.school][r.vehicle.trip.trip_id].up
+                      ? routelist[req.params.school].uptime
+                      : routelist[req.params.school].downtime)+'</p>");' : '.</p>");')
                   );
                 else
                   return (
