@@ -73,7 +73,7 @@ app.get("/:school", (req, res) => {
                     ", which departs at <b>" +
                     list[req.params.school][r.vehicle.trip.trip_id].time +
                     "</b>, is <b>" +
-                    (r.vehicle.current_status === 2 ? "going to " : "at ") +
+                    (r.vehicle.current_status === 2 ? "going to " : "stopping at ") +
                     routelist[req.params.school].stops[
                       (list[req.params.school][r.vehicle.trip.trip_id].up ? "u" : "d") +
                         r.vehicle.current_stop_sequence
@@ -93,7 +93,7 @@ app.get("/:school", (req, res) => {
                     r.vehicle.position.latitude +
                     ", " +
                     r.vehicle.position.longitude +
-                    '], {icon: greenIcon}).addTo(mymap).bindPopup("Bus number ' +
+                    '], {icon: greenIcon}).addTo(mymap).bindPopup("Bus ' +
                     r.id +
                     " is currently " +
                     (r.vehicle.current_status === 2 ? "going to" : "at") +

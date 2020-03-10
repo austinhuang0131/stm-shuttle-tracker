@@ -1,5 +1,5 @@
 {
-  "name": "maribus",
+  "name": "stmbus",
   "version": "0.0.1",
   "author": "Austin Huang <im@austinhuang.me> (https://austinhuang.me)",
   "description": "Checks STM shuttle buses (mainly in Marianopolis)",
