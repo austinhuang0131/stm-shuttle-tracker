@@ -184,7 +184,7 @@ app.get("/:school", (req, res) => {
               ".</i>"
           )
           .replace(
-            "[SCHOOL]",
+            /\[SCHOOL\]/g,
             routelist[req.params.school].name +
               ", route " +
               routelist[req.params.school].route

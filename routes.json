@@ -40,8 +40,8 @@
     },
     "up": "André-Laurendeau",
     "down": "Métro Angrignon",
-    "uptime": 360000,
-    "downtime": 420000
+    "uptime": 420000,
+    "downtime": 600000
   },
   "rosemont": {
     "name": "Collège de Rosemont",
