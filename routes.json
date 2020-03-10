@@ -46,11 +46,19 @@
   "rosemont": {
     "name": "Collège de Rosemont",
     "route": "18E",
-    "center": "[45.5564, -73.5699], 13"
+    "center": "[45.5564, -73.5699], 13",
+    "stops": {
+      
+    }
   },
   "lcchs-pacc": {
     "name": "LCCHS / PACC",
     "route": "112E",
-    "center": "[45.4446, -73.6071], 13"
+    "center": "[45.4446, -73.6071], 13",
+    "stops": {
+      
+    },
+    "up": "PACC",
+    "down": "Jolicoeur"
   }
 }
