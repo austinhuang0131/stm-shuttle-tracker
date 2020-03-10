@@ -13,7 +13,7 @@
       "d5": "Métro Vendôme"
     },
     "up": "Marianopolis",
-    "down": "Vendôme",
+    "down": "Métro Vendôme",
     "uptime": 480000,
     "downtime": 600000
   },
@@ -39,7 +39,7 @@
       "u1": "Métro Angrignon"
     },
     "up": "André-Laurendeau",
-    "down": "Angrignon",
+    "down": "Métro Angrignon",
     "uptime": 360000,
     "downtime": 420000
   },
@@ -60,5 +60,15 @@
     },
     "up": "PACC",
     "down": "Jolicoeur"
+  },
+  "regina-assumpta": {
+    "name": "Regina Assumpta",
+    "route": "121E",
+    "center": "[45.5594, -73.6516], 14",
+    "stops": {
+      
+    },
+    "up": "Sauvé Est / Papineau",
+    "down": "Métro Sauvé"
   }
 }
