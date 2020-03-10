@@ -1,9 +1,10 @@
 const express = require("express"),
   request = require("request"),
-  GtfsRealtimeBindings = require("gtfs-realtime-bindings"),
+  GtfsRealtimeBindings = require("gtfs-realtime-bindings"), // Do NOT update to 0.0.5
   DB = require("quick.db"),
   fs = require("fs"),
   humanizeDuration = require("humanize-duration"),
+  time = "EDT", // Change to EST for non-daylight saving time!!!
   sample = fs.readFileSync("./sample.html", "utf8"),
   routes = new DB.table("routes"),
   list = require("./list.json"),
@@ -14,7 +15,7 @@ var listener = app.listen(process.env.PORT, function() {
 });
 
 function update() {
-  if (new Date().getHours() >= 11 && new Date().getHours() <= 23)
+  if ((time === "EDT" && new Date().getUTCHours() >= 11 && new Date().getUTCHours() <= 23) || (time === "EST" && new Date().getUTCHours() >= 12))
     request(
       "https://api.stm.info/pub/od/gtfs-rt/ic/v1/vehiclePositions",
       {
@@ -81,7 +82,7 @@ app.get("/:school", (req, res) => {
                     "</b> (" +
                     r.vehicle.current_stop_sequence +
                     ") at "+
-                    new Date(t).toLocaleString("en-US", {
+                    new Date(r.vehicle.timestamp.low * 1000).toLocaleString("en-US", {
                       timeZone: "America/Montreal",
                       hour12: false
                     }).split(" ")[1]
