@@ -39,6 +39,7 @@ function update() {
             DB.set("time." + s, Date.now());
             DB.set("old." + s, "no");
             routes.set(s, buses);
+            console.log(buses);
           }
         });
       }
@@ -87,9 +88,9 @@ app.get("/:school", (req, res) => {
                     ", which departs at <b>" +
                     list[req.params.school][r.vehicle.trip.tripId].time +
                     "</b>, is <b>" +
-                    (r.vehicle.currentStatus === 2
-                      ? "going to "
-                      : "stopping at ") +
+                    (r.vehicle.currentStatus === 1
+                      ? "stopping at "
+                      : "going to ") +
                     routelist[req.params.school].stops[
                       (list[req.params.school][r.vehicle.trip.tripId].up
                         ? "u"
@@ -165,7 +166,7 @@ app.get("/:school", (req, res) => {
                     '], {icon: greenIcon}).addTo(mymap).bindPopup("Bus ' +
                     r.id +
                     " is currently " +
-                    (r.vehicle.currentStatus === 2 ? "at" : "going to") +
+                    (r.vehicle.currentStatus === 1 ? "at" : "going to") +
                     " stop no. " +
                     r.vehicle.currentStopSequence +
                     " with trip #" +
