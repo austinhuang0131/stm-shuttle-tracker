@@ -47,27 +47,71 @@
     "name": "Collège de Rosemont",
     "route": "18E",
     "center": "[45.5564, -73.5699], 13",
-    "stops": {
-      
-    }
+    "stops": {}
   },
   "lcchs-pacc": {
     "name": "LCCHS / PACC",
     "route": "112E",
     "center": "[45.4446, -73.6071], 13",
     "stops": {
-      
+      "d1": "Champlain / Raymond",
+      "d2": "George / Gamelin (PACC)",
+      "d3": "George / Bishop-Power",
+      "d4": "George / 9e Avenue",
+      "d5": "Broadway / 8e Avenue (LCCHS)",
+      "d6": "Broadway / 6e Avenue",
+      "d7": "Broadway / 4e Avenue",
+      "d8": "Broadway / 2e Avenue",
+      "d9": "Broadway / Alepin",
+      "d10": "Champlain / Centrale",
+      "d11": "Champlain / Parkdale",
+      "d12": "Champlain / Crawford",
+      "d13": "Champlain / No 7100",
+      "d14": "Hôpital Douglas",
+      "d15": "Champlain / Stephens",
+      "d16": "Stephens / No 1482",
+      "d17": "Beurling / Rolland",
+      "d18": "Beurling / Allard (E)",
+      "d19": "Beurling / Brown",
+      "d20": "Beurling / Moffat",
+      "d21": "Champlain / Woodland",
+      "d22": "Champlain / Desmarchais",
+      "d23": "Champlain / 5e Avenue",
+      "d24": "Station Jolicoeur (Drake / Jolicoeur)",
+      "u1": "Station Jolicoeur",
+      "u2": "Champlain / 5e Avenue",
+      "u3": "Champlain / Desmarchais",
+      "u4": "Champlain / Woodland",
+      "u5": "Beurling / Moffat",
+      "u6": "Beurling / Brown",
+      "u7": "Beurling / Allard (O)",
+      "u8": "Beurling / Rolland",
+      "u9": "Rolland / No 1411",
+      "u10": "Rolland / Champlain",
+      "u11": "Champlain / Stephens",
+      "u12": "Hôpital Douglas (Champlain / No 7070)",
+      "u13": "Champlain / No 7100",
+      "u14": "Champlain / Crawford",
+      "u15": "Champlain / Fayolle",
+      "u16": "Champlain / Centrale",
+      "u17": "Champlain / Allion 57003",
+      "u18": "Broadway / 2e Avenue",
+      "u19": "Broadway / 4e Avenue",
+      "u20": "Broadway / 6e Avenue",
+      "u21": "Broadway / 9e Avenue (LCCHS)",
+      "u22": "9e Avenue / George",
+      "u23": "George / 11e Avenue",
+      "u24": "George / Gagné",
+      "u25": "George / Raymond (PACC)"
     },
-    "up": "George / Gamelin (PACC)",
+    "up": "PACC",
     "down": "Métro Jolicoeur"
   },
   "regina-assumpta": {
     "name": "Regina Assumpta",
     "route": "121E",
     "center": "[45.5594, -73.6516], 14",
-    "stops": {
-      
-    },
+    "stops": {},
     "up": "Sauvé Est / Papineau",
     "down": "Métro Sauvé"
   },
@@ -75,9 +119,7 @@
     "name": "Collège de Montréal",
     "route": "168E",
     "center": "[45.4718, -73.5678], 13",
-    "stops": {
-      
-    },
+    "stops": {},
     "up": "Sherbrooke / St-Marc",
     "down": "Île-des-Sœurs"
   }
