@@ -39,7 +39,7 @@ function update() {
             DB.set("time." + s, Date.now());
             DB.set("old." + s, "no");
             routes.set(s, buses);
-            console.log(buses);
+            console.log(s, buses);
           }
         });
       }
