@@ -41,7 +41,7 @@
     "up": "André-Laurendeau",
     "down": "Métro Angrignon",
     "uptime": 420000,
-    "downtime": 600000
+    "downtime": 480000
   },
   "rosemont": {
     "name": "Collège de Rosemont",
@@ -70,5 +70,15 @@
     },
     "up": "Sauvé Est / Papineau",
     "down": "Métro Sauvé"
+  },
+  "college-de-montreal": {
+    "name": "Collège de Montréal",
+    "route": "168E",
+    "center": "[45.4718, -73.5678], 13",
+    "stops": {
+      
+    },
+    "up": "Sherbrooke / St-Marc",
+    "down": "Île-des-Sœurs"
   }
 }
