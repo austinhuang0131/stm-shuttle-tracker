@@ -124,7 +124,7 @@ app.get("/:school", (req, res) => {
                               " " +
                               time
                           ).getTime() -
-                            t +
+                            Date.now() +
                             (list[req.params.school][r.vehicle.trip.trip_id].up
                               ? routelist[req.params.school].uptime
                               : routelist[req.params.school].downtime),
@@ -148,7 +148,7 @@ app.get("/:school", (req, res) => {
                               " " +
                               time
                           ).getTime() -
-                            t +
+                            Date.now() +
                             routelist[req.params.school].uptime +
                             routelist[req.params.school].downtime,
                           { round: true, units: ["m"] }

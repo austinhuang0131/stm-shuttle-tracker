@@ -1,18 +1,27 @@
 https://stm.austinhuang.me
 
 Inquiries? Feedbacks? Concerns?
-Instagram @austinhuang.me or https://austinhuang.me/contact
+- Instagram @austinhuang.me
+- Snapchat @austin0131mtl
+- https://austinhuang.me/contact
 
 === C H A N G E L O G ===
 
 Version 0.0.3, 2020/03/10
-- Added trip prediction (Marianopolis only)
+* Tracker
+- Added trip prediction (Marianopolis and André-Laurendeau only)
+* Schools
+- Added LCCHS/PACC
+- Fixed trip IDs for Marianopolis
 
 Version 0.0.2, 2020/03/09
+* Tracker
 - This tracker became a *real* thing!
 - Added map
 - Added index.html
+* Schools
 - Mapped trip IDs for Marianopolis
+- Added André-Laurendeau and Rosemont
 
 Version 0.0.1, 2020/03/03
 - This tracker became a thing...
