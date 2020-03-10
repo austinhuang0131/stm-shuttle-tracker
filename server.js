@@ -1,6 +1,6 @@
 const express = require("express"),
   request = require("request"),
-  GtfsRealtimeBindings = require("gtfs-realtime-bindings"), // Do NOT update to 0.0.5
+  GtfsRealtimeBindings = require("gtfs-realtime-bindings").transit_realtime,
   DB = require("quick.db"),
   fs = require("fs"),
   humanizeDuration = require("pretty-ms"),
@@ -13,6 +13,8 @@ var app = express();
 var listener = app.listen(process.env.PORT, function() {
   console.log("Your app is listening on port " + listener.address().port);
 });
+
+console.log(GtfsRealtimeBindings)
 
 function update() {
   if (
