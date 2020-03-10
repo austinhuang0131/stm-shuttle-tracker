@@ -30,7 +30,6 @@ function update() {
       },
       (e, r, b) => {
         let feed = GtfsRealtimeBindings.FeedMessage.decode(b);
-        fs.writeFileSync("./feed.json", JSON.stringify(feed), "utf8")
         Object.keys(routelist).map(s => {
           let buses = feed.entity.filter(
             f => f.vehicle.trip.routeId === routelist[s].route
@@ -166,7 +165,7 @@ app.get("/:school", (req, res) => {
                     '], {icon: greenIcon}).addTo(mymap).bindPopup("Bus ' +
                     r.id +
                     " is currently " +
-                    (r.vehicle.currentStatus === 2 ? "going to" : "at") +
+                    (r.vehicle.currentStatus === 2 ? "at" : "going to") +
                     " stop no. " +
                     r.vehicle.currentStopSequence +
                     " with trip #" +
@@ -190,10 +189,10 @@ app.get("/:school", (req, res) => {
             "[OLD]",
             old === "yes"
               ? '<p id="open">There are no buses running currently. This could mean that all the buses are being "En Transit", or a driver forgot to turn on iBUS... Below are the data acquired ' +
-                  humanizeDuration(Date.now() - t, {verbose: true, unitCount: 1}) +
+                  humanizeDuration(Date.now() - t, {verbose: true, unitCount: 1, separateMilliseconds: true}) +
                   " ago:</p>"
               : '<p id="open">Below are the data acquired ' +
-                  humanizeDuration(Date.now() - t, {verbose: true, unitCount: 1}) +
+                  humanizeDuration(Date.now() - t, {verbose: true, unitCount: 1, separateMilliseconds: true}) +
                   " ago:</p>"
           )
       );
