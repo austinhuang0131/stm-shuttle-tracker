@@ -39,7 +39,6 @@ function update() {
             DB.set("time." + s, Date.now());
             DB.set("old." + s, "no");
             routes.set(s, buses);
-            console.log(s, buses);
           }
         });
       }
@@ -51,94 +50,6 @@ setInterval(update, 45000);
 
 app.get("/", (req, res) => {
   res.sendFile(__dirname + "/index.html");
-});
-
-app.get("/:school.txt", (req, res) => {
-  routes.fetch(req.params.school).then(async x => {
-    let t = await DB.fetch("time." + req.params.school),
-      old = await DB.fetch("old." + req.params.school);
-    res.end(
-      "https://stm.austinhuang.me\n\n" +
-        (!x
-          ? "No data available."
-          : x.map(
-              r =>
-                "Bus #" +
-                r.id +
-                ", bound for " +
-                (list[req.params.school][r.vehicle.trip.tripId].up
-                  ? routelist[req.params.school].up
-                  : routelist[req.params.school].down) +
-                ", which departs at " +
-                list[req.params.school][r.vehicle.trip.tripId].time +
-                ", is " +
-                (r.vehicle.currentStatus === 1 ? "stopping at " : "going to ") +
-                routelist[req.params.school].stops[
-                  (list[req.params.school][r.vehicle.trip.tripId].up
-                    ? "u"
-                    : "d") + r.vehicle.currentStopSequence
-                ] +
-                " (" +
-                r.vehicle.currentStopSequence +
-                ") at " +
-                new Date(r.vehicle.timestamp * 1000)
-                  .toLocaleString("en-US", {
-                    timeZone: "America/Montreal",
-                    hour12: false
-                  })
-                  .split(" ")[1] +
-                (routelist[req.params.school].uptime &&
-                routelist[req.params.school].downtime
-                  ? ". The bus is predicted to arrive at " +
-                    (list[req.params.school][r.vehicle.trip.tripId].up
-                      ? routelist[req.params.school].up
-                      : routelist[req.params.school].down) +
-                    " in " +
-                    humanizeDuration(
-                      new Date(
-                        new Date()
-                          .toLocaleString("en-US", {
-                            timeZone: "America/Montreal"
-                          })
-                          .split(",")[0] +
-                          " " +
-                          list[req.params.school][r.vehicle.trip.tripId].time +
-                          " " +
-                          time
-                      ).getTime() -
-                        Date.now() +
-                        (list[req.params.school][r.vehicle.trip.tripId].up
-                          ? routelist[req.params.school].uptime
-                          : routelist[req.params.school].downtime),
-                      { verbose: true, unitCount: 1 }
-                    ) +
-                    ", and come back to " +
-                    (list[req.params.school][r.vehicle.trip.tripId].up
-                      ? routelist[req.params.school].down
-                      : routelist[req.params.school].up) +
-                    " in " +
-                    humanizeDuration(
-                      new Date(
-                        new Date()
-                          .toLocaleString("en-US", {
-                            timeZone: "America/Montreal"
-                          })
-                          .split(",")[0] +
-                          " " +
-                          list[req.params.school][r.vehicle.trip.tripId].time +
-                          " " +
-                          time
-                      ).getTime() -
-                        Date.now() +
-                        routelist[req.params.school].uptime +
-                        routelist[req.params.school].downtime,
-                      { verbose: true, unitCount: 1 }
-                    ) +
-                    "."
-                  : ".")
-            ))
-    , "ascii");
-  });
 });
 
 app.get("/changelog", (req, res) => {
@@ -175,10 +86,10 @@ app.get("/:school", (req, res) => {
                       : routelist[req.params.school].down) +
                     ", which departs at <b>" +
                     list[req.params.school][r.vehicle.trip.tripId].time +
-                    "</b>, is <b>" +
+                    "</b>, is " +
                     (r.vehicle.currentStatus === 1
-                      ? "stopping at "
-                      : "going to ") +
+                      ? "stopping at <b>"
+                      : "going to <b>") +
                     routelist[req.params.school].stops[
                       (list[req.params.school][r.vehicle.trip.tripId].up
                         ? "u"
