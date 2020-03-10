@@ -49,9 +49,7 @@ app.get("/:school", (req, res) => {
     if (!x) res.send("You sure you're typing the school name right?");
     else if (x.length === 0)
       res.send(
-        "No buses are online. Note that buses out of service are simply not trackable.<br><i>List updated at " +
-          t +
-          ".</i>"
+        "<p>Possible database damage detected. <a href=\"https://austinhuang.me/contact\">Contact Austin immediately!</a></p>"
       );
     else
       res.send(

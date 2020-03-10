@@ -4,8 +4,8 @@
     "center": "45.4764, -73.6082",
     "stops": {
       "u1": "Métro Vendôme",
-      "u2": "Marianopolis",
-      "d1": "Marianopolis",
+      "u2": "Marianopolis (NDG / Claremont)",
+      "d1": "Marianopolis (NDG / Claremont)",
       "d2": "Claremont / Côte-Ste-Antoine",
       "d3": "Claremont / Windsor",
       "d4": "Claremont / Sherbrooke",
@@ -18,13 +18,18 @@
     "route": "113E",
     "center": "45.4404, -73.6059",
     "stops": {
-      "d1": "Cégep André-Laurendeau",
+      "d1": "Lapierre / Jean-Chevalier",
+      "d2": "Lapierre / Leclerc",
+      "d3": "Cégep André-Laurendeau",
+      "d4": "de la Vérendrye / Ducas",
       "d5": "Parc Angrignon",
       "d6": "Des Trinitaires / D'Aragon",
       "d7": "Des Trinitaires / Jogues",
       "d8": "Des Trinitaires / Lamont",
       "d9": "Métro Angrignon"
-    }
+    },
+    "up": "André-Laurendeau",
+    "down": "Angrignon"
   },
   "rosemont": {
     "route": "18E",
