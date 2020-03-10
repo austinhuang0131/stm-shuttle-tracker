@@ -57,14 +57,17 @@ app.get("/changelog", (req, res) => {
 });
 
 app.get("/:school", (req, res) => {
-  routes.fetch(req.params.school).then(async x => {
+  if (
+    (time === "EDT" &&
+      new Date().getUTCHours() >= 11 &&
+      new Date().getUTCHours() <= 23) ||
+    (time === "EST" && new Date().getUTCHours() >= 12)
+  ) res.status(503).sendFile(__dirname + "/unavailable.html");
+  else if (!list[req.params.school]) res.status(404).send("Invalid school.");
+  else routes.fetch(req.params.school).then(async x => {
     let t = await DB.fetch("time." + req.params.school),
       old = await DB.fetch("old." + req.params.school);
-    if (!x) res.send("You sure you're typing the school name right?");
-    else if (x.length === 0)
-      res.send(
-        '<p>Possible database damage detected. <a href="https://austinhuang.me/contact">Contact Austin immediately!</a></p>'
-      );
+    if (!x) res.status(501).send("No bus data yet. This could be due to the school being relatively new to the system. Wait a couple of hours.");
     else
       res.send(
         sample
