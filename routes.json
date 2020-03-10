@@ -1,7 +1,8 @@
 {
   "marianopolis": {
+    "name": "Marianopolis College",
     "route": "124E",
-    "center": "45.4764, -73.6082",
+    "center": "[45.4764, -73.6082], 15",
     "stops": {
       "u1": "Métro Vendôme",
       "u2": "Marianopolis (NDG / Claremont)",
@@ -17,8 +18,9 @@
     "downtime": 600000
   },
   "andre-laurendeau": {
+    "name": "Cégep André-Laurendeau",
     "route": "113E",
-    "center": "45.4404, -73.6059",
+    "center": "[45.4404, -73.6059], 14",
     "stops": {
       "d1": "Lapierre / Jean-Chevalier",
       "d2": "Lapierre / Leclerc",
@@ -42,7 +44,13 @@
     "downtime": 420000
   },
   "rosemont": {
+    "name": "Collège de Rosemont",
     "route": "18E",
-    "center": "45.5564, -73.5699"
+    "center": "[45.5564, -73.5699], 13"
+  },
+  "lcchs-pacc": {
+    "name": "LCCHS / PACC",
+    "route": "112E",
+    "center": "[45.4446, -73.6071], 13"
   }
 }

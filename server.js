@@ -183,8 +183,8 @@ app.get("/:school", (req, res) => {
               }) +
               ".</i>"
           )
-          .replace("[SCHOOL]", req.params.school)
-          .replace("[CENTER]", "[" + routelist[req.params.school].center + "]")
+          .replace("[SCHOOL]", routelist[req.params.school].name + ", route " + routelist[req.params.school].route)
+          .replace("[CENTER]", routelist[req.params.school].center)
           .replace(
             "[OLD]",
             old === "yes"
