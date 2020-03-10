@@ -30,9 +30,10 @@ function update() {
       },
       (e, r, b) => {
         let feed = GtfsRealtimeBindings.FeedMessage.decode(b);
+        fs.writeFileSync("./feed.json", JSON.stringify(feed), "utf8")
         Object.keys(routelist).map(s => {
           let buses = feed.entity.filter(
-            f => f.vehicle.trip.route_id === routelist[s].route
+            f => f.vehicle.trip.routeId === routelist[s].route
           );
           if (buses.length === 0) DB.set("old." + s, "yes");
           else {
@@ -72,7 +73,7 @@ app.get("/:school", (req, res) => {
             "[BUSES]",
             x
               .map(r => {
-                if (list[req.params.school][r.vehicle.trip.trip_id])
+                if (list[req.params.school][r.vehicle.trip.tripId])
                   return (
                     "L.marker([" +
                     r.vehicle.position.latitude +
@@ -81,24 +82,24 @@ app.get("/:school", (req, res) => {
                     '], {icon: greenIcon}).addTo(mymap).bindPopup("<p>Bus #' +
                     r.id +
                     ", bound for " +
-                    (list[req.params.school][r.vehicle.trip.trip_id].up
+                    (list[req.params.school][r.vehicle.trip.tripId].up
                       ? routelist[req.params.school].up
                       : routelist[req.params.school].down) +
                     ", which departs at <b>" +
-                    list[req.params.school][r.vehicle.trip.trip_id].time +
+                    list[req.params.school][r.vehicle.trip.tripId].time +
                     "</b>, is <b>" +
-                    (r.vehicle.current_status === 2
+                    (r.vehicle.currentStatus === 2
                       ? "going to "
                       : "stopping at ") +
                     routelist[req.params.school].stops[
-                      (list[req.params.school][r.vehicle.trip.trip_id].up
+                      (list[req.params.school][r.vehicle.trip.tripId].up
                         ? "u"
-                        : "d") + r.vehicle.current_stop_sequence
+                        : "d") + r.vehicle.currentStopSequence
                     ] +
                     "</b> (" +
-                    r.vehicle.current_stop_sequence +
+                    r.vehicle.currentStopSequence +
                     ") at " +
-                    new Date(r.vehicle.timestamp.low * 1000)
+                    new Date(r.vehicle.timestamp * 1000)
                       .toLocaleString("en-US", {
                         timeZone: "America/Montreal",
                         hour12: false
@@ -107,7 +108,7 @@ app.get("/:school", (req, res) => {
                     (routelist[req.params.school].uptime &&
                     routelist[req.params.school].downtime
                       ? ".</p><p>The bus is predicted to arrive at " +
-                        (list[req.params.school][r.vehicle.trip.trip_id].up
+                        (list[req.params.school][r.vehicle.trip.tripId].up
                           ? routelist[req.params.school].up
                           : routelist[req.params.school].down) +
                         " in " +
@@ -119,19 +120,19 @@ app.get("/:school", (req, res) => {
                               })
                               .split(",")[0] +
                               " " +
-                              list[req.params.school][r.vehicle.trip.trip_id]
+                              list[req.params.school][r.vehicle.trip.tripId]
                                 .time +
                               " " +
                               time
                           ).getTime() -
                             Date.now() +
-                            (list[req.params.school][r.vehicle.trip.trip_id].up
+                            (list[req.params.school][r.vehicle.trip.tripId].up
                               ? routelist[req.params.school].uptime
                               : routelist[req.params.school].downtime),
                           {verbose: true, unitCount: 1}
                         ) +
                         ", and come back to " +
-                        (list[req.params.school][r.vehicle.trip.trip_id].up
+                        (list[req.params.school][r.vehicle.trip.tripId].up
                           ? routelist[req.params.school].down
                           : routelist[req.params.school].up) +
                         " in " +
@@ -143,7 +144,7 @@ app.get("/:school", (req, res) => {
                               })
                               .split(",")[0] +
                               " " +
-                              list[req.params.school][r.vehicle.trip.trip_id]
+                              list[req.params.school][r.vehicle.trip.tripId]
                                 .time +
                               " " +
                               time
@@ -165,11 +166,11 @@ app.get("/:school", (req, res) => {
                     '], {icon: greenIcon}).addTo(mymap).bindPopup("Bus ' +
                     r.id +
                     " is currently " +
-                    (r.vehicle.current_status === 2 ? "going to" : "at") +
+                    (r.vehicle.currentStatus === 2 ? "going to" : "at") +
                     " stop no. " +
-                    r.vehicle.current_stop_sequence +
+                    r.vehicle.currentStopSequence +
                     " with trip #" +
-                    r.vehicle.trip.trip_id +
+                    r.vehicle.trip.tripId +
                     '");'
                   );
               })
@@ -189,10 +190,10 @@ app.get("/:school", (req, res) => {
             "[OLD]",
             old === "yes"
               ? '<p id="open">There are no buses running currently. This could mean that all the buses are being "En Transit", or a driver forgot to turn on iBUS... Below are the data acquired ' +
-                  humanizeDuration(Date.now() - t, {verbose: true, unitCount: 2, separateMilliseconds: true}) +
+                  humanizeDuration(Date.now() - t, {verbose: true, unitCount: 1}) +
                   " ago:</p>"
               : '<p id="open">Below are the data acquired ' +
-                  humanizeDuration(Date.now() - t, {verbose: true, unitCount: 2, separateMilliseconds: true}) +
+                  humanizeDuration(Date.now() - t, {verbose: true, unitCount: 1}) +
                   " ago:</p>"
           )
       );
