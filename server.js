@@ -108,8 +108,8 @@ app.get("/:school", (req, res) => {
                     routelist[req.params.school].downtime
                       ? ".</p><p>The bus is predicted to arrive at " +
                         (list[req.params.school][r.vehicle.trip.trip_id].up
-                              ? routelist[req.params.school].up
-                              : routelist[req.params.school].down) +
+                          ? routelist[req.params.school].up
+                          : routelist[req.params.school].down) +
                         " in " +
                         humanizeDuration(
                           new Date(
@@ -128,11 +128,12 @@ app.get("/:school", (req, res) => {
                             (list[req.params.school][r.vehicle.trip.trip_id].up
                               ? routelist[req.params.school].uptime
                               : routelist[req.params.school].downtime),
-                          { round: true, units: ['m'] }
-                        ) + ", and come back to " +
+                          { round: true, units: ["m"] }
+                        ) +
+                        ", and come back to " +
                         (list[req.params.school][r.vehicle.trip.trip_id].up
-                              ? routelist[req.params.school].down
-                              : routelist[req.params.school].up) +
+                          ? routelist[req.params.school].down
+                          : routelist[req.params.school].up) +
                         " in " +
                         humanizeDuration(
                           new Date(
@@ -148,9 +149,9 @@ app.get("/:school", (req, res) => {
                               time
                           ).getTime() -
                             Date.now() +
-                            +routelist[req.params.school].uptime
-                            +routelist[req.params.school].downtime,
-                          { round: true, units: ['m'] }
+                            routelist[req.params.school].uptime +
+                            routelist[req.params.school].downtime,
+                          { round: true, units: ["m"] }
                         ) +
                         '.</p>");'
                       : '.</p>");')

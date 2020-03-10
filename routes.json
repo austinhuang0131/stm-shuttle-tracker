@@ -13,7 +13,7 @@
     },
     "up": "Marianopolis",
     "down": "Vendôme",
-    "uptime": 600000,
+    "uptime": 480000,
     "downtime": 600000
   },
   "andre-laurendeau": {
@@ -29,8 +29,6 @@
       "d7": "Des Trinitaires / Jogues",
       "d8": "Des Trinitaires / Lamont",
       "d9": "Métro Angrignon",
-      "u8": "Lapierre / Jean-Chevalier",
-      "u7": "Lapierre / Leclerc",
       "u6": "Cégep André-Laurendeau",
       "u5": "de la Vérendrye / Ducas",
       "u4": "Parc Angrignon",
@@ -39,7 +37,9 @@
       "u1": "Métro Angrignon"
     },
     "up": "André-Laurendeau",
-    "down": "Angrignon"
+    "down": "Angrignon",
+    "uptime": 360000,
+    "downtime": 420000
   },
   "rosemont": {
     "route": "18E",
