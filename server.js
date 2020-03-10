@@ -121,10 +121,10 @@ app.get("/:school", (req, res) => {
           .replace(
             "[OLD]",
             old === "yes"
-              ? '<p>There are no buses running currently. This could mean that all the buses are being "En Transit", or a driver forgot to turn on iBUS... Below are the data acquired ' +
+              ? '<p id="open">There are no buses running currently. This could mean that all the buses are being "En Transit", or a driver forgot to turn on iBUS... Below are the data acquired ' +
                   humanizeDuration(Date.now() - t, { round: true }) +
                   " ago:</p>"
-              : "<p>Below are the data acquired " +
+              : '<p id="open">Below are the data acquired ' +
                   humanizeDuration(Date.now() - t, { round: true }) +
                   " ago:</p>"
           )
