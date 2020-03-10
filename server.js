@@ -3,7 +3,7 @@ const express = require("express"),
   GtfsRealtimeBindings = require("gtfs-realtime-bindings"), // Do NOT update to 0.0.5
   DB = require("quick.db"),
   fs = require("fs"),
-  humanizeDuration = require("humanize-duration"),
+  humanizeDuration = require("pretty-ms"),
   time = "EDT", // Change to EST for non-daylight saving time!!!
   sample = fs.readFileSync("./sample.html", "utf8"),
   routes = new DB.table("routes"),
@@ -128,7 +128,7 @@ app.get("/:school", (req, res) => {
                             (list[req.params.school][r.vehicle.trip.trip_id].up
                               ? routelist[req.params.school].uptime
                               : routelist[req.params.school].downtime),
-                          { round: true, units: ["m"] }
+                          {verbose: true, unitCount: 1}
                         ) +
                         ", and come back to " +
                         (list[req.params.school][r.vehicle.trip.trip_id].up
@@ -151,7 +151,7 @@ app.get("/:school", (req, res) => {
                             Date.now() +
                             routelist[req.params.school].uptime +
                             routelist[req.params.school].downtime,
-                          { round: true, units: ["m"] }
+                          {verbose: true, unitCount: 1}
                         ) +
                         '.</p>");'
                       : '.</p>");')
@@ -189,10 +189,10 @@ app.get("/:school", (req, res) => {
             "[OLD]",
             old === "yes"
               ? '<p id="open">There are no buses running currently. This could mean that all the buses are being "En Transit", or a driver forgot to turn on iBUS... Below are the data acquired ' +
-                  humanizeDuration(Date.now() - t, { round: true }) +
+                  humanizeDuration(Date.now() - t, {verbose: true, unitCount: 2, separateMilliseconds: true}) +
                   " ago:</p>"
               : '<p id="open">Below are the data acquired ' +
-                  humanizeDuration(Date.now() - t, { round: true }) +
+                  humanizeDuration(Date.now() - t, {verbose: true, unitCount: 2, separateMilliseconds: true}) +
                   " ago:</p>"
           )
       );

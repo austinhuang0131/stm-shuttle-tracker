@@ -12,7 +12,7 @@
     "request": "^2.88.2",
     "gtfs-realtime-bindings": "0.0.4",
     "quick.db": "^6.3.2",
-    "humanize-duration": "^3.22.0"
+    "pretty-ms": "^6.0.1"
   },
   "engines": {
     "node": "10.x"
