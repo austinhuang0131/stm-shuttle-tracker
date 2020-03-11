@@ -1,6 +1,5 @@
 {
   "//": {
-    "transsee": "are you transsee.ca? respond in twitter",
     "1": "These are the route data! They're manually collected because STM does not publicize them..." ,
     "2": "The word `up` or `u` means going *to* school, while `down` or `d` means otherwise.",
     "3": "`center` is used to center the map. Times are in miliseconds (javascript duh)",
