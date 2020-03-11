@@ -55,8 +55,8 @@
     "name": "Collège de Rosemont",
     "route": "18E",
     "center": "[45.5564, -73.5699], 13",
-    "stops": {}
-    "period": [[]]
+    "stops": {},
+    "period": [[7, 18]]
   },
   "lcchs-pacc": {
     "name": "LCCHS / PACC",
@@ -116,7 +116,8 @@
     "up": "PACC",
     "down": "Métro Jolicoeur",
     "uptime": 1020000,
-    "downtime": 1200000
+    "downtime": 1200000,
+    "period": [[7, 8], [16, 16]]
   },
   "regina-assumpta": {
     "name": "Regina Assumpta",
@@ -124,7 +125,8 @@
     "center": "[45.5594, -73.6516], 14",
     "stops": {},
     "up": "Sauvé Est / Papineau",
-    "down": "Métro Sauvé"
+    "down": "Métro Sauvé",
+    "period": [[7, 16]]
   },
   "college-de-montreal": {
     "name": "Collège de Montréal",
@@ -142,6 +144,7 @@
       "d8": "Berlioz / de l'Île-des-Sœurs"
     },
     "up": "Sherbrooke / St-Marc",
-    "down": "Île-des-Sœurs"
+    "down": "Île-des-Sœurs",
+    "period": [[7, 8], [15, 16]]
   }
 }

@@ -56,14 +56,22 @@ app.get("/changelog", (req, res) => {
 });
 
 app.get("/:school", (req, res) => {
-  if (
-    (time === "EDT" && new Date().getUTCHours() < 11) ||
+  if (!list[req.params.school]) res.status(404).send("Invalid school.");
+  else if (
+    (time === "EDT" &&
+      !routelist[req.params.school].period.find(
+        p =>
+          p[0] + 4 <= new Date().getUTCHours() &&
+          p[1] + 4 >= new Date().getUTCHours()
+      )) ||
     (time === "EST" &&
-      new Date().getUTCHours() < 12 &&
-      new Date().getUTCHours() !== 0)
+      !routelist[req.params.school].period.find(
+        p =>
+          p[0] + 5 <= new Date().getUTCHours() &&
+          (p[1] + 5 === 24 ? 0 : p[1] + 5) >= new Date().getUTCHours()
+      ))
   )
     res.status(503).sendFile(__dirname + "/unavailable.html");
-  else if (!list[req.params.school]) res.status(404).send("Invalid school.");
   else
     routes.fetch(req.params.school).then(async x => {
       let t = await DB.fetch("time." + req.params.school),
