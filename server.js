@@ -45,7 +45,7 @@ function update() {
     );
 }
 
-setInterval(update, 20000);
+setInterval(update, 30000);
 
 app.get("/", (req, res) => {
   res.sendFile(__dirname + "/index.html");

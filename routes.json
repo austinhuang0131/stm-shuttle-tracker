@@ -14,8 +14,8 @@
     },
     "up": "Marianopolis",
     "down": "Métro Vendôme",
-    "uptime": 480000,
-    "downtime": 600000
+    "uptime": 420000,
+    "downtime": 420000
   },
   "andre-laurendeau": {
     "name": "Cégep André-Laurendeau",
