@@ -21,7 +21,8 @@
     "up": "Marianopolis",
     "down": "Métro Vendôme",
     "uptime": 420000,
-    "downtime": 420000
+    "downtime": 420000,
+    "period": [[7, 9], [13, 19]]
   },
   "andre-laurendeau": {
     "name": "Cégep André-Laurendeau",
@@ -47,13 +48,15 @@
     "up": "André-Laurendeau",
     "down": "Métro Angrignon",
     "uptime": 420000,
-    "downtime": 480000
+    "downtime": 480000,
+    "period": [[7, 18]]
   },
   "rosemont": {
     "name": "Collège de Rosemont",
     "route": "18E",
     "center": "[45.5564, -73.5699], 13",
     "stops": {}
+    "period": [[]]
   },
   "lcchs-pacc": {
     "name": "LCCHS / PACC",
