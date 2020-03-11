@@ -130,7 +130,7 @@ app.get("/:school", (req, res) => {
                                 .split(",")[0] +
                                 " " +
                                 list[req.params.school][r.vehicle.trip.tripId]
-                                  .time +
+                                  .time.replace("?", "") +
                                 " " +
                                 time
                             ).getTime() -
@@ -154,7 +154,7 @@ app.get("/:school", (req, res) => {
                                 .split(",")[0] +
                                 " " +
                                 list[req.params.school][r.vehicle.trip.tripId]
-                                  .time +
+                                  .time.replace("?", "") +
                                 " " +
                                 time
                             ).getTime() -
@@ -204,14 +204,14 @@ app.get("/:school", (req, res) => {
             .replace(
               "[OLD]",
               old === "yes"
-                ? '<p id="open">There are no buses running currently. This could mean that all the buses are being "En Transit", or a driver forgot to turn on iBUS... Below are the data acquired ' +
+                ? '<p>There are no buses running currently. This could mean that all the buses are being "En Transit", or a driver forgot to turn on iBUS... Below are the data acquired ' +
                     humanizeDuration(Date.now() - t, {
                       verbose: true,
                       unitCount: 1,
                       separateMilliseconds: true
                     }) +
                     " ago:</p>"
-                : '<p id="open">Below are the data acquired ' +
+                : '<p>Below are the data acquired ' +
                     humanizeDuration(Date.now() - t, {
                       verbose: true,
                       unitCount: 1,

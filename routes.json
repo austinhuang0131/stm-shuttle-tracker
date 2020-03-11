@@ -105,7 +105,9 @@
       "u25": "George / Raymond (PACC)"
     },
     "up": "PACC",
-    "down": "Métro Jolicoeur"
+    "down": "Métro Jolicoeur",
+    "uptime": 1020000,
+    "downtime": 1200000
   },
   "regina-assumpta": {
     "name": "Regina Assumpta",
