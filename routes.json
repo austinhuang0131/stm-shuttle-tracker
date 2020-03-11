@@ -121,7 +121,14 @@
     "name": "Collège de Montréal",
     "route": "168E",
     "center": "[45.4718, -73.5678], 13",
-    "stops": {},
+    "stops": {
+      "d1": "Sherbrooke / St-Marc",
+      "d2": "Place du Commerce / Provigo",
+      "d3": "Place du Commerce / Centre Le Village",
+      "d4": "Place du Commerce / Cité de l'Île",
+      "d5": "Place du Commerce / René-Lévesque",
+      "d6": "Berlioz / "
+    },
     "up": "Sherbrooke / St-Marc",
     "down": "Île-des-Sœurs"
   }
