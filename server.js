@@ -29,7 +29,6 @@ function update() {
         encoding: null
       },
       (e, r, b) => {
-        console.log(b)
         let feed = GtfsRealtimeBindings.FeedMessage.decode(b);
         Object.keys(routelist).map(s => {
           let buses = feed.entity.filter(
