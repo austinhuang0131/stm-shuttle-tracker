@@ -7,6 +7,13 @@ Inquiries? Feedbacks? Concerns?
 
 === C H A N G E L O G ===
 
+Version 0.0.4, 2020/03/11
+* Tracker
+- 45s interval => 15s interval due to STM approval
+* Schools
+- LCCHS/PACC now with full support (but with guessed schedule)
+- Added Collège de Montréal
+
 Version 0.0.3, 2020/03/10
 * Tracker
 - Added trip prediction (Marianopolis and André-Laurendeau only)
