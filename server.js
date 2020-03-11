@@ -95,8 +95,10 @@ app.get("/:school", (req, res) => {
                         ? routelist[req.params.school].up
                         : routelist[req.params.school].down) +
                       ", which departs at <b>" +
+                      r.vehicle.trip.startTime +
+                      "</b> (Scheduled " +
                       list[req.params.school][r.vehicle.trip.tripId].time +
-                      "</b>, is " +
+                      "), is " +
                       (r.vehicle.currentStatus === 1
                         ? "stopping at <b>"
                         : "going to <b>") +
@@ -129,8 +131,7 @@ app.get("/:school", (req, res) => {
                                 })
                                 .split(",")[0] +
                                 " " +
-                                list[req.params.school][r.vehicle.trip.tripId]
-                                  .time.replace("?", "") +
+                                r.vehicle.trip.startTime +
                                 " " +
                                 time
                             ).getTime() -
@@ -153,8 +154,7 @@ app.get("/:school", (req, res) => {
                                 })
                                 .split(",")[0] +
                                 " " +
-                                list[req.params.school][r.vehicle.trip.tripId]
-                                  .time.replace("?", "") +
+                                r.vehicle.trip.startTime +
                                 " " +
                                 time
                             ).getTime() -
@@ -174,6 +174,8 @@ app.get("/:school", (req, res) => {
                       r.vehicle.position.longitude +
                       '], {icon: greenIcon}).addTo(mymap).bindPopup("Bus ' +
                       r.id +
+                      ", which departed at " +
+                      r.vehicle.trip.startTime +
                       " is currently " +
                       (r.vehicle.currentStatus === 1 ? "at" : "going to") +
                       " stop no. " +

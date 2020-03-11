@@ -10,6 +10,7 @@ Inquiries? Feedbacks? Concerns?
 Version 0.0.4, 2020/03/11
 * Tracker
 - 45s interval => 15s interval due to STM approval
+- Added departure time comparison
 * Schools
 - LCCHS/PACC now with full support (but with guessed schedule)
 - Added Collège de Montréal
