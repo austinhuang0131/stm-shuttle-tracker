@@ -176,7 +176,9 @@ app.get("/:school", (req, res) => {
                       ", which departed at " +
                       r.vehicle.trip.startTime +
                       " is currently " +
-                      (r.vehicle.currentStatus === "STOPPED_AT" ? "at" : "going to") +
+                      (r.vehicle.currentStatus === "STOPPED_AT"
+                        ? "at"
+                        : "going to") +
                       " stop no. " +
                       r.vehicle.currentStopSequence +
                       " with trip #" +
@@ -197,8 +199,9 @@ app.get("/:school", (req, res) => {
             .replace(
               /\[SCHOOL\]/g,
               routelist[req.params.school].name +
-                ", route " +
-                routelist[req.params.school].route
+                " (" +
+                routelist[req.params.school].route +
+                ")"
             )
             .replace("[school]", req.params.school)
             .replace("[CENTER]", routelist[req.params.school].center)
@@ -212,7 +215,7 @@ app.get("/:school", (req, res) => {
                       separateMilliseconds: true
                     }) +
                     " ago:</p>"
-                : '<p>Below are the data acquired ' +
+                : "<p>Below are the data acquired " +
                     humanizeDuration(Date.now() - t, {
                       verbose: true,
                       unitCount: 1,
