@@ -124,10 +124,12 @@
     "stops": {
       "d1": "Sherbrooke / St-Marc",
       "d2": "Place du Commerce / Provigo",
-      "d3": "Place du Commerce / Centre Le Village",
-      "d4": "Place du Commerce / Cité de l'Île",
-      "d5": "Place du Commerce / René-Lévesque",
-      "d6": "Berlioz / "
+      "d3": "Place du Commerce / Cité de l'Île",
+      "d4": "Place du Commerce / René-Lévesque",
+      "d5": "Berlioz / Terry-Fox",
+      "d6": "Berlioz / Place du Soleil",
+      "d7": "Berlioz / Place de la Fontaine",
+      "d8": "Berlioz / Landreville"
     },
     "up": "Sherbrooke / St-Marc",
     "down": "Île-des-Sœurs"
