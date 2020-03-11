@@ -12,6 +12,7 @@ Version 0.0.3, 2020/03/10
 - Added trip prediction (Marianopolis and André-Laurendeau only)
 - Switched from humanize-duration to pretty-ms just to show negative time
 - Finalized data interpreter
+- OpenGraph implementation for Discord embed / Facebook link preview
 * Schools
 - Added LCCHS/PACC
 - Fixed trip IDs for Marianopolis
