@@ -98,7 +98,7 @@ app.get("/:school", (req, res) => {
                       "</b> (Scheduled " +
                       list[req.params.school][r.vehicle.trip.tripId].time +
                       "), is " +
-                      (r.vehicle.currentStatus === 1
+                      (r.vehicle.currentStatus === "STOPPED_AT"
                         ? "stopping at <b>"
                         : "going to <b>") +
                       routelist[req.params.school].stops[
@@ -176,7 +176,7 @@ app.get("/:school", (req, res) => {
                       ", which departed at " +
                       r.vehicle.trip.startTime +
                       " is currently " +
-                      (r.vehicle.currentStatus === 1 ? "at" : "going to") +
+                      (r.vehicle.currentStatus === "STOPPED_AT" ? "at" : "going to") +
                       " stop no. " +
                       r.vehicle.currentStopSequence +
                       " with trip #" +
