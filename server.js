@@ -18,8 +18,12 @@ function update() {
   if (
     (time === "EDT" &&
       new Date().getUTCHours() >= 11 &&
-      new Date().getUTCHours() <= 23) ||
-    (time === "EST" && new Date().getUTCHours() >= 12)
+      new Date().getUTCHours() <= 23 &&
+      new Date().getDay() !== 0 &&
+      new Date().getDay() !== 6) ||
+    (time === "EST" && new Date().getUTCHours() >= 12 &&
+      new Date().getDay() !== 0 &&
+      new Date().getDay() !== 6)
   )
     request(
       "https://api.stm.info/pub/od/gtfs-rt/ic/v1/vehiclePositions",
@@ -69,7 +73,9 @@ app.get("/:school", (req, res) => {
         p =>
           p[0] + 5 <= new Date().getUTCHours() &&
           (p[1] + 5 === 24 ? 0 : p[1] + 5) >= new Date().getUTCHours()
-      ))
+      )) ||
+      new Date().getDay() === 0 ||
+      new Date().getDay() === 6
   )
     res.status(503).sendFile(__dirname + "/unavailable.html");
   else
