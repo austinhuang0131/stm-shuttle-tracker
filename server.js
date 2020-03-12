@@ -48,7 +48,8 @@ function update() {
         });
         feed.entity.filter(f => f.vehicle.trip.routeId.endsWith("E")).map(r => {
           if (gtfstrip.indexOf(r.vehicle.trip.tripId) === -1) {
-            fs.writeFile("./trips.txt", gtfstrip + "\n" + r.vehicle.trip.routeId + ",," + r.vehicle.trip.tripId + "," + r.vehicle.trip.routeId + "-?,?,")
+            gtfstrip = gtfstrip + "\n" + r.vehicle.trip.routeId + ",," + r.vehicle.trip.tripId + "," + r.vehicle.trip.routeId + "-?,?,,0,,";
+            fs.writeFile("./trips.txt", gtfstrip, "utf8")
           }
         });
       }
@@ -61,11 +62,12 @@ app.get("/", (req, res) => {
   res.sendFile(__dirname + "/index.html");
 });
 
-app.get("/changelog", (req, res) => {
-  res.sendFile(__dirname + "/changelog.txt");
+app.get("/faq", (req, res) => {
+  res.sendFile(__dirname + "/faq.html");
 });
 
-app.get("/debug", (req, res) => {
+app.get("/changelog", (req, res) => {
+  res.sendFile(__dirname + "/changelog.txt");
 });
 
 app.get("/:school", (req, res) => {
