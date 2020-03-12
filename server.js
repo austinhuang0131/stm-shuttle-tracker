@@ -10,6 +10,7 @@ const express = require("express"),
   list = require("./list.json"),
   routelist = require("./routes.json");
 var app = express(),
+  gtfsfile = fs.createWriteStream("./trips.txt", {flags:'a'}),
   gtfstrip = fs.readFileSync("./trips.txt", "utf8");
 var listener = app.listen(process.env.PORT, function() {
   console.log("Your app is listening on port " + listener.address().port);
@@ -52,7 +53,6 @@ function update() {
           .map(r => {
             if (gtfstrip.indexOf(r.vehicle.trip.tripId) === -1) {
               gtfstrip =
-                fs.readFileSync("./trips.txt", "utf8") +
                 "\n" +
                 r.vehicle.trip.routeId +
                 ",," +
@@ -61,7 +61,7 @@ function update() {
                 r.vehicle.trip.routeId +
                 "-?,?,,0,," +
                 r.vehicle.trip.startTime;
-              fs.writeFile("./trips.txt", gtfstrip, "utf8", e => console.error);
+              gtfsfile.write("./trips.txt", gtfstrip, "utf8", e => console.error);
             }
           });
       }
