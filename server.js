@@ -52,7 +52,7 @@ function update() {
           .map(r => {
             if (gtfstrip.indexOf(r.vehicle.trip.tripId) === -1) {
               gtfstrip =
-                gtfstrip +
+                fs.readFileSync("./trips.txt", "utf8") +
                 "\n" +
                 r.vehicle.trip.routeId +
                 ",," +
