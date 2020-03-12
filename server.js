@@ -69,6 +69,7 @@ function update() {
           });
       }
     );
+  else gtfsfile.end()
 }
 
 setInterval(update, 30000);
