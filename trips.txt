@@ -11,7 +11,7 @@ route_id,service_id,trip_id,trip_headsign,direction_id,shape_id,wheelchair_acces
 49E,,213453096,49E-?,?,,0,,
 189E,,213454688,189E-?,?,,0,,Polyvalente Pointe-aux-Trembles? (parks in school)
 86E,,213455100,86E-?,?,,0,,
-179E,,213459974,179E-S,?,,0,,École secondaire La Dauversière? (stop 50249)
+179E,,213459974,179E-S,1,,0,,École secondaire La Dauversière? (stop 50249)
 86E,,213450998,86E-?,?,,0,,
 164E,,213461883,164E-?,?,,0,,
 189E,,213451848,189E-?,?,,0,,
@@ -22,8 +22,9 @@ route_id,service_id,trip_id,trip_headsign,direction_id,shape_id,wheelchair_acces
 192E,,213455083,192E-?,?,,0,,
 44E,,213453026,44E-?,?,,0,,
 32E,,213452825,32E-?,?,,0,,
-121E,,213468167,121E-?,?,,0,,12:35:00 Regina Assumpta
+121E,,213468167,121E-W,1,,0,,12:35:00 Regina Assumpta
 191E,,213478620,191E-?,?,,0,,12:40:00 James Lyng
 161E,,213465413,161E-?,?,,0,,12:50:00 Giovanni Palatucci Educational Centre?
 124E,,213495490,124E-N,0,,0,,13:34:00 Marianopolis <= Vendôme
 124E,,213495495,124E-S,1,,0,,13:54:00 Marianopolis => Vendôme
+124E,,213495491,124E-N,0,,0,,14:04:00 Marianopolis <= Vendôme
