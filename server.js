@@ -6,6 +6,7 @@ const express = require("express"),
   humanizeDuration = require("pretty-ms"),
   time = "EDT", // Change to EST for non-daylight saving time!!!
   sample = fs.readFileSync("./sample.html", "utf8"),
+  gtfstrip = fs.readFileSync("./trips.txt", "utf8"),
   routes = new DB.table("routes"),
   list = require("./list.json"),
   routelist = require("./routes.json");
@@ -45,6 +46,11 @@ function update() {
             routes.set(s, buses);
           }
         });
+        feed.entity.filter(f => f.vehicle.trip.routeId.endsWith("E")).map(r => {
+          if (gtfstrip.indexOf(r.vehicle.trip.tripId) === -1) {
+            fs.writeFile("./trips.txt", gtfstrip + "\n" + r.vehicle.trip.routeId + ",," + r.vehicle.trip.tripId + "," + r.vehicle.trip.routeId + "-?,?,")
+          }
+        });
       }
     );
 }
@@ -57,6 +63,9 @@ app.get("/", (req, res) => {
 
 app.get("/changelog", (req, res) => {
   res.sendFile(__dirname + "/changelog.txt");
+});
+
+app.get("/debug", (req, res) => {
 });
 
 app.get("/:school", (req, res) => {
