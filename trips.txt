@@ -59,7 +59,7 @@ route_id,service_id,trip_id,trip_headsign,direction_id,shape_id,wheelchair_acces
 69E,,213469063,69E-?,?,,0,,15:51
 124E,,213495502,124E-S,1,,0,,16:08 Marianopolis => Vendôme https://marianopolis.edu/shuttle
 105E,,213495034,105E-?,?,,0,,16:10
-168E,,213458056,168E-?,?,,0,,15:35
+168E,,213458056,168E-S,1,,0,,15:35 Collège de Montréal => Île-des-Sœurs https://college-montreal.qc.ca/wp-content/uploads/2019/02/Aide-memoire-pour-la-rentr%C3%A9e-2019-2020_fev.pdf
 105E,,213495013,105E-?,?,,0,,16:10
 160E,,213495692,160E-?,?,,0,,16:15
 85E,,213457111,85E-?,?,,0,,15:45
@@ -99,3 +99,4 @@ route_id,service_id,trip_id,trip_headsign,direction_id,shape_id,wheelchair_acces
 124E,,213495506,124E-S,1,,0,,16:52 Marianopolis => Vendôme https://marianopolis.edu/shuttle
 113E,,213479620,113E-?,?,,0,,16:55
 113E,,213479944,113E-?,?,,0,,17:02
+124E,,213495508,124E-?,?,,0,,17:14
