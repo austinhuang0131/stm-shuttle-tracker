@@ -6,11 +6,11 @@ const express = require("express"),
   humanizeDuration = require("pretty-ms"),
   time = "EDT", // Change to EST for non-daylight saving time!!!
   sample = fs.readFileSync("./sample.html", "utf8"),
-  gtfstrip = fs.readFileSync("./trips.txt", "utf8"),
   routes = new DB.table("routes"),
   list = require("./list.json"),
   routelist = require("./routes.json");
-var app = express();
+var app = express(),
+  gtfstrip = fs.readFileSync("./trips.txt", "utf8");
 var listener = app.listen(process.env.PORT, function() {
   console.log("Your app is listening on port " + listener.address().port);
 });
@@ -22,7 +22,8 @@ function update() {
       new Date().getUTCHours() <= 23 &&
       new Date().getDay() !== 0 &&
       new Date().getDay() !== 6) ||
-    (time === "EST" && new Date().getUTCHours() >= 12 &&
+    (time === "EST" &&
+      new Date().getUTCHours() >= 12 &&
       new Date().getDay() !== 0 &&
       new Date().getDay() !== 6)
   )
@@ -46,12 +47,22 @@ function update() {
             routes.set(s, buses);
           }
         });
-        feed.entity.filter(f => f.vehicle.trip.routeId.endsWith("E")).map(r => {
-          if (gtfstrip.indexOf(r.vehicle.trip.tripId) === -1) {
-            gtfstrip = gtfstrip + "\n" + r.vehicle.trip.routeId + ",," + r.vehicle.trip.tripId + "," + r.vehicle.trip.routeId + "-?,?,,0,,";
-            fs.writeFile("./trips.txt", gtfstrip, "utf8")
-          }
-        });
+        feed.entity
+          .filter(f => f.vehicle.trip.routeId.endsWith("E"))
+          .map(r => {
+            if (gtfstrip.indexOf(r.vehicle.trip.tripId) === -1) {
+              gtfstrip =
+                gtfstrip +
+                "\n" +
+                r.vehicle.trip.routeId +
+                ",," +
+                r.vehicle.trip.tripId +
+                "," +
+                r.vehicle.trip.routeId +
+                "-?,?,,0,,";
+              fs.writeFile("./trips.txt", gtfstrip, "utf8", e => console.error);
+            }
+          });
       }
     );
 }
@@ -89,8 +100,8 @@ app.get("/:school", (req, res) => {
           p[0] + 5 <= new Date().getUTCHours() &&
           (p[1] + 5 === 24 ? 0 : p[1] + 5) >= new Date().getUTCHours()
       )) ||
-      new Date().getDay() === 0 ||
-      new Date().getDay() === 6
+    new Date().getDay() === 0 ||
+    new Date().getDay() === 6
   )
     res.status(503).sendFile(__dirname + "/unavailable.html");
   else
