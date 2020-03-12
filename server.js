@@ -10,7 +10,7 @@ const express = require("express"),
   list = require("./list.json"),
   routelist = require("./routes.json");
 var app = express(),
-  gtfsfile = fs.createWriteStream("./trips.txt", {flags:'a'}),
+  gtfsfile = fs.createWriteStream("./trips.txt", { flags: "a" }),
   gtfstrip = fs.readFileSync("./trips.txt", "utf8");
 var listener = app.listen(process.env.PORT, function() {
   console.log("Your app is listening on port " + listener.address().port);
@@ -51,17 +51,20 @@ function update() {
         feed.entity
           .filter(f => f.vehicle.trip.routeId.endsWith("E"))
           .map(r => {
+            gtfstrip = fs.readFileSync("./trips.txt", "utf8");
             if (gtfstrip.indexOf(r.vehicle.trip.tripId) === -1) {
-              gtfstrip =
+              gtfsfile.write(
                 "\n" +
-                r.vehicle.trip.routeId +
-                ",," +
-                r.vehicle.trip.tripId +
-                "," +
-                r.vehicle.trip.routeId +
-                "-?,?,,0,," +
-                r.vehicle.trip.startTime.replace(/:00$/g, "");
-              gtfsfile.write(gtfstrip, "utf8", e => console.error);
+                  r.vehicle.trip.routeId +
+                  ",," +
+                  r.vehicle.trip.tripId +
+                  "," +
+                  r.vehicle.trip.routeId +
+                  "-?,?,,0,," +
+                  r.vehicle.trip.startTime.replace(/:00$/g, ""),
+                "utf8",
+                e => console.error
+              );
             }
           });
       }
