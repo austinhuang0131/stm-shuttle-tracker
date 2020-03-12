@@ -103,3 +103,7 @@ route_id,service_id,trip_id,trip_headsign,direction_id,shape_id,wheelchair_acces
 124E,,213495508,124E-S,1,,0,,17:14 Marianopolis College => Vendôme https://marianopolis.edu/shuttle
 113E,,213479470,113E-E,0,,0,,17:24 Cégep André-Laurendeau => Angrignon https://www.claurendeau.qc.ca/se-rendre-au-cegep/#113E
 124E,,213495510,124E-S,1,,0,,17:36 Marianopolis College => Vendôme https://marianopolis.edu/shuttle
+18E,,213463904,18E-?,?,,0,,17:52
+113E,,213479860,113E-?,?,,0,,17:41
+171E,,213496527,171E-?,?,,0,,17:50 Collège de Bois-de-Boulogne
+18E,,213464416,18E-?,?,,0,,17:59
