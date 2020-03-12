@@ -60,8 +60,8 @@ function update() {
                 "," +
                 r.vehicle.trip.routeId +
                 "-?,?,,0,," +
-                r.vehicle.trip.startTime;
-              gtfsfile.write("./trips.txt", gtfstrip, "utf8", e => console.error);
+                r.vehicle.trip.startTime.replace(/:00$/g, "");
+              gtfsfile.write(gtfstrip, "utf8", e => console.error);
             }
           });
       }
