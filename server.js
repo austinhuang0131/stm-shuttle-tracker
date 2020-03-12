@@ -70,6 +70,10 @@ app.get("/changelog", (req, res) => {
   res.sendFile(__dirname + "/changelog.txt");
 });
 
+app.get("/trips.txt", (req, res) => {
+  res.sendFile(__dirname + "/trips.txt");
+});
+
 app.get("/:school", (req, res) => {
   if (!list[req.params.school]) res.status(404).send("Invalid school.");
   else if (
