@@ -2,10 +2,13 @@ route_id,service_id,trip_id,trip_headsign,direction_id,shape_id,wheelchair_acces
 69E,,213467390,69E-?,?,,0,,
 139E,,213467028,139E-?,?,,0,,
 49E,,213452602,49E-?,?,,0,,
-48E,,213451557,48E-?,?,,0,,École Secondaire Jean-Grou?
+48E,,213451557,48E-?,?,,0,,École secondaire Jean-Grou?
 146E,,213466572,146E-?,?,,0,,
-105E,,213494101,105E-E,?,,0,,Loyola? (stop 50831) => Vendôme?
+105E,,213494101,105E-E,?,,0,,Loyola? (stop 50831) => Vendôme
 44E,,213453886,44E-?,?,,0,,
-187E,,213454430,187E-?,?,,0,,Polyvalente Pointe-aux-Trembles?
-186E,,213451530,186E-?,?,,0,,Polyvalente Pointe-aux-Trembles?
+187E,,213454430,187E-?,?,,0,,Polyvalente Pointe-aux-Trembles? (parks in school)
+186E,,213451530,186E-?,?,,0,,Polyvalente Pointe-aux-Trembles? (parks in school)
 49E,,213453096,49E-?,?,,0,,
+189E,,213454688,189E-?,?,,0,,Polyvalente Pointe-aux-Trembles? (parks in school)
+86E,,213455100,86E-?,?,,0,,
+179E,,213459974,179E-S,?,,0,,École secondaire La Dauversière? (stop 50249)
