@@ -59,7 +59,8 @@ function update() {
                 r.vehicle.trip.tripId +
                 "," +
                 r.vehicle.trip.routeId +
-                "-?,?,,0,,";
+                "-?,?,,0,," +
+                r.vehicle.trip.startTime;
               fs.writeFile("./trips.txt", gtfstrip, "utf8", e => console.error);
             }
           });
