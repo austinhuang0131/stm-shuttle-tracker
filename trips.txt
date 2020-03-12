@@ -34,7 +34,7 @@ route_id,service_id,trip_id,trip_headsign,direction_id,shape_id,wheelchair_acces
 69E,,213468912,69E-?,?,,0,,15:40
 104E,,213478771,104E-?,?,,0,,15:35
 51E,,213477195,51E-?,?,,0,,16:05
-189E,,213454646,189E-?,?,,0,,16:15
+189E,,213454646,189E-?,?,,0,,16:15 Collège St-Jean-Vianney https://www.csjv.ca/sites/24608/Secondaire/Transport/STM%20circuits%20et%20heures%20d%C3%A9parts%202019-20.pdf
 48E,,213453059,48E-?,?,,0,,15:40
 68E,,213459210,68E-?,?,,0,,15:56
 51E,,213476249,51E-?,?,,0,,15:30
@@ -57,7 +57,7 @@ route_id,service_id,trip_id,trip_headsign,direction_id,shape_id,wheelchair_acces
 467E,,213470544,467E-?,?,,0,,15:52
 69E,,213469358,69E-?,?,,0,,15:30
 69E,,213469063,69E-?,?,,0,,15:51
-124E,,213495502,124E-S,1,,0,,16:08
+124E,,213495502,124E-S,1,,0,,16:08 Marianopolis => Vendôme https://marianopolis.edu/shuttle
 105E,,213495034,105E-?,?,,0,,16:10
 168E,,213458056,168E-?,?,,0,,15:35
 105E,,213495013,105E-?,?,,0,,16:10
@@ -89,11 +89,13 @@ route_id,service_id,trip_id,trip_headsign,direction_id,shape_id,wheelchair_acces
 43E,,213455705,43E-?,?,,0,,16:15
 18E,,213465398,18E-?,?,,0,,16:17
 203E,,213461325,203E-?,?,,0,,16:10
-86E,,213454699,86E-?,?,,0,,16:15
+86E,,213454699,86E-?,?,,0,,16:15 Collège St-Jean-Vianney https://www.csjv.ca/sites/24608/Secondaire/Transport/STM%20circuits%20et%20heures%20d%C3%A9parts%202019-20.pdf
 208E,,213461018,208E-?,?,,0,,16:15
-124E,,213495504,124E-S,1,,0,,16:30
+124E,,213495504,124E-S,1,,0,,16:30 Marianopolis => Vendôme https://marianopolis.edu/shuttle
 49E,,213452506,49E-?,?,,0,,15:40
 45E,,213476564,45E-?,?,,0,,16:13
 119E,,213494019,119E-?,?,,0,,16:45
 113E,,213479961,113E-?,?,,0,,16:40
-124E,,213495506,124E-S,1,,0,,16:52
+124E,,213495506,124E-S,1,,0,,16:52 Marianopolis => Vendôme https://marianopolis.edu/shuttle
+113E,,213479620,113E-?,?,,0,,16:55
+113E,,213479944,113E-?,?,,0,,17:02
