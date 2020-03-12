@@ -1,1 +1,11 @@
 route_id,service_id,trip_id,trip_headsign,direction_id,shape_id,wheelchair_accessible,note_fr,note_en
+69E,,213467390,69E-?,?,,0,,
+139E,,213467028,139E-?,?,,0,,
+49E,,213452602,49E-?,?,,0,,
+48E,,213451557,48E-?,?,,0,,École Secondaire Jean-Grou?
+146E,,213466572,146E-?,?,,0,,
+105E,,213494101,105E-E,?,,0,,Loyola? (stop 50831) => Vendôme?
+44E,,213453886,44E-?,?,,0,,
+187E,,213454430,187E-?,?,,0,,Polyvalente Pointe-aux-Trembles?
+186E,,213451530,186E-?,?,,0,,Polyvalente Pointe-aux-Trembles?
+49E,,213453096,49E-?,?,,0,,
