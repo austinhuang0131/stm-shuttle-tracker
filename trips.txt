@@ -1,4 +1,5 @@
-route_id,service_id,trip_id,trip_headsign,direction_id,shape_id,wheelchair_accessible,note_fr,note_en
+
+68E,,213459154,68E-?,?,,0,,14:45:0000ign,direction_id,shape_id,wheelchair_accessible,note_fr,note_en
 69E,,213467390,69E-?,?,,0,,
 139E,,213467028,139E-?,?,,0,,
 49E,,213452602,49E-?,?,,0,,
@@ -29,3 +30,14 @@ route_id,service_id,trip_id,trip_headsign,direction_id,shape_id,wheelchair_acces
 124E,,213495495,124E-S,1,,0,,13:54:00 Marianopolis => Vendôme
 124E,,213495491,124E-N,0,,0,,14:04:00 Marianopolis <= Vendôme
 124E,,213495496,124E-S,1,,0,,14:24:00 Marianopolis => Vendôme
+90E,,213478748,90E-?,?,,0,,14:40:00
+90E,,213478748,90E-?,?,,0,,14:40:00
+68E,,213459154,68E-?,?,,0,,14:45:00
+92E,,213465042,92E-?,?,,0,,14:52:0000
+411E,,213480987,411E-?,?,,0,,15:05:00
+100E,,213494164,100E-?,?,,0,,14:50:00
+202E,,213459249,202E-?,?,,0,,14:50:00
+92E,,213465042,92E-?,?,,0,,14:52:00
+92E,,213465042,92E-?,?,,0,,14:52:00
+124E,,213495492,124E-?,?,,0,,14:34:00
+44E,,213452202,44E-?,?,,0,,14:55:00
