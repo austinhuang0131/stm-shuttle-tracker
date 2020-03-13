@@ -143,10 +143,12 @@ app.get("/:school", (req, res) => {
                         ? ""
                         : new Date(r.vehicle.timestamp * 1000)
                             .toLocaleString("en-US", {
+                              hour12: false,
                               timeZone: "America/Montreal",
-                              hour12: false
-                            })
-                            .split(" ")[1]) +
+                              hour: "2-digit",
+                              minute: "2-digit",
+                              second: "2-digit"                            
+                            })) +
                       "</td></tr><tr><td>" +
                       routelist[req.params.school].stops[
                         (list[req.params.school][r.vehicle.trip.tripId].up
@@ -155,20 +157,28 @@ app.get("/:school", (req, res) => {
                       ] +
                       '</td><td align=\\"center\\">' +
                       (r.vehicle.currentStatus === "STOPPED_AT"
-                        ? "⬤</td><td>" +
+                        ? ("⬤</td><td>" +
                           new Date(r.vehicle.timestamp * 1000)
                             .toLocaleString("en-US", {
+                              hour12: false,
                               timeZone: "America/Montreal",
-                              hour12: false
-                            })
-                            .split(" ")[1] +
-                          "</td>"
-                        : "◯</td><td></td>") +
+                              hour: "2-digit",
+                              minute: "2-digit",
+                              second: "2-digit"
+                            }) +
+                          "</td>")
+                        : "◯</td><td></td>")
                       + '</tr><tr><td></td><td align=\\"center\\">↓</td><td></td></tr><tr><td align=\\"right\\">' +
-                          (list[req.params.school][r.vehicle.trip.tripId].up
-                            ? routelist[req.params.school].up
-                            : routelist[req.params.school].down) +
-                          '</td><td align=\\"center\\">◯</td><td>' +
+                          ((list[req.params.school][r.vehicle.trip.tripId].up && routelist[req.params.school].up !== ("u" + r.vehicle.currentStopSequence))
+                            ? routelist[req.params.school].stops[routelist[req.params.school].up]
+                            : (!list[req.params.school][r.vehicle.trip.tripId].up && routelist[req.params.school].up !== ("d" + r.vehicle.currentStopSequence)) ? routelist[req.params.school].stops[routelist[req.params.school].down] : "") +
+                                    routelist[req.params.school].up !==
+                            "d" + r.vehicle.currentStopSequence
+                        ? (routelist[req.params.school].stops[
+                            routelist[req.params.school].down
+                          ]
+                        : "") +
+                      '</td><td align=\\"center\\">◯</td><td>' +
                       ((routelist[req.params.school].uptime &&
                       routelist[req.params.school].downtime)
                         ? 

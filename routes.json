@@ -18,9 +18,10 @@
       "d4": "Claremont / Sherbrooke",
       "d5": "Métro Vendôme"
     },
-    "up": "Marianopolis",
-    "down": "Métro Vendôme",
+    "up": "u2",
+    "down": "d5",
     "uptime": 420000,
+    "downtime": 420000,
     "period": [[7, 9], [13, 19]]
   },
   "andre-laurendeau": {
@@ -44,8 +45,8 @@
       "u2": "Des Trinitaires / Jogues",
       "u1": "Métro Angrignon"
     },
-    "up": "André-Laurendeau",
-    "down": "Métro Angrignon",
+    "up": "u3",
+    "down": "d9",
     "uptime": 420000,
     "downtime": 480000,
     "period": [[7, 18]]
@@ -112,8 +113,8 @@
       "u24": "George / Gagné",
       "u25": "George / Raymond (PACC)"
     },
-    "up": "PACC",
-    "down": "Métro Jolicoeur",
+    "up": "u25",
+    "down": "d24",
     "uptime": 1020000,
     "downtime": 1200000,
     "period": [[7, 8], [16, 16]]
