@@ -21,7 +21,6 @@
     "up": "Marianopolis",
     "down": "Métro Vendôme",
     "uptime": 420000,
-    "downtime": 420000,
     "period": [[7, 9], [13, 19]]
   },
   "andre-laurendeau": {
