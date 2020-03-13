@@ -132,40 +132,38 @@ app.get("/:school", (req, res) => {
                       r.vehicle.position.latitude +
                       ", " +
                       r.vehicle.position.longitude +
-                      '], {icon: greenIcon}).addTo(mymap).bindPopup("<table style=\"border-width:0px;\"><tr><td align="right">Bus #' +
+                      '], {icon: greenIcon}).addTo(mymap).bindPopup("<table style=\\"border-width:0px;\\"><tr><td align=\\"right\\">Bus #' +
                       r.id +
-                      '</td><td align=\"center\">▼</td><td>' +
+                      '</td><td align=\\"center\\">▼</td><td>' +
                       r.vehicle.trip.startTime +
                       "</b> (" +
                       list[req.params.school][r.vehicle.trip.tripId].time +
-                      ")</td></tr><tr><td>" +
+                      ')</td></tr><tr><td align=\\"right\\">' +
                       (r.vehicle.currentStatus === "STOPPED_AT"
                         ? "Stopping at"
                         : "Going to") +
-                      '</td><td align=\"center\">↓</td><td></td></tr><tr><td>' +
-                      routelist[req.params.school].stops[
-                        (list[req.params.school][r.vehicle.trip.tripId].up
-                          ? "u"
-                          : "d") + r.vehicle.currentStopSequence
-                      ] +
-                      "</b> (" +
-                      r.vehicle.currentStopSequence +
-                      ')</td><td align=\"center\">●</td><td>' +
+                      '</td><td align=\\"center\\">↓</td><td>' +
                       new Date(r.vehicle.timestamp * 1000)
                         .toLocaleString("en-US", {
                           timeZone: "America/Montreal",
                           hour12: false
                         })
                         .split(" ")[1] +
-                      "</td></tr></table>" +
+                      "</td></tr><tr><td><b>" +
+                      routelist[req.params.school].stops[
+                        (list[req.params.school][r.vehicle.trip.tripId].up
+                          ? "u"
+                          : "d") + r.vehicle.currentStopSequence
+                      ] +
+                      '</b></td><td align=\\"center\\">●</td><td></td>' +
                       (routelist[req.params.school].uptime &&
                       routelist[req.params.school].downtime
-                        ? "<p>The bus is predicted to arrive at " +
+                        ? '</tr><tr><td></td><td align=\\"center\\">↓</td><td></td></tr><tr><td align=\\"right\\">' +
                           (list[req.params.school][r.vehicle.trip.tripId].up
                             ? routelist[req.params.school].up
                             : routelist[req.params.school].down) +
-                          " in " +
-                          humanizeDuration(
+                          '<td><td align=\\"center\\">●</td><td>' +
+                          new Date(
                             new Date(
                               new Date()
                                 .toLocaleString("en-US", {
@@ -176,13 +174,15 @@ app.get("/:school", (req, res) => {
                                 r.vehicle.trip.startTime +
                                 " " +
                                 time
-                            ).getTime() -
-                              Date.now() +
-                              (list[req.params.school][r.vehicle.trip.tripId].up
+                            ).getTime() + (list[req.params.school][r.vehicle.trip.tripId].up
                                 ? routelist[req.params.school].uptime
-                                : routelist[req.params.school].downtime),
-                            { verbose: true, unitCount: 1 }
-                          ) +
+                                : routelist[req.params.school].downtime)
+                          ).toLocaleString("en-US", {
+                            timeZone: "America/Montreal",
+                            hour: "2-digit",
+                            formatMatcher: "hour, minute"
+                          })
+                           +
                           ", and come back to " +
                           (list[req.params.school][r.vehicle.trip.tripId].up
                             ? routelist[req.params.school].down
@@ -205,8 +205,8 @@ app.get("/:school", (req, res) => {
                               routelist[req.params.school].downtime,
                             { verbose: true, unitCount: 1 }
                           ) +
-                          '.</p>");'
-                        : '.</p>");')
+                          '</table>");'
+                        : '</table>");')
                     );
                   else
                     return (
