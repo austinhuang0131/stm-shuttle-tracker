@@ -134,14 +134,15 @@ app.get("/:school", (req, res) => {
                       r.vehicle.position.longitude +
                       '], {icon: greenIcon}).addTo(mymap).bindPopup("<table style=\"border-width:0px;\"><tr><td align="right">Bus #' +
                       r.id +
-                      "</td><td>▼</td><td>" +
+                      '</td><td align=\"center\">▼</td><td>' +
                       r.vehicle.trip.startTime +
-                      "</b> (Scheduled " +
+                      "</b> (" +
                       list[req.params.school][r.vehicle.trip.tripId].time +
-                      ")</td></tr><tr><td></td><td>↓</td><td></td>" +
+                      ")</td></tr><tr><td>" +
                       (r.vehicle.currentStatus === "STOPPED_AT"
-                        ? "stopping at <b>"
-                        : "going to <b>") +
+                        ? "Stopping at"
+                        : "Going to") +
+                      '</td><td align=\"center\">↓</td><td></td></tr><tr><td>' +
                       routelist[req.params.school].stops[
                         (list[req.params.school][r.vehicle.trip.tripId].up
                           ? "u"
@@ -149,16 +150,17 @@ app.get("/:school", (req, res) => {
                       ] +
                       "</b> (" +
                       r.vehicle.currentStopSequence +
-                      ") at " +
+                      ')</td><td align=\"center\">●</td><td>' +
                       new Date(r.vehicle.timestamp * 1000)
                         .toLocaleString("en-US", {
                           timeZone: "America/Montreal",
                           hour12: false
                         })
                         .split(" ")[1] +
+                      "</td></tr></table>" +
                       (routelist[req.params.school].uptime &&
                       routelist[req.params.school].downtime
-                        ? ".</p><p>The bus is predicted to arrive at " +
+                        ? "<p>The bus is predicted to arrive at " +
                           (list[req.params.school][r.vehicle.trip.tripId].up
                             ? routelist[req.params.school].up
                             : routelist[req.params.school].down) +
