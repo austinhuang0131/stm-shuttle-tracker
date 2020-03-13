@@ -105,7 +105,7 @@ route_id,service_id,trip_id,trip_headsign,direction_id,shape_id,wheelchair_acces
 124E,,213495510,124E-S,1,,0,,17:36 Marianopolis College => Vendôme https://marianopolis.edu/shuttle
 18E,,213463904,18E-E,0,,0,,17:52 Collège Rosemont? => Henri-Bourassa (observation)
 113E,,213479860,113E-E,0,,0,,17:41 Cégep André-Laurendeau => Angrignon https://www.claurendeau.qc.ca/se-rendre-au-cegep/#113E
-171E,,213496527,171E-E,0,,0,,17:50 Collège de Bois-de-Boulogne (observation)
+171E,,213496527,171E-E,0,,0,,17:50 Collège de Bois-de-Boulogne => ??? (observation)
 18E,,213464416,18E-E,0,,0,,17:59 Collège Rosemont? => Henri-Bourassa (observation)
 124E,,213495512,124E-S,1,,0,,17:58 Marianopolis College => Vendôme https://marianopolis.edu/shuttle
 113E,,213479853,113E-E,0,,0,,17:58 Cégep André-Laurendeau => Angrignon https://www.claurendeau.qc.ca/se-rendre-au-cegep/#113E
@@ -219,3 +219,4 @@ route_id,service_id,trip_id,trip_headsign,direction_id,shape_id,wheelchair_acces
 191E,,213480339,191E-?,?,,0,,13:03
 179E,,213465085,179E-?,?,,0,,12:04
 86E,,213450998,86E-?,?,,0,,12:05
+191E,,213480340,191E-?,?,,0,,13:40 James Lyng => Lionel-Groulx? (observation)
