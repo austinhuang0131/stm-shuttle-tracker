@@ -104,7 +104,7 @@ route_id,service_id,trip_id,trip_headsign,direction_id,shape_id,wheelchair_acces
 113E,,213479470,113E-E,0,,0,,17:24 Cégep André-Laurendeau => Angrignon https://www.claurendeau.qc.ca/se-rendre-au-cegep/#113E
 124E,,213495510,124E-S,1,,0,,17:36 Marianopolis College => Vendôme https://marianopolis.edu/shuttle
 18E,,213463904,18E-E,0,,0,,17:52 Collège Rosemont? => Henri-Bourassa (observation)
-113E,,213479860,113E-?,?,,0,,17:41 Cégep André-Laurendeau => Angrignon https://www.claurendeau.qc.ca/se-rendre-au-cegep/#113E
+113E,,213479860,113E-E,0,,0,,17:41 Cégep André-Laurendeau => Angrignon https://www.claurendeau.qc.ca/se-rendre-au-cegep/#113E
 171E,,213496527,171E-E,0,,0,,17:50 Collège de Bois-de-Boulogne (observation)
 18E,,213464416,18E-E,0,,0,,17:59 Collège Rosemont? => Henri-Bourassa (observation)
 124E,,213495512,124E-S,1,,0,,17:58 Marianopolis College => Vendôme https://marianopolis.edu/shuttle
@@ -116,7 +116,7 @@ route_id,service_id,trip_id,trip_headsign,direction_id,shape_id,wheelchair_acces
 124E,,213495517,124E-S,1,,0,,18:42 Marianopolis College => Vendôme https://marianopolis.edu/shuttle
 124E,,213495519,124E-S,1,,0,,19:04 Marianopolis College => Vendôme https://marianopolis.edu/shuttle
 110E,,213479676,110E-?,?,,0,,07:00
-113E,,213479880,113E-?,?,,0,,07:11
+113E,,213479880,113E-O,1,,0,,07:11 Angrignon => Cégep André-Laurendeau https://www.claurendeau.qc.ca/se-rendre-au-cegep/#113E
 49E,,213451730,49E-?,?,,0,,07:03
 113E,,213478694,113E-?,?,,0,,06:55
 68E,,213460049,68E-?,?,,0,,07:06
@@ -126,26 +126,26 @@ route_id,service_id,trip_id,trip_headsign,direction_id,shape_id,wheelchair_acces
 121E,,213467302,121E-?,?,,0,,07:15
 192E,,213452247,192E-?,?,,0,,07:18
 16E,,213496809,16E-?,?,,0,,07:15
-113E,,213457835,113E-?,?,,0,,07:23
-113E,,213479211,113E-?,?,,0,,07:29
+113E,,213457835,113E-O,1,,0,,07:23 Angrignon => Cégep André-Laurendeau https://www.claurendeau.qc.ca/se-rendre-au-cegep/#113E
+113E,,213479211,113E-O,1,,0,,07:29 Angrignon => Cégep André-Laurendeau https://www.claurendeau.qc.ca/se-rendre-au-cegep/#113E
 193E,,213466448,193E-?,?,,0,,07:22
 68E,,213459200,68E-?,?,,0,,07:35
 28E,,967232,28E-?,?,,0,,07:39
 193E,,213466679,193E-?,?,,0,,07:29
 32E,,213476115,32E-?,?,,0,,07:45
-113E,,213479834,113E-?,?,,0,,07:42
-113E,,213480904,113E-?,?,,0,,07:36
+113E,,213479834,113E-O,1,,0,,07:42 Angrignon => Cégep André-Laurendeau https://www.claurendeau.qc.ca/se-rendre-au-cegep/#113E
+113E,,213480904,113E-O,1,,0,,07:36 Angrignon => Cégep André-Laurendeau https://www.claurendeau.qc.ca/se-rendre-au-cegep/#113E
 110E,,213479500,110E-?,?,,0,,06:55
 186E,,213476129,186E-?,?,,0,,07:37
 136E,,213457356,136E-?,?,,0,,07:33
 112E,,213479713,112E-?,?,,0,,07:44
 193E,,213466433,193E-?,?,,0,,07:42
-124E,,213495483,124E-?,?,,0,,07:46
+124E,,213495483,124E-N,0,,0,,07:46 Vendôme => Marianopolis College https://marianopolis.edu/shuttle
 32E,,213452037,32E-?,?,,0,,07:48
 112E,,213479709,112E-?,?,,0,,07:53
 121E,,213461037,121E-?,?,,0,,08:08
 186E,,213454386,186E-?,?,,0,,07:40
-113E,,213479613,113E-?,?,,0,,07:47
+113E,,213479613,113E-O,1,,0,,07:47 Angrignon => Cégep André-Laurendeau https://www.claurendeau.qc.ca/se-rendre-au-cegep/#113E
 49E,,213455578,49E-?,?,,0,,07:40
 30E,,213464954,30E-?,?,,0,,07:34
 103E,,213494701,103E-?,?,,0,,07:53
@@ -160,7 +160,7 @@ route_id,service_id,trip_id,trip_headsign,direction_id,shape_id,wheelchair_acces
 171E,,213459823,171E-?,?,,0,,07:50
 109E,,213480066,109E-?,?,,0,,07:53
 146E,,213467005,146E-?,?,,0,,07:59
-124E,,213495486,124E-?,?,,0,,08:01
+124E,,213495486,124E-N,0,,0,,08:01 Vendôme => Marianopolis College https://marianopolis.edu/shuttle
 103E,,213495430,103E-?,?,,0,,08:04
 69E,,213467190,69E-?,?,,0,,08:10
 191E,,213478721,191E-?,?,,0,,07:57
@@ -170,12 +170,12 @@ route_id,service_id,trip_id,trip_headsign,direction_id,shape_id,wheelchair_acces
 164E,,213459003,164E-?,?,,0,,07:59
 106E,,213479614,106E-?,?,,0,,08:04
 112E,,213478223,112E-?,?,,0,,08:10
-113E,,213479589,113E-?,?,,0,,07:57
+113E,,213479589,113E-O,1,,0,,07:57 Angrignon => Cégep André-Laurendeau https://www.claurendeau.qc.ca/se-rendre-au-cegep/#113E
 55E,,213465012,55E-?,?,,0,,07:50
 108E,,213478256,108E-?,?,,0,,08:00
 106E,,213479835,106E-?,?,,0,,08:00
 36E,,213479288,36E-?,?,,0,,08:10
-113E,,213479511,113E-?,?,,0,,08:11
+113E,,213479511,113E-O,1,,0,,08:11 Angrignon => Cégep André-Laurendeau https://www.claurendeau.qc.ca/se-rendre-au-cegep/#113E
 103E,,213494390,103E-?,?,,0,,08:20
 110E,,213479714,110E-?,?,,0,,08:08
 103E,,213495900,103E-?,?,,0,,08:16
@@ -185,23 +185,23 @@ route_id,service_id,trip_id,trip_headsign,direction_id,shape_id,wheelchair_acces
 121E,,213459865,121E-?,?,,0,,08:06
 51E,,213475910,51E-?,?,,0,,08:18
 55E,,213464993,55E-?,?,,0,,07:56
-113E,,213479885,113E-?,?,,0,,08:18
+113E,,213479885,113E-O,1,,0,,08:18 Angrignon => Cégep André-Laurendeau https://www.claurendeau.qc.ca/se-rendre-au-cegep/#113E
 49E,,213455649,49E-?,?,,0,,08:15
 55E,,213464990,55E-?,?,,0,,07:51
-124E,,213495488,124E-?,?,,0,,08:31
+124E,,213495488,124E-N,0,,0,,08:31 Vendôme => Marianopolis College https://marianopolis.edu/shuttle
 105E,,213494411,105E-?,?,,0,,08:15
 85E,,213457598,85E-?,?,,0,,08:29
 160E,,213495733,160E-?,?,,0,,08:17
 51E,,213464972,51E-?,?,,0,,08:35
 51E,,213476208,51E-?,?,,0,,08:25
 112E,,213478932,112E-?,?,,0,,08:34
-113E,,213479937,113E-?,?,,0,,08:35
+113E,,213479937,113E-O,1,,0,,08:35 Angrignon => Cégep André-Laurendeau https://www.claurendeau.qc.ca/se-rendre-au-cegep/#113E
 119E,,213494079,119E-?,?,,0,,08:27
 112E,,213479726,112E-?,?,,0,,08:51
 112E,,213479112,112E-?,?,,0,,08:59
 139E,,213467028,139E-?,?,,0,,11:17
 187E,,213454430,187E-?,?,,0,,11:45
-113E,,213479998,113E-?,?,,0,,11:13
+113E,,213479998,113E-O,1,,0,,11:13 Angrignon => Cégep André-Laurendeau (observation, not on site)
 105E,,213494101,105E-?,?,,0,,11:35
 44E,,213453886,44E-?,?,,0,,11:32
 86E,,213455100,86E-?,?,,0,,11:45
