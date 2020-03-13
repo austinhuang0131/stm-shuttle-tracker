@@ -136,7 +136,7 @@ app.get("/:school", (req, res) => {
                       r.id +
                       '</td><td align=\\"center\\">▼</td><td>' +
                       r.vehicle.trip.startTime +
-                      "</b> (" +
+                      " (" +
                       list[req.params.school][r.vehicle.trip.tripId].time +
                       ')</td></tr><tr><td align=\\"right\\">' +
                       (r.vehicle.currentStatus === "STOPPED_AT"
@@ -162,7 +162,7 @@ app.get("/:school", (req, res) => {
                           (list[req.params.school][r.vehicle.trip.tripId].up
                             ? routelist[req.params.school].up
                             : routelist[req.params.school].down) +
-                          '<td><td align=\\"center\\">●</td><td>' +
+                          '</td><td align=\\"center\\">●</td><td>' +
                           new Date(
                             new Date(
                               new Date()
@@ -178,16 +178,17 @@ app.get("/:school", (req, res) => {
                                 ? routelist[req.params.school].uptime
                                 : routelist[req.params.school].downtime)
                           ).toLocaleString("en-US", {
+                            hour12: false,
                             timeZone: "America/Montreal",
                             hour: "2-digit",
-                            formatMatcher: "hour, minute"
+                            minute: "2-digit",
                           })
                            +
-                          ", and come back to " +
+                          '<td></tr><tr><td align=\\"right\\">' +
                           (list[req.params.school][r.vehicle.trip.tripId].up
                             ? routelist[req.params.school].down
                             : routelist[req.params.school].up) +
-                          " in " +
+                          "</td><td></td>" +
                           humanizeDuration(
                             new Date(
                               new Date()
