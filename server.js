@@ -132,17 +132,13 @@ app.get("/:school", (req, res) => {
                       r.vehicle.position.latitude +
                       ", " +
                       r.vehicle.position.longitude +
-                      '], {icon: greenIcon}).addTo(mymap).bindPopup("<p>Bus #' +
+                      '], {icon: greenIcon}).addTo(mymap).bindPopup("<table style=\"border-width:0px;\"><tr><td align="right">Bus #' +
                       r.id +
-                      ", bound for " +
-                      (list[req.params.school][r.vehicle.trip.tripId].up
-                        ? routelist[req.params.school].up
-                        : routelist[req.params.school].down) +
-                      ", which departs at <b>" +
+                      "</td><td>▼</td><td>" +
                       r.vehicle.trip.startTime +
                       "</b> (Scheduled " +
                       list[req.params.school][r.vehicle.trip.tripId].time +
-                      "), is " +
+                      ")</td></tr><tr><td></td><td>↓</td><td></td>" +
                       (r.vehicle.currentStatus === "STOPPED_AT"
                         ? "stopping at <b>"
                         : "going to <b>") +
