@@ -135,34 +135,28 @@ app.get("/:school", (req, res) => {
                       '], {icon: greenIcon}).addTo(mymap).bindPopup("<table style=\\"border-width:0px;\\"><tr><td align=\\"right\\">Bus #' +
                       r.id +
                       '</td><td align=\\"center\\">▼</td><td>' +
-                      r.vehicle.trip.startTime +
+                      r.vehicle.trip.startTime.replace(/:00$/g, "") +
                       " (" +
-                      list[req.params.school][r.vehicle.trip.tripId].time +
-                      ')</td></tr><tr><td align=\\"right\\">' +
-                      (r.vehicle.currentStatus === "STOPPED_AT"
-                        ? "Stopping at"
-                        : "Going to") +
-                      '</td><td align=\\"center\\">↓</td><td>' +
-                      new Date(r.vehicle.timestamp * 1000)
-                        .toLocaleString("en-US", {
-                          timeZone: "America/Montreal",
-                          hour12: false
-                        })
-                        .split(" ")[1] +
-                      "</td></tr><tr><td><b>" +
+                      (r.vehicle.currentStatus !== "STOPPED_AT" ? "" :
+                        list[req.params.school][r.vehicle.trip.tripId].time) +
+                      ')</td></tr><tr><td></td><td align=\\"center\\">↓</td><td>' +
+                       +
+                      "</td></tr><tr><td>" +
                       routelist[req.params.school].stops[
                         (list[req.params.school][r.vehicle.trip.tripId].up
                           ? "u"
                           : "d") + r.vehicle.currentStopSequence
                       ] +
-                      '</b></td><td align=\\"center\\">●</td><td></td>' +
+                      '</td><td align=\\"center\\">'+(r.vehicle.currentStatus !== "STOPPED_AT"
+                        ? ("⬤</td><td>"+list[req.params.school][r.vehicle.trip.tripId].time+"</td>")
+                        : "◯</td><td></td>")+ '' +
                       (routelist[req.params.school].uptime &&
                       routelist[req.params.school].downtime
                         ? '</tr><tr><td></td><td align=\\"center\\">↓</td><td></td></tr><tr><td align=\\"right\\">' +
                           (list[req.params.school][r.vehicle.trip.tripId].up
                             ? routelist[req.params.school].up
                             : routelist[req.params.school].down) +
-                          '</td><td align=\\"center\\">●</td><td>' +
+                          '</td><td align=\\"center\\">◯</td><td>[' +
                           new Date(
                             new Date(
                               new Date()
@@ -184,12 +178,12 @@ app.get("/:school", (req, res) => {
                             minute: "2-digit",
                           })
                            +
-                          '<td></tr><tr><td align=\\"right\\">' +
+                          ']<td></tr><tr><td align=\\"right\\">' +
                           (list[req.params.school][r.vehicle.trip.tripId].up
                             ? routelist[req.params.school].down
                             : routelist[req.params.school].up) +
-                          "</td><td></td>" +
-                          humanizeDuration(
+                          '</td><td align=\\"center\\">◯</td><td>[' +
+                          new Date(
                             new Date(
                               new Date()
                                 .toLocaleString("en-US", {
@@ -200,13 +194,16 @@ app.get("/:school", (req, res) => {
                                 r.vehicle.trip.startTime +
                                 " " +
                                 time
-                            ).getTime() -
-                              Date.now() +
+                            ).getTime() +
                               routelist[req.params.school].uptime +
-                              routelist[req.params.school].downtime,
-                            { verbose: true, unitCount: 1 }
-                          ) +
-                          '</table>");'
+                              routelist[req.params.school].downtime
+                          ).toLocaleString("en-US", {
+                            hour12: false,
+                            timeZone: "America/Montreal",
+                            hour: "2-digit",
+                            minute: "2-digit",
+                          }) +
+                          ']</td></tr></table>");'
                         : '</table>");')
                     );
                   else
