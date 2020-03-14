@@ -234,8 +234,8 @@ app.get("/:school", (req, res) => {
                               hour: "2-digit",
                               minute: "2-digit"
                             }) +
-                            "]</td></tr>"
-                          : "</td></tr>")
+                            "]" : ""
+                          + "</td></tr>")
                         : ((!list[req.params.school][r.vehicle.trip.tripId].up &&
                           routelist[req.params.school].down !==
                             "d" + r.vehicle.currentStopSequence) // down, not last stop?
