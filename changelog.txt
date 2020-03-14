@@ -7,6 +7,11 @@ Inquiries? Feedbacks? Concerns?
 
 === C H A N G E L O G ===
 
+Version 0.0.5, 2020/03/13
+During coronavirus crisis, please stay safe.
+* Tracker
+- Information is now presented with pictograms and emojis rather than words
+
 Version 0.0.4, 2020/03/11
 * Tracker
 - 45s interval => 30s interval due to STM approval
