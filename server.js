@@ -73,6 +73,7 @@ function update() {
 }
 
 setInterval(update, 30000);
+update();
 
 app.get("/", (req, res) => {
   res.sendFile(__dirname + "/index.html");
