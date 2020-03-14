@@ -12,14 +12,13 @@
     "stops": {
       "u1": "Métro Vendôme",
       "u2": "Marianopolis (NDG / Claremont)",
-      "u3": "test",
       "d1": "Marianopolis (NDG / Claremont)",
       "d2": "Claremont / Côte-Ste-Antoine",
       "d3": "Claremont / Windsor",
       "d4": "Claremont / Sherbrooke",
       "d5": "Métro Vendôme"
     },
-    "up": "u3",
+    "up": "u2",
     "down": "d5",
     "uptime": 420000,
     "downtime": 420000,
