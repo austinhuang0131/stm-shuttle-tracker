@@ -236,7 +236,7 @@ app.get("/:school", (req, res) => {
                             }) +
                             "]</td></tr>"
                           : "</td></tr>")
-                        : (!list[req.params.school][r.vehicle.trip.tripId].up &&
+                        : ((!list[req.params.school][r.vehicle.trip.tripId].up &&
                           routelist[req.params.school].down !==
                             "d" + r.vehicle.currentStopSequence) // down, not last stop?
                         ? ('<tr><td align=\\"right\\">' +
@@ -268,7 +268,8 @@ app.get("/:school", (req, res) => {
                               }) +
                               "]</td></tr>"
                             : "</td></tr>")
-                        : "") +
+                           )
+                        : "")) +
                       '<tr><td align=\\"right\\">' +
                       (list[req.params.school][r.vehicle.trip.tripId].up
                         ? routelist[req.params.school].stops[
