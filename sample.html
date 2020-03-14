@@ -36,34 +36,38 @@
     [OLD]
 
     <div id="mapid" style="width: 100%; height: 400px;"></div>
-    <div id="open2">
-      <p>
-        <a href="./">Back to homepage</a>. Made by
-        <a href="https://austinhuang.me">Austin Huang</a>.
-      </p>
-      <p>
-        <small
-          >By using this tool, you agree to the terms and conditions imposed by
-          <a href="http://www.stm.info/en/about/developers/terms-use"
-            >the STM</a
-          >
-          (Bus data), <a href="https://glitch.com/legal/">Glitch</a> (Backend),
-          <a href="https://wiki.osmfoundation.org/wiki/Terms_of_Use"
-            >OpenStreetMap</a
-          >
-          (Map), and
-          <a href="https://www.cloudflare.com/terms/">Cloudflare</a> (HTTPS
-          stuff). Data are sourced directly from the STM. This work is licensed
-          under a
-          <a
-            rel="license"
-            href="http://creativecommons.org/licenses/by-nc-sa/4.0/"
-            >Creative Commons Attribution-NonCommercial-ShareAlike 4.0
-            International License</a
-          >.</small
+    <ul>
+        <li>📡 Time when STM received the location of the bus</li>
+        <li>🔮 Predicted arrival</li>
+        <li>⬤ Bus has reached the stop</li>
+        <li>◯ Bus has NOT reached the stop</li>
+    </ul>
+    <p>
+      <a href="./">Back to homepage</a>. Made by
+      <a href="https://austinhuang.me">Austin Huang</a>.
+    </p>
+    <p>
+      <small
+        >By using this tool, you agree to the terms and conditions imposed by
+        <a href="http://www.stm.info/en/about/developers/terms-use"
+          >the STM</a
         >
-      </p>
-    </div>
+        (Bus data), <a href="https://glitch.com/legal/">Glitch</a> (Backend),
+        <a href="https://wiki.osmfoundation.org/wiki/Terms_of_Use"
+          >OpenStreetMap</a
+        >
+        (Map), and
+        <a href="https://www.cloudflare.com/terms/">Cloudflare</a> (HTTPS
+        stuff). Data are sourced directly from the STM. This work is licensed
+        under a
+        <a
+          rel="license"
+          href="http://creativecommons.org/licenses/by-nc-sa/4.0/"
+          >Creative Commons Attribution-NonCommercial-ShareAlike 4.0
+          International License</a
+        >.</small
+      >
+    </p>
     <script>
         var mymap = L.map("mapid").setView([CENTER]);
 

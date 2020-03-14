@@ -92,7 +92,7 @@ app.get("/trips.txt", (req, res) => {
 
 app.get("/:school", (req, res) => {
   if (!list[req.params.school]) res.status(404).send("Invalid school.");
-  /*else if (
+  else if (
     (time === "EDT" &&
       !routelist[req.params.school].period.find(
         p =>
@@ -108,7 +108,8 @@ app.get("/:school", (req, res) => {
     new Date().getDay() === 0 ||
     new Date().getDay() === 6
   )
-    res.status(503).sendFile(__dirname + "/unavailable.html");*/ else
+    res.status(503).sendFile(__dirname + "/unavailable.html");
+  else
     routes.fetch(req.params.school).then(async x => {
       let t = await DB.fetch("time." + req.params.school),
         old = await DB.fetch("old." + req.params.school);
