@@ -92,7 +92,7 @@ app.get("/trips.txt", (req, res) => {
 
 app.get("/:school", (req, res) => {
   if (!list[req.params.school]) res.status(404).send("Invalid school.");
-  else if (
+  /*else if (
     (time === "EDT" &&
       !routelist[req.params.school].period.find(
         p =>
@@ -108,7 +108,7 @@ app.get("/:school", (req, res) => {
     new Date().getDay() === 0 ||
     new Date().getDay() === 6
   )
-    res.status(503).sendFile(__dirname + "/unavailable.html");
+    res.status(503).sendFile(__dirname + "/unavailable.html");*/
   else
     routes.fetch(req.params.school).then(async x => {
       let t = await DB.fetch("time." + req.params.school),
@@ -232,12 +232,12 @@ app.get("/:school", (req, res) => {
                         : !list[req.params.school][r.vehicle.trip.tripId].up &&
                           routelist[req.params.school].down !==
                             "d" + r.vehicle.currentStopSequence
-                        ? routelist[req.params.school].up !==
+                        ? routelist[req.params.school].down !==
                           "d" + r.vehicle.currentStopSequence
                           ? routelist[req.params.school].stops[
                               routelist[req.params.school].down
                             ] +
-                            '</td><td align=\\"center\\">◯</td><td>' +
+                            '<tr><td align=\\"right\\"><td align=\\"center\\">◯</td><td>' +
                             (routelist[req.params.school].uptime &&
                             routelist[req.params.school].downtime
                               ? "[" +
@@ -263,7 +263,7 @@ app.get("/:school", (req, res) => {
                                 "]</td></tr>"
                               : "</td></tr>")
                           : ""
-                        : "</tr>") +
+                        : "") +
                       '<tr><td align=\\"right\\">' +
                       (list[req.params.school][r.vehicle.trip.tripId].up
                         ? routelist[req.params.school].stops[

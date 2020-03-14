@@ -12,17 +12,18 @@
     "stops": {
       "u1": "Métro Vendôme",
       "u2": "Marianopolis (NDG / Claremont)",
+      "u3": "test",
       "d1": "Marianopolis (NDG / Claremont)",
       "d2": "Claremont / Côte-Ste-Antoine",
       "d3": "Claremont / Windsor",
       "d4": "Claremont / Sherbrooke",
       "d5": "Métro Vendôme"
     },
-    "up": "u2",
+    "up": "u3",
     "down": "d5",
     "uptime": 420000,
     "downtime": 420000,
-    "period": [[7, 9], [13, 19]]
+    "period": [[7, 9], [13, 20]]
   },
   "andre-laurendeau": {
     "name": "Cégep André-Laurendeau",
