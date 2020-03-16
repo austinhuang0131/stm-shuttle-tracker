@@ -19,12 +19,12 @@ var listener = app.listen(process.env.PORT, function() {
 function update() {
   if (
     (time === "EDT" &&
-      new Date().getUTCHours() >= 11 &&
+      new Date().getUTCHours() >= 10 &&
       new Date().getUTCHours() <= 23 &&
       new Date().getDay() !== 0 &&
       new Date().getDay() !== 6) ||
     (time === "EST" &&
-      new Date().getUTCHours() >= 12 &&
+      new Date().getUTCHours() >= 11 &&
       new Date().getDay() !== 0 &&
       new Date().getDay() !== 6)
   )
