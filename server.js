@@ -282,7 +282,7 @@ app.get("/:school", (req, res) => {
                       )
                         ? route.stops[route.down]
                         : route.stops[route.up]) +
-                      '</td><td align=\\"center\\">◯</td><td>' +
+                      '</td><td align=\\"center\\">○</td><td>' +
                       (route.uptime && route.downtime
                         ? "🔮 [" +
                           new Date(
@@ -341,7 +341,9 @@ app.get("/:school", (req, res) => {
                 ".</i>"
             )
             .replace(/\[SCHOOL\]/g, routelist[req.params.school].name)
-            .replace("[school]", req.params.school)
+            .replace(/\[school\]/g, req.params.school)
+            .replace("[REFRESH]", req.query.refresh === "true" ? "true" : "false")
+            .replace("[METAR]", req.query.refresh === "true" ? '<meta http-equiv="refresh" content="30" >' : "")
             .replace("[CENTER]", routelist[req.params.school].center)
             .replace(
               "[OLD]",

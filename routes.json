@@ -51,7 +51,7 @@
         "downtime": 480000
       }
     ],
-    "period": [[6, 8], [11, 11], [15, 18]]
+    "period": [[6, 8], [11, 12], [15, 18]]
   },
   "rosemont": {
     "name": "Collège de Rosemont",

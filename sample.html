@@ -2,6 +2,8 @@
 <html lang="en">
   <head>
     <title>STM Shuttle Tracker - [SCHOOL]</title>
+    
+    [METAR]
 
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -36,11 +38,17 @@
     [OLD]
 
     <div id="mapid" style="width: 100%; height: 400px;"></div>
+    <p>
+      <center><button type="button" onclick="refresh()">
+        Auto-Refresh (30s interval)
+        </button> (Status: <b id="ON" style="color:green;visibility:hidden;">ON</b> <b id="OFF" style="color:red;">OFF</b>) <small>(Not recommended for phones)</small></center>
+    </p>
     <ul>
         <li>📡 Time when STM received the location of the bus</li>
         <li>🔮 Predicted arrival</li>
-        <li>⬤ Bus has reached the stop</li>
+        <li>⬤ Bus has passed the stop</li>
         <li>◯ Bus has NOT reached the stop</li>
+        <li>○ Presumed "En Transit" terminus</li>
     </ul>
     <p>
       <a href="./">Back to homepage</a>. Made by
@@ -69,7 +77,8 @@
       >
     </p>
     <script>
-        var mymap = L.map("mapid").setView([CENTER]);
+        var mymap = L.map("mapid").setView([CENTER]),
+            r = [REFRESH];
 
         var greenIcon = L.icon({
           iconUrl:
@@ -82,6 +91,18 @@
         }).addTo(mymap);
 
         [BUSES]
+      
+        function refresh() {
+          if (!r) {
+            r = true;
+            document.getElementById("OFF").style.visibility = "hidden";
+            document.getElementById("ON").style.visibility = null;
+            setTimeout(() => window.location.href = "https://stm.austinhuang.me/[school]?refresh=true", 30000);
+          }
+          else {
+            window.location.href = "https://stm.austinhuang.me/[school]";
+          }
+        }
     </script>
   </body>
 </html>
