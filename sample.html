@@ -39,7 +39,7 @@
     <p>
       Actualisation automatique chaque 30s<br><button type="button" onclick="refresh()">
         Toggle / Changer
-        </button> <b id="ON" style="color:green;visibility:hidden;">ON</b> <b id="OFF" style="color:red;">OFF</b><br>Auto-Refresh every 30s
+        </button> <b id="ON" style="color:green;opacity:0.1;">ON</b> <b id="OFF" style="color:red;">OFF</b><br>Auto-Refresh every 30s
     </p>
     <table style="border-width:0px;">
       <tr><td align="right">Départ planifié</td><td>🗒️</td><td>Scheduled departure</td></tr>
@@ -93,16 +93,16 @@
         [BUSES]
       
         if (r) {
-            document.getElementById("OFF").style.visibility = "hidden";
-            document.getElementById("ON").style.visibility = null;
+            document.getElementById("OFF").style.opacity = "0.1";
+            document.getElementById("ON").style.opacity = null;
         }
         setTimeout(() => {if (r) window.location.href = "https://stm.austinhuang.me/[school]?refresh=true"}, 30000);
       
         function refresh() {
           if (!r) {
             r = true;
-            document.getElementById("OFF").style.visibility = "hidden";
-            document.getElementById("ON").style.visibility = null;
+            document.getElementById("OFF").style.opacity = "0.1";
+            document.getElementById("ON").style.opacity = null;
             setTimeout(() => {if (r) window.location.href = "https://stm.austinhuang.me/[school]?refresh=true"}, 30000);
           }
           else {
