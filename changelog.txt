@@ -7,6 +7,10 @@ Inquiries? Feedbacks? Concerns?
 
 === C H A N G E L O G ===
 
+Version 0.0.6, 2020/03/18
+* Tracker
+- Added auto-refresh
+
 Version 0.0.5, 2020/03/13
 During coronavirus crisis, please stay safe.
 * Tracker
