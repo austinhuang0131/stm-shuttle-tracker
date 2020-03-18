@@ -127,7 +127,7 @@ app.get("/:school", (req, res) => {
               "[BUSES]",
               x
                 .map(r => {
-                  if (list[req.params.school][r.vehicle.trip.tripId])
+                  if (list[req.params.school].up.includes(r.vehicle.trip.tripId) || list[req.params.school].down.includes(r.vehicle.trip.tripId))
                     return (
                       "L.marker([" +
                       r.vehicle.position.latitude +
@@ -137,9 +137,7 @@ app.get("/:school", (req, res) => {
                       r.id +
                       '</td><td align=\\"center\\">▼</td><td>' +
                       r.vehicle.trip.startTime.replace(/:00$/g, "") +
-                      " (" +
-                      list[req.params.school][r.vehicle.trip.tripId].time +
-                      ')</td></tr><tr><td></td><td align=\\"center\\">↓</td><td>' +
+                      '</td></tr><tr><td></td><td align=\\"center\\">↓</td><td>' +
                       (r.vehicle.currentStatus === "STOPPED_AT"
                         ? ""
                         : "📡 " + new Date(r.vehicle.timestamp * 1000).toLocaleString(
@@ -154,7 +152,7 @@ app.get("/:school", (req, res) => {
                           )) +
                       "</td></tr><tr><td>" +
                       routelist[req.params.school].stops[
-                        (list[req.params.school][r.vehicle.trip.tripId].up
+                        (list[req.params.school].up.includes(r.vehicle.trip.tripId)
                           ? "u"
                           : "d") + r.vehicle.currentStopSequence
                       ] +
@@ -175,11 +173,10 @@ app.get("/:school", (req, res) => {
                         : "◯</td><td>" +
                           (routelist[req.params.school].uptime &&
                           routelist[req.params.school].downtime &&
-                          ((list[req.params.school][r.vehicle.trip.tripId].up &&
+                          ((list[req.params.school].up.includes(r.vehicle.trip.tripId) &&
                             routelist[req.params.school].up ===
                               "u" + r.vehicle.currentStopSequence) ||
-                            (!list[req.params.school][r.vehicle.trip.tripId]
-                              .up &&
+                            (list[req.params.school].down.includes(r.vehicle.trip.tripId) &&
                               routelist[req.params.school].up ===
                                 "d" + r.vehicle.currentStopSequence))
                             ? "🔮 [" +
@@ -206,7 +203,7 @@ app.get("/:school", (req, res) => {
                             : "") +
                           "</td>") +
                       '</tr><tr><td></td><td align=\\"center\\">↓</td><td></td></tr>' +
-                      (list[req.params.school][r.vehicle.trip.tripId].up &&
+                      (list[req.params.school].up.includes(r.vehicle.trip.tripId) &&
                       routelist[req.params.school].up !==
                         "u" + r.vehicle.currentStopSequence // up, not last stop?
                         ? '<tr><td align=\\"right\\">' +
@@ -239,7 +236,7 @@ app.get("/:school", (req, res) => {
                               "]"
                             : "") +
                           '</td></tr><tr><td></td><td align=\\"center\\">↓</td><td></td></tr>'
-                        : !list[req.params.school][r.vehicle.trip.tripId].up &&
+                        : list[req.params.school].down.includes(r.vehicle.trip.tripId) &&
                           routelist[req.params.school].down !==
                             "d" + r.vehicle.currentStopSequence // down, not last stop?
                         ? ('<tr><td align=\\"right\\">' +
@@ -274,7 +271,7 @@ app.get("/:school", (req, res) => {
                         + '</td></tr><tr><td></td><td align=\\"center\\">↓</td><td></td></tr>')
                        : "")+
                       '<tr><td align=\\"right\\">' +
-                      (list[req.params.school][r.vehicle.trip.tripId].up
+                      (list[req.params.school].up.includes(r.vehicle.trip.tripId)
                         ? routelist[req.params.school].stops[
                             routelist[req.params.school].down
                           ]
