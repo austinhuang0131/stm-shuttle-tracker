@@ -143,7 +143,7 @@ app.get("/:school", (req, res) => {
                       r.vehicle.position.longitude +
                       '], {icon: greenIcon}).addTo(mymap).bindPopup("<table style=\\"border-width:0px;\\"><tr><td align=\\"right\\">Bus #' +
                       r.id +
-                      '</td><td align=\\"center\\">▼</td><td>' +
+                      '</td><td align=\\"center\\">▼</td><td>🗒️ ' +
                       r.vehicle.trip.startTime.replace(/:00$/g, "") +
                       '</td></tr><tr><td></td><td align=\\"center\\">↓</td><td>' +
                       (r.vehicle.currentStatus === "STOPPED_AT"
@@ -187,11 +187,11 @@ app.get("/:school", (req, res) => {
                           ((list[req.params.school].up.includes(
                             r.vehicle.trip.tripId
                           ) &&
-                            route === "u" + r.vehicle.currentStopSequence) ||
+                            route.up === "u" + r.vehicle.currentStopSequence) ||
                             (list[req.params.school].down.includes(
                               r.vehicle.trip.tripId
                             ) &&
-                              route === "d" + r.vehicle.currentStopSequence))
+                              route.down === "d" + r.vehicle.currentStopSequence))
                             ? "🔮 [" +
                               new Date(
                                 new Date(
@@ -276,6 +276,7 @@ app.get("/:school", (req, res) => {
                             : "") +
                           '</td></tr><tr><td></td><td align=\\"center\\">↓</td><td></td></tr>'
                         : "") +
+                      // return trip
                       '<tr><td align=\\"right\\">' +
                       (list[req.params.school].up.includes(
                         r.vehicle.trip.tripId
