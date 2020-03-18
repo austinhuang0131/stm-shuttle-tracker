@@ -1,150 +1,174 @@
 {
   "//": {
-    "1": "These are the route data! They're manually collected because STM does not publicize them..." ,
+    "1": "These are the route data! They're manually collected because STM does not publicize them...",
     "2": "The word `up` or `u` means going *to* school, while `down` or `d` means otherwise.",
     "3": "`center` is used to center the map. Times are in miliseconds (javascript duh)",
     "4": "More questions? Find me in person or im@austinhuang.me"
   },
   "marianopolis": {
     "name": "Marianopolis College",
-    "route": "124E",
     "center": "[45.4764, -73.6082], 15",
-    "stops": {
-      "u1": "Métro Vendôme",
-      "u2": "Marianopolis (NDG / Claremont)",
-      "d1": "Marianopolis (NDG / Claremont)",
-      "d2": "Claremont / Côte-Ste-Antoine",
-      "d3": "Claremont / Windsor",
-      "d4": "Claremont / Sherbrooke",
-      "d5": "Métro Vendôme"
-    },
-    "up": "u2",
-    "down": "d5",
-    "uptime": 420000,
-    "downtime": 420000,
+    "routes": [
+      {
+        "route": "124E",
+        "stops": {
+          "u1": "Métro Vendôme",
+          "u2": "Marianopolis (NDG / Claremont)",
+          "d1": "Marianopolis (NDG / Claremont)",
+          "d2": "Claremont / Côte-Ste-Antoine",
+          "d3": "Claremont / Windsor",
+          "d4": "Claremont / Sherbrooke",
+          "d5": "Métro Vendôme"
+        },
+        "up": "u2",
+        "down": "d5",
+        "uptime": 420000,
+        "downtime": 420000
+      }
+    ],
     "period": [[7, 9], [13, 20]]
   },
   "andre-laurendeau": {
     "name": "Cégep André-Laurendeau",
-    "route": "113E",
     "center": "[45.4404, -73.6059], 14",
-    "stops": {
-      "d1": "Lapierre / Jean-Chevalier",
-      "d2": "Lapierre / Leclerc",
-      "d3": "Cégep André-Laurendeau",
-      "d4": "de la Vérendrye / Ducas",
-      "d5": "Parc Angrignon",
-      "d6": "Des Trinitaires / D'Aragon",
-      "d7": "Des Trinitaires / Jogues",
-      "d8": "Des Trinitaires / Lamont",
-      "d9": "Métro Angrignon",
-      "u6": "Cégep André-Laurendeau",
-      "u5": "de la Vérendrye / Ducas",
-      "u4": "Parc Angrignon",
-      "u3": "Des Trinitaires / Dumas",
-      "u2": "Des Trinitaires / Jogues",
-      "u1": "Métro Angrignon"
-    },
-    "up": "u6",
-    "down": "d9",
-    "uptime": 420000,
-    "downtime": 480000,
+    "routes": [
+      {
+        "route": "113E",
+        "stops": {
+          "d1": "Lapierre / Jean-Chevalier",
+          "d2": "Lapierre / Leclerc",
+          "d3": "Cégep André-Laurendeau",
+          "d4": "de la Vérendrye / Ducas",
+          "d5": "Parc Angrignon",
+          "d6": "Des Trinitaires / D'Aragon",
+          "d7": "Des Trinitaires / Jogues",
+          "d8": "Des Trinitaires / Lamont",
+          "d9": "Métro Angrignon",
+          "u6": "Cégep André-Laurendeau",
+          "u5": "de la Vérendrye / Ducas",
+          "u4": "Parc Angrignon",
+          "u3": "Des Trinitaires / Dumas",
+          "u2": "Des Trinitaires / Jogues",
+          "u1": "Métro Angrignon"
+        },
+        "up": "u6",
+        "down": "d9",
+        "uptime": 420000,
+        "downtime": 480000
+      }
+    ],
     "period": [[6, 8], [11, 11], [15, 18]]
   },
   "rosemont": {
     "name": "Collège de Rosemont",
-    "route": "18E",
     "center": "[45.5564, -73.5699], 13",
-    "stops": {},
+    "routes": [
+      {
+        "route": "18E",
+        "stops": {}
+      }
+    ],
     "period": [[7, 18]]
   },
   "lcchs-pacc": {
     "name": "LCCHS / PACC",
-    "route": "112E",
     "center": "[45.4446, -73.6071], 13",
-    "stops": {
-      "d1": "Champlain / Raymond",
-      "d2": "George / Gamelin (PACC)",
-      "d3": "George / Bishop-Power",
-      "d4": "George / 9e Avenue",
-      "d5": "Broadway / 8e Avenue (LCCHS)",
-      "d6": "Broadway / 6e Avenue",
-      "d7": "Broadway / 4e Avenue",
-      "d8": "Broadway / 2e Avenue",
-      "d9": "Broadway / Alepin",
-      "d10": "Champlain / Centrale",
-      "d11": "Champlain / Parkdale",
-      "d12": "Champlain / Crawford",
-      "d13": "Champlain / No 7100",
-      "d14": "Hôpital Douglas",
-      "d15": "Champlain / Stephens",
-      "d16": "Stephens / No 1482",
-      "d17": "Beurling / Rolland",
-      "d18": "Beurling / Allard (E)",
-      "d19": "Beurling / Brown",
-      "d20": "Beurling / Moffat",
-      "d21": "Champlain / Woodland",
-      "d22": "Champlain / Desmarchais",
-      "d23": "Champlain / 5e Avenue",
-      "d24": "Station Jolicoeur (Drake / Jolicoeur)",
-      "u1": "Station Jolicoeur",
-      "u2": "Champlain / 5e Avenue",
-      "u3": "Champlain / Desmarchais",
-      "u4": "Champlain / Woodland",
-      "u5": "Beurling / Moffat",
-      "u6": "Beurling / Brown",
-      "u7": "Beurling / Allard (O)",
-      "u8": "Beurling / Rolland",
-      "u9": "Rolland / No 1411",
-      "u10": "Rolland / Champlain",
-      "u11": "Champlain / Stephens",
-      "u12": "Hôpital Douglas (Champlain / No 7070)",
-      "u13": "Champlain / No 7100",
-      "u14": "Champlain / Crawford",
-      "u15": "Champlain / Fayolle",
-      "u16": "Champlain / Centrale",
-      "u17": "Champlain / Allion",
-      "u18": "Broadway / 2e Avenue",
-      "u19": "Broadway / 4e Avenue",
-      "u20": "Broadway / 6e Avenue",
-      "u21": "Broadway / 9e Avenue (LCCHS)",
-      "u22": "9e Avenue / George",
-      "u23": "George / 11e Avenue",
-      "u24": "George / Gagné",
-      "u25": "George / Raymond (PACC)"
-    },
-    "up": "u25",
-    "down": "d24",
-    "uptime": 1020000,
-    "downtime": 1200000,
+    "routes": [
+      {
+        "route": "112E",
+        "stops": {
+          "d1": "Champlain / Raymond",
+          "d2": "George / Gamelin (PACC)",
+          "d3": "George / Bishop-Power",
+          "d4": "George / 9e Avenue",
+          "d5": "Broadway / 8e Avenue (LCCHS)",
+          "d6": "Broadway / 6e Avenue",
+          "d7": "Broadway / 4e Avenue",
+          "d8": "Broadway / 2e Avenue",
+          "d9": "Broadway / Alepin",
+          "d10": "Champlain / Centrale",
+          "d11": "Champlain / Parkdale",
+          "d12": "Champlain / Crawford",
+          "d13": "Champlain / No 7100",
+          "d14": "Hôpital Douglas",
+          "d15": "Champlain / Stephens",
+          "d16": "Stephens / No 1482",
+          "d17": "Beurling / Rolland",
+          "d18": "Beurling / Allard (E)",
+          "d19": "Beurling / Brown",
+          "d20": "Beurling / Moffat",
+          "d21": "Champlain / Woodland",
+          "d22": "Champlain / Desmarchais",
+          "d23": "Champlain / 5e Avenue",
+          "d24": "Station Jolicoeur (Drake / Jolicoeur)",
+          "u1": "Station Jolicoeur",
+          "u2": "Champlain / 5e Avenue",
+          "u3": "Champlain / Desmarchais",
+          "u4": "Champlain / Woodland",
+          "u5": "Beurling / Moffat",
+          "u6": "Beurling / Brown",
+          "u7": "Beurling / Allard (O)",
+          "u8": "Beurling / Rolland",
+          "u9": "Rolland / No 1411",
+          "u10": "Rolland / Champlain",
+          "u11": "Champlain / Stephens",
+          "u12": "Hôpital Douglas (Champlain / No 7070)",
+          "u13": "Champlain / No 7100",
+          "u14": "Champlain / Crawford",
+          "u15": "Champlain / Fayolle",
+          "u16": "Champlain / Centrale",
+          "u17": "Champlain / Allion",
+          "u18": "Broadway / 2e Avenue",
+          "u19": "Broadway / 4e Avenue",
+          "u20": "Broadway / 6e Avenue",
+          "u21": "Broadway / 9e Avenue (LCCHS)",
+          "u22": "9e Avenue / George",
+          "u23": "George / 11e Avenue",
+          "u24": "George / Gagné",
+          "u25": "George / Raymond (PACC)"
+        },
+        "up": "u25",
+        "down": "d24",
+        "uptime": 1020000,
+        "downtime": 1200000
+      }
+    ],
     "period": [[7, 8], [16, 16]]
   },
   "regina-assumpta": {
     "name": "Regina Assumpta",
-    "route": "121E",
     "center": "[45.5594, -73.6516], 14",
-    "stops": {},
-    "up": "Sauvé Est / Papineau",
-    "down": "Métro Sauvé",
+    "routes": [
+      {
+        "route": "121E",
+        "stops": {},
+        "up": "Sauvé Est / Papineau",
+        "down": "St-Laurent?"
+      }
+    ],
     "period": [[7, 16]]
   },
   "college-de-montreal": {
     "name": "Collège de Montréal",
-    "route": "168E",
     "center": "[45.4718, -73.5678], 13",
-    "stops": {
-      "d1": "Sherbrooke / St-Marc",
-      "d2": "Place du Commerce / Provigo",
-      "d3": "Place du Commerce / Cité de l'Île",
-      "d4": "Place du Commerce / René-Lévesque",
-      "d5": "Berlioz / Terry-Fox",
-      "d6": "Berlioz / Place du Soleil",
-      "d7": "Berlioz / Place de la Fontaine",
-      "d8": "Berlioz / Landreville",
-      "d8": "Berlioz / de l'Île-des-Sœurs"
-    },
-    "up": "Sherbrooke / St-Marc",
-    "down": "Île-des-Sœurs",
+    "routes": [
+      {
+        "route": "168E",
+        "stops": {
+          "d1": "Sherbrooke / St-Marc",
+          "d2": "Place du Commerce / Provigo",
+          "d3": "Place du Commerce / Cité de l'Île",
+          "d4": "Place du Commerce / René-Lévesque",
+          "d5": "Berlioz / Terry-Fox",
+          "d6": "Berlioz / Place du Soleil",
+          "d7": "Berlioz / Place de la Fontaine",
+          "d8": "Berlioz / Landreville",
+          "d8": "Berlioz / de l'Île-des-Sœurs"
+        },
+        "up": "Sherbrooke / St-Marc",
+        "down": "Île-des-Sœurs"
+      }
+    ],
     "period": [[7, 8], [15, 16]]
   }
 }

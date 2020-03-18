@@ -38,8 +38,8 @@ function update() {
       (e, r, b) => {
         let feed = GtfsRealtimeBindings.FeedMessage.decode(b);
         Object.keys(routelist).map(s => {
-          let buses = feed.entity.filter(
-            f => f.vehicle.trip.routeId === routelist[s].route
+          let buses = feed.entity.filter(f =>
+            routelist[s].routes.find(r => r.route === f.vehicle.trip.routeId)
           );
           if (buses.length === 0) DB.set("old." + s, "yes");
           else {
@@ -127,7 +127,15 @@ app.get("/:school", (req, res) => {
               "[BUSES]",
               x
                 .map(r => {
-                  if (list[req.params.school].up.includes(r.vehicle.trip.tripId) || list[req.params.school].down.includes(r.vehicle.trip.tripId))
+                  let route = routelist[req.params.school].routes.find(
+                    x => x.route === r.vehicle.trip.routeId
+                  );
+                  if (
+                    list[req.params.school].up.includes(
+                      r.vehicle.trip.tripId
+                    ) ||
+                    list[req.params.school].down.includes(r.vehicle.trip.tripId)
+                  )
                     return (
                       "L.marker([" +
                       r.vehicle.position.latitude +
@@ -140,7 +148,8 @@ app.get("/:school", (req, res) => {
                       '</td></tr><tr><td></td><td align=\\"center\\">↓</td><td>' +
                       (r.vehicle.currentStatus === "STOPPED_AT"
                         ? ""
-                        : "📡 " + new Date(r.vehicle.timestamp * 1000).toLocaleString(
+                        : "📡 " +
+                          new Date(r.vehicle.timestamp * 1000).toLocaleString(
                             "en-US",
                             {
                               hour12: false,
@@ -151,8 +160,10 @@ app.get("/:school", (req, res) => {
                             }
                           )) +
                       "</td></tr><tr><td>" +
-                      routelist[req.params.school].stops[
-                        (list[req.params.school].up.includes(r.vehicle.trip.tripId)
+                      route.stops[
+                        (list[req.params.school].up.includes(
+                          r.vehicle.trip.tripId
+                        )
                           ? "u"
                           : "d") + r.vehicle.currentStopSequence
                       ] +
@@ -171,14 +182,16 @@ app.get("/:school", (req, res) => {
                           ) +
                           "</td>"
                         : "◯</td><td>" +
-                          (routelist[req.params.school].uptime &&
-                          routelist[req.params.school].downtime &&
-                          ((list[req.params.school].up.includes(r.vehicle.trip.tripId) &&
-                            routelist[req.params.school].up ===
-                              "u" + r.vehicle.currentStopSequence) ||
-                            (list[req.params.school].down.includes(r.vehicle.trip.tripId) &&
-                              routelist[req.params.school].up ===
-                                "d" + r.vehicle.currentStopSequence))
+                          (route.uptime &&
+                          route.downtime &&
+                          ((list[req.params.school].up.includes(
+                            r.vehicle.trip.tripId
+                          ) &&
+                            route === "u" + r.vehicle.currentStopSequence) ||
+                            (list[req.params.school].down.includes(
+                              r.vehicle.trip.tripId
+                            ) &&
+                              route === "d" + r.vehicle.currentStopSequence))
                             ? "🔮 [" +
                               new Date(
                                 new Date(
@@ -191,8 +204,7 @@ app.get("/:school", (req, res) => {
                                     r.vehicle.trip.startTime +
                                     " " +
                                     time
-                                ).getTime() +
-                                  routelist[req.params.school].downtime
+                                ).getTime() + route.downtime
                               ).toLocaleString("en-US", {
                                 hour12: false,
                                 timeZone: "America/Montreal",
@@ -203,13 +215,11 @@ app.get("/:school", (req, res) => {
                             : "") +
                           "</td>") +
                       '</tr><tr><td></td><td align=\\"center\\">↓</td><td></td></tr>' +
-                      (list[req.params.school].up.includes(r.vehicle.trip.tripId) &&
-                      routelist[req.params.school].up !==
-                        "u" + r.vehicle.currentStopSequence // up, not last stop?
+                      (list[req.params.school].up.includes(
+                        r.vehicle.trip.tripId
+                      ) && route.up !== "u" + r.vehicle.currentStopSequence // up, not last stop?
                         ? '<tr><td align=\\"right\\">' +
-                          routelist[req.params.school].stops[
-                            routelist[req.params.school].up
-                          ] +
+                          route.stops[route.up] +
                           '</td><td align=\\"center\\">◯</td><td>' +
                           (routelist[req.params.school].uptime &&
                           routelist[req.params.school].downtime
@@ -225,8 +235,7 @@ app.get("/:school", (req, res) => {
                                     r.vehicle.trip.startTime +
                                     " " +
                                     time
-                                ).getTime() +
-                                  routelist[req.params.school].downtime
+                                ).getTime() + route.downtime
                               ).toLocaleString("en-US", {
                                 hour12: false,
                                 timeZone: "America/Montreal",
@@ -236,16 +245,14 @@ app.get("/:school", (req, res) => {
                               "]"
                             : "") +
                           '</td></tr><tr><td></td><td align=\\"center\\">↓</td><td></td></tr>'
-                        : list[req.params.school].down.includes(r.vehicle.trip.tripId) &&
-                          routelist[req.params.school].down !==
-                            "d" + r.vehicle.currentStopSequence // down, not last stop?
-                        ? ('<tr><td align=\\"right\\">' +
-                          routelist[req.params.school].stops[
-                            routelist[req.params.school].down
-                          ] +
+                        : list[req.params.school].down.includes(
+                            r.vehicle.trip.tripId
+                          ) &&
+                          route.down !== "d" + r.vehicle.currentStopSequence // down, not last stop?
+                        ? '<tr><td align=\\"right\\">' +
+                          route.stops[route.down] +
                           '</td><td align=\\"center\\">◯</td><td>' +
-                          (routelist[req.params.school].uptime &&
-                          routelist[req.params.school].downtime
+                          (route.uptime && route.downtime
                             ? "🔮 [" +
                               new Date(
                                 new Date(
@@ -258,8 +265,7 @@ app.get("/:school", (req, res) => {
                                     r.vehicle.trip.startTime +
                                     " " +
                                     time
-                                ).getTime() +
-                                  routelist[req.params.school].downtime
+                                ).getTime() + route.downtime
                               ).toLocaleString("en-US", {
                                 hour12: false,
                                 timeZone: "America/Montreal",
@@ -267,20 +273,17 @@ app.get("/:school", (req, res) => {
                                 minute: "2-digit"
                               }) +
                               "]"
-                            : "")
-                        + '</td></tr><tr><td></td><td align=\\"center\\">↓</td><td></td></tr>')
-                       : "")+
+                            : "") +
+                          '</td></tr><tr><td></td><td align=\\"center\\">↓</td><td></td></tr>'
+                        : "") +
                       '<tr><td align=\\"right\\">' +
-                      (list[req.params.school].up.includes(r.vehicle.trip.tripId)
-                        ? routelist[req.params.school].stops[
-                            routelist[req.params.school].down
-                          ]
-                        : routelist[req.params.school].stops[
-                            routelist[req.params.school].up
-                          ]) +
+                      (list[req.params.school].up.includes(
+                        r.vehicle.trip.tripId
+                      )
+                        ? route.stops[route.down]
+                        : route.stops[route.up]) +
                       '</td><td align=\\"center\\">◯</td><td>' +
-                      (routelist[req.params.school].uptime &&
-                      routelist[req.params.school].downtime
+                      (route.uptime && route.downtime
                         ? "🔮 [" +
                           new Date(
                             new Date(
@@ -294,8 +297,8 @@ app.get("/:school", (req, res) => {
                                 " " +
                                 time
                             ).getTime() +
-                              routelist[req.params.school].uptime +
-                              routelist[req.params.school].downtime
+                              route.uptime +
+                              route.downtime
                           ).toLocaleString("en-US", {
                             hour12: false,
                             timeZone: "America/Montreal",
@@ -337,13 +340,7 @@ app.get("/:school", (req, res) => {
                 }) +
                 ".</i>"
             )
-            .replace(
-              /\[SCHOOL\]/g,
-              routelist[req.params.school].name +
-                " (" +
-                routelist[req.params.school].route +
-                ")"
-            )
+            .replace(/\[SCHOOL\]/g, routelist[req.params.school].name)
             .replace("[school]", req.params.school)
             .replace("[CENTER]", routelist[req.params.school].center)
             .replace(
