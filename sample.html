@@ -34,23 +34,22 @@
       crossorigin=""
     ></script>
   </head>
-  <body>
-    [OLD]
-
-    <div id="mapid" style="width: 100%; height: 400px;"></div>
+  <body><div id="mapid" style="width: 100%; height: 450px;"></div>
+    <center>
     <p>
-      <center>Auto-Refresh every 30s<br><button type="button" onclick="refresh()">
+      Actualisation automatique chaque 30s<br><button type="button" onclick="refresh()">
         Toggle / Changer
-        </button> <b id="ON" style="color:green;visibility:hidden;">ON</b> <b id="OFF" style="color:red;">OFF</b><br>Actualisation automatique chaque 30s</center>
+        </button> <b id="ON" style="color:green;visibility:hidden;">ON</b> <b id="OFF" style="color:red;">OFF</b><br>Auto-Refresh every 30s
     </p>
-    <table>
-      <tr>🗒️ Scheduled departure / Départ planifié</li>
-      <tr>📡 GPS time / Le temps de GPS</li>
-      <tr>🔮 Predicted arrival / Arrivée prevue</li>
-      <tr>⬤ Bus has passed the stop / Le bus a passé l'arrêt</li>
-      <tr>◯ Bus is moving to the stop / Le bus se déplace à l'arrêt</li>
-      <tr>○ Presumed "En Transit" terminus / Terminus "En Transit" supposé</tr>
+    <table style="border-width:0px;">
+      <tr><td align="right">Départ planifié</td><td>🗒️</td><td>Scheduled departure</td></tr>
+      <tr><td align="right">Le temps de GPS</td><td aligh="center">📡</td><td>GPS time</td></tr>
+      <tr><td align="right">Arrivée prevue</td><td aligh="center">🔮</td><td>Predicted arrival</td></tr>
+      <tr><td align="right">Le bus a passé l'arrêt</td><td aligh="center">⬤</td><td>Bus has passed the stop</td></tr>
+      <tr><td align="right">Le bus se déplace à l'arrêt</td><td aligh="center">◯</td><td>Bus is moving to the stop</td></tr>
+      <tr><td align="right">Terminus "En Transit" supposé</td><td aligh="center">○</td><td>Presumed "En Transit" terminus</td></tr>
     </table>
+      </center>
     <p>
       <a href="./">Back to homepage</a>. Made by
       <a href="https://austinhuang.me">Austin Huang</a>.

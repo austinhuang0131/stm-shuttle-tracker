@@ -11,6 +11,7 @@ Version 0.0.6, 2020/03/18
 * Tracker
 - Added auto-refresh
 - Change of database structure
+- Some design changes with bilingual signages
 
 Version 0.0.5, 2020/03/13
 During coronavirus crisis, please stay safe.

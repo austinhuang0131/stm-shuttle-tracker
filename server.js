@@ -335,7 +335,7 @@ app.get("/:school", (req, res) => {
             )
             .replace(
               "[TIME]",
-              "<br><i>List updated at " +
+              "<br><i>" +
                 new Date(t).toLocaleString("en-US", {
                   timeZone: "America/Montreal"
                 }) +
@@ -346,24 +346,6 @@ app.get("/:school", (req, res) => {
             .replace("[REFRESH]", req.query.refresh === "true" ? "true" : "false")
             .replace("[METAR]", req.query.refresh === "true" ? '<meta http-equiv="refresh" content="30" >' : "")
             .replace("[CENTER]", routelist[req.params.school].center)
-            .replace(
-              "[OLD]",
-              old === "yes"
-                ? '<p>There are no buses running currently. This could mean that all the buses are being "En Transit", or a driver forgot to turn on iBUS... Below are the data acquired ' +
-                    humanizeDuration(Date.now() - t, {
-                      verbose: true,
-                      unitCount: 1,
-                      separateMilliseconds: true
-                    }) +
-                    " ago:</p>"
-                : "<p>Below are the data acquired " +
-                    humanizeDuration(Date.now() - t, {
-                      verbose: true,
-                      unitCount: 1,
-                      separateMilliseconds: true
-                    }) +
-                    " ago:</p>"
-            )
         );
     });
 });
