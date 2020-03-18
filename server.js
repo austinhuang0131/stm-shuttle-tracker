@@ -159,7 +159,7 @@ app.get("/:school", (req, res) => {
                               second: "2-digit"
                             }
                           )) +
-                      "</td></tr><tr><td>" +
+                      '</td></tr><tr><td align=\\"right\\">' +
                       route.stops[
                         (list[req.params.school].up.includes(
                           r.vehicle.trip.tripId
