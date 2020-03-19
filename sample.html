@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <title>STM Shuttle Tracker - [SCHOOL]</title>
-    
+
     [METAR]
 
     <meta charset="utf-8" />
@@ -24,12 +24,12 @@
     />
     <link
       rel="stylesheet"
-      href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+      href="./leaflet.css.min"
       integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
       crossorigin=""
     />
     <script
-      src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+      src="./leaflet.js.min"
       integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
       crossorigin=""
     ></script>
@@ -56,48 +56,31 @@
     </p>
     <p>
       <small
-        >By using this tool, you agree to the terms and conditions imposed by
-        <a href="http://www.stm.info/en/about/developers/terms-use"
-          >the STM</a
-        >
-        (Bus data), <a href="https://glitch.com/legal/">Glitch</a> (Backend),
-        <a href="https://wiki.osmfoundation.org/wiki/Terms_of_Use"
-          >OpenStreetMap</a
-        >
-        (Map), and
-        <a href="https://www.cloudflare.com/terms/">Cloudflare</a> (HTTPS
-        stuff). Data are sourced directly from the STM. This work is licensed
-        under a
-        <a
+        >By using this tool, you agree to the <a href="./faq#terms">terms and privacy policy</a>.
+        Data are sourced directly from the STM. Tracker licensed under <a
           rel="license"
           href="http://creativecommons.org/licenses/by-nc-sa/4.0/"
-          >Creative Commons Attribution-NonCommercial-ShareAlike 4.0
-          International License</a
+          >CC BY-NC-SA 4.0.</a
         >.</small
       >
     </p>
     <script>
         var mymap = L.map("mapid").setView([CENTER]),
             r = [REFRESH];
-
-        var greenIcon = L.icon({
-          iconUrl:
-            "https://cdn.glitch.com/f760b15e-1eb8-484a-838a-6431059cae3c%2Fbus.png?v=1583781456239"
+        L.Marker.prototype.options.icon = L.icon({
+            iconUrl: '/images/marker-icon.png',
+            iconSize: [25, 25]
         });
-
-        L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        L.tileLayer("https://stm.austinhuang.me/osm/{s}/{z}/{x}/{y}.png", {
           attribution:
             '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors[TIME]'
         }).addTo(mymap);
-
         [BUSES]
-      
         if (r) {
             document.getElementById("OFF").style.opacity = "0.1";
             document.getElementById("ON").style.opacity = null;
         }
         setTimeout(() => {if (r) window.location.href = "https://stm.austinhuang.me/[school]?refresh=true"}, 30000);
-      
         function refresh() {
           if (!r) {
             r = true;

@@ -7,6 +7,11 @@ Inquiries? Feedbacks? Concerns?
 
 === C H A N G E L O G ===
 
+Version 0.0.7, 2020/03/19
+* Tracker
+- Added proxy for OSM tiles, scripts, stylesheets, etc. Yes for privacy!
+- Bug fix for database structure change
+
 Version 0.0.6, 2020/03/18
 * Tracker
 - Added auto-refresh

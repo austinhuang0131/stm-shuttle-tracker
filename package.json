@@ -1,6 +1,6 @@
 {
   "name": "stmbus",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "author": "Austin Huang <im@austinhuang.me> (https://austinhuang.me)",
   "description": "Checks STM shuttle buses (mainly in Marianopolis)",
   "main": "server.js",
@@ -9,10 +9,10 @@
   },
   "dependencies": {
     "express": "^4.17.1",
-    "request": "^2.88.2",
-    "gtfs-realtime-bindings": "^0.0.5",
+    "gtfs-realtime-bindings": "0.0.5",
+    "pretty-ms": "^6.0.1",
     "quick.db": "^6.3.2",
-    "pretty-ms": "^6.0.1"
+    "request": "^2.88.2"
   },
   "engines": {
     "node": "10.x"

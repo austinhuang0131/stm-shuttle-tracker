@@ -91,6 +91,26 @@ app.get("/trips.txt", (req, res) => {
   res.sendFile(__dirname + "/trips.txt");
 });
 
+app.get("/leaflet.:type.min", (req, res) => {
+  request("https://unpkg.com/leaflet@1.6.0/dist/leaflet."+req.params.type).pipe(res);
+})
+
+app.get("/images/marker-icon.png", (req, res) => {
+  request(
+    "https://cdn.glitch.com/f760b15e-1eb8-484a-838a-6431059cae3c%2Fbus.png?v=1583781456239",
+  ).pipe(res);
+});
+
+app.get("/osm/:s/:z/:x/:y.png", (req, res) => {
+  if (parseInt(req.params.z) < 10) return res.status(400).send("Zoom below 10 is rejected.");
+  else if ((parseInt(req.params.x) / (2 ** (parseInt(req.params.z) - 10))) < 301 || (parseInt(req.params.x) / (2 ** (parseInt(req.params.z) - 10))) > 303) return res.status(400).send("Out of Montreal (x must be between 301 and 303 on zoom 10)");
+  else if ((parseInt(req.params.y) / (2 ** (parseInt(req.params.z) - 10))) < 365 || (parseInt(req.params.y) / (2 ** (parseInt(req.params.z) - 10))) > 367) return res.status(400).send("Out of Montreal (y must be between 365 and 367 on zoom 10)");
+  request(
+    `https://${req.params.s}.tile.openstreetmap.org/${req.params.z}/${req.params.x}/${req.params.y}.png`,
+    { headers: { "User-Agent": "I am caching for https://stm.austinhuang.me" } }
+  ).pipe(res);
+});
+
 app.get("/:school", (req, res) => {
   if (!list[req.params.school]) res.status(404).send("Invalid school.");
   else if (
@@ -141,7 +161,7 @@ app.get("/:school", (req, res) => {
                       r.vehicle.position.latitude +
                       ", " +
                       r.vehicle.position.longitude +
-                      '], {icon: greenIcon}).addTo(mymap).bindPopup("<table style=\\"border-width:0px;\\"><tr><td align=\\"right\\">Bus #' +
+                      ']).addTo(mymap).bindPopup("<table style=\\"border-width:0px;\\"><tr><td align=\\"right\\">Bus #' +
                       r.id +
                       '</td><td align=\\"center\\">▼</td><td>🗒️ ' +
                       r.vehicle.trip.startTime.replace(/:00$/g, "") +
@@ -191,7 +211,8 @@ app.get("/:school", (req, res) => {
                             (list[req.params.school].down.includes(
                               r.vehicle.trip.tripId
                             ) &&
-                              route.down === "d" + r.vehicle.currentStopSequence))
+                              route.down ===
+                                "d" + r.vehicle.currentStopSequence))
                             ? "🔮 [" +
                               new Date(
                                 new Date(
@@ -221,8 +242,7 @@ app.get("/:school", (req, res) => {
                         ? '<tr><td align=\\"right\\">' +
                           route.stops[route.up] +
                           '</td><td align=\\"center\\">◯</td><td>' +
-                          (routelist[req.params.school].uptime &&
-                          routelist[req.params.school].downtime
+                          (route.uptime
                             ? "🔮 [" +
                               new Date(
                                 new Date(
@@ -235,7 +255,7 @@ app.get("/:school", (req, res) => {
                                     r.vehicle.trip.startTime +
                                     " " +
                                     time
-                                ).getTime() + route.downtime
+                                ).getTime() + route.uptime
                               ).toLocaleString("en-US", {
                                 hour12: false,
                                 timeZone: "America/Montreal",
@@ -252,7 +272,7 @@ app.get("/:school", (req, res) => {
                         ? '<tr><td align=\\"right\\">' +
                           route.stops[route.down] +
                           '</td><td align=\\"center\\">◯</td><td>' +
-                          (route.uptime && route.downtime
+                          (route.downtime
                             ? "🔮 [" +
                               new Date(
                                 new Date(
@@ -343,8 +363,16 @@ app.get("/:school", (req, res) => {
             )
             .replace(/\[SCHOOL\]/g, routelist[req.params.school].name)
             .replace(/\[school\]/g, req.params.school)
-            .replace("[REFRESH]", req.query.refresh === "true" ? "true" : "false")
-            .replace("[METAR]", req.query.refresh === "true" ? '<meta http-equiv="refresh" content="30" >' : "")
+            .replace(
+              "[REFRESH]",
+              req.query.refresh === "true" ? "true" : "false"
+            )
+            .replace(
+              "[METAR]",
+              req.query.refresh === "true"
+                ? '<meta http-equiv="refresh" content="30" >'
+                : ""
+            )
             .replace("[CENTER]", routelist[req.params.school].center)
         );
     });
