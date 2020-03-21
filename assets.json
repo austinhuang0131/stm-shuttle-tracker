@@ -1,0 +1,12 @@
+{
+  "marker-icon.png": "https://cdn.glitch.com/f760b15e-1eb8-484a-838a-6431059cae3c%2Fbus.png?v=1583781456239",
+  "leaflet.min.css": "https://unpkg.com/leaflet@1.6.0/dist/leaflet.css",
+  "leaflet.min.js": "https://unpkg.com/leaflet@1.6.0/dist/leaflet.js",
+  "open-source.svg": "https://badges.frapsoft.com/os/v3/open-source.svg?v=103",
+  "status.svg": "https://img.shields.io/uptimerobot/ratio/m784498814-06112afb69226dc020753396",
+  "made-with-javascript.svg": "https://forthebadge.com/images/badges/made-with-javascript.svg",
+  "uses-html.svg": "https://forthebadge.com/images/badges/uses-html.svg",
+  "built-with-love.svg": "https://forthebadge.com/images/badges/built-with-love.svg",
+  "for-you.svg": "https://forthebadge.com/images/badges/for-you.svg",
+  "endless.png": "https://endlcdn.site/download/attachments/1474572/DA%20Logo.png"
+}

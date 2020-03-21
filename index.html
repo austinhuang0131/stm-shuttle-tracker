@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
   <head>
     <title>STM Shuttle Tracker</title>
     <meta charset="utf-8" />
@@ -24,63 +24,87 @@
     />
   </head>
   <body>
-    <p>
-      <b>Propage l'info, pas le virus!</b> Arrêtez des partys et restez à la maison! <a href="https://quebec.ca/coronavirus">Quebec.ca/Coronavirus</a>
-    </p>
-    <p>
-      <b>Spread the info, not the virus!</b> Stop partying and stay home! <a href="https://quebec.ca/en/coronavirus">Quebec.ca/en/Coronavirus</a>
-    </p>
-    <hr>
-    <p><i>https://stm.austinhuang.me</i></p>
-    <p>
-      Tracer les bus "École" de la STM. Exposer l'emplacement, le séquence
-      d'arrêt et des arrivées prevues, fournit par l'API GTFS-Realtime de la STM.
-      <br>Tracks STM "École" buses. Provides real-time location, stop sequence
-      and arrival predictions, through STM's GTFS-Realtime API.
-    </p>
-    <p>
-      Ce service non-officiel est offrert volontairement à ces cégeps:<br>This unofficial service is voluntarily offered to the following cégeps:
-    </p>
+    <div lang="en" id="en1">
+      <button type="button" onclick="refresh(1)">Français</button>
+      <p>
+        <b>Spread the info, not the virus!</b> Stop partying and stay home! <a href="https://quebec.ca/en/coronavirus">Quebec.ca/en/Coronavirus</a>
+      </p>
+      <hr>
+      <p><i>https://stm.austinhuang.me</i></p>
+      <p>
+        Tracks STM "École" buses. Provides real-time location, stop sequence
+        and arrival predictions, through STM's GTFS-Realtime API.
+      </p>
+      <p>
+        This unofficial service is voluntarily offered to the following cégeps:
+      </p>
+    </div>
+    <div lang="fr" id="fr1" style="display:none;">
+      <button onclick="refresh(0)">English</button>
+      <p>
+        <b>Propage l'info, pas le virus!</b> Arrêtez des partys et restez à la maison! <a href="https://quebec.ca/coronavirus">Quebec.ca/Coronavirus</a>
+      </p>
+      <hr>
+      <p><i>https://stm.austinhuang.me</i></p>
+      <p>
+        Tracer les bus "École" de la STM. Exposer l'emplacement, le séquence
+        d'arrêt et des arrivées prevues, fournit par l'API GTFS-Realtime de la STM.
+      </p>
+      <p>
+        Ce service non-officiel est offrert volontairement à ces cégeps:
+      </p>
+    </div>
     <ul>
       <li>
-        <a href="/marianopolis">Marianopolis College 124E</a> (All features)
+        <a href="/marianopolis">Marianopolis College 124E</a>
       </li>
       <li>
-        <a href="/andre-laurendeau">Cégep André-Laurendeau 113E</a> (All features)
+        <a href="/andre-laurendeau">Cégep André-Laurendeau 113E</a>
       </li>
     </ul>
-    <p>Et aussi ces écoles secondaires:<br>As well as the following high schools:</p>
+    <p lang="fr" id="fr2" style="display:none;">Et aussi ces écoles secondaires: (Version ALPHA)</p>
+    <p lang="en" id="en2">As well as the following high schools: (ALPHA Version)</p>
     <ul>
       <li>
-        <a href="/college-de-montreal">Collège de Montréal 168E</a> (Just raw
-        data)
+        <a href="/college-de-montreal">Collège de Montréal 168E</a>
       </li>
       <li>
-        <a href="/lcchs-pacc">LaSalle Comprehensive / PACC 112E</a> (All features, guessed schedules)
+        <a href="/lcchs-pacc">LaSalle Comprehensive / PACC 112E</a>
       </li>
     </ul>
-    <p>Read the <a href="./faq">FAQ</a> and the <a href="./changelog">change log</a>! (English only)</p>
-    <p>
-      Leave your comments, suggestions, corrections, etc... to me! (Instagram: <a href="https://instagram.com/austinhuang.me">@austinhuang.me</a>)
-    </p>
-    <p>Made by <a href="https://austinhuang.me">Austin Huang</a>.</p>
-    <p>Proudly hosted by:</p>
-    <a href="https://theendlessweb.com"><img src="https://endlcdn.site/download/attachments/1474572/DA%20Logo.png" height="40"/></a>
+    <div lang="en" id="en3">
+      <p>Read the <a href="./faq">FAQ</a>, follow the <a href="./changelog">change log</a>, and monitor the <a href="https://status.austinhuang.me/">uptime</a>!</p>
+      <p>
+        Contact me: <a href="https://instagram.com/austinhuang.me">Instagram @austinhuang.me</a> / <a href="mailto:im@austinhuang.me">Email <code>im@austinhuang.me</code></a>
+      </p>
+      <p>Made by <a href="https://austinhuang.me">Austin Huang</a>.</p>
+      <p>Proudly hosted by:</p>
+    </div>
+    <div lang="fr" id="fr3" style="display:none;">
+      <p>Lisez le <a href="./faq">FAQ</a> et suivez les <a href="./changelog">mises à jour</a>! (Anglais seulement)</p>
+      <p>
+        Me contacter: <a href="https://instagram.com/austinhuang.me">Instagram @austinhuang.me</a> / <a href="mailto:im@austinhuang.me">Courrier électronique <code>im@austinhuang.me</code></a>
+      </p>
+      <p>Réalisée par <a href="https://austinhuang.me">Austin Huang</a>.</p>
+      <p>Fièrement opéré par:</p>
+    </div>
+    <a href="https://theendlessweb.com"><img src="/assets/endless.png" height="40"/></a>
     <hr>
     <a href="https://github.com/ellerbrock/open-source-badges"
       ><img
-        src="https://badges.frapsoft.com/os/v3/open-source.svg?v=103"
+        src="/assets/open-source.svg"
         alt="Love Open Source!"/></a
-    ><br />
+    ><a href="https://status.austinhuang.me"><img alt="Uptime Robot ratio (30 days)" src="/assets/status.svg"></a>
+    <br />
     <a href="https://forthebadge.com/"
       ><img
-        src="https://forthebadge.com/images/badges/made-with-javascript.svg"
+        src="/assets/made-with-javascript.svg"
         alt="Made with JavaScript"/><img
-        src="https://forthebadge.com/images/badges/uses-html.svg"
+        src="/assets/uses-html.svg"
         alt="Uses HTML"/><img
-        src="https://forthebadge.com/images/badges/built-with-love.svg"
+        src="/assets/built-with-love.svg"
         alt="Built with <3"/><img
-        src="https://forthebadge.com/images/badges/for-you.svg"
+        src="/assets/for-you.svg"
         alt="For you!"
     /></a>
     <p>
@@ -93,5 +117,25 @@
         >.</small
       >
     </p>
+    <script>
+      function refresh(x) {
+        if (x === 1) {
+          document.getElementById("fr1").style.display = null;
+          document.getElementById("fr2").style.display = null;
+          document.getElementById("fr3").style.display = null;
+          document.getElementById("en1").style.display = "none";
+          document.getElementById("en2").style.display = "none";
+          document.getElementById("en3").style.display = "none";
+        }
+        else if (x === 0) {
+          document.getElementById("fr1").style.display = "none";
+          document.getElementById("fr2").style.display = "none";
+          document.getElementById("fr3").style.display = "none";
+          document.getElementById("en1").style.display = null;
+          document.getElementById("en2").style.display = null;
+          document.getElementById("en3").style.display = null;
+        }
+      }
+    </script>
   </body>
 </html>

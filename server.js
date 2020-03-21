@@ -8,7 +8,8 @@ const express = require("express"),
   sample = fs.readFileSync("./sample.html", "utf8"),
   routes = new DB.table("routes"),
   list = require("./list.json"),
-  routelist = require("./routes.json");
+  routelist = require("./routes.json"),
+  assets = require("./assets.json");
 var app = express(),
   gtfsfile = fs.createWriteStream("./trips.txt", { flags: "a" }),
   gtfstrip = fs.readFileSync("./trips.txt", "utf8");
@@ -91,14 +92,10 @@ app.get("/trips.txt", (req, res) => {
   res.sendFile(__dirname + "/trips.txt");
 });
 
-app.get("/leaflet.:type.min", (req, res) => {
-  request("https://unpkg.com/leaflet@1.6.0/dist/leaflet."+req.params.type).pipe(res);
-})
-
-app.get("/images/marker-icon.png", (req, res) => {
-  request(
-    "https://cdn.glitch.com/f760b15e-1eb8-484a-838a-6431059cae3c%2Fbus.png?v=1583781456239",
-  ).pipe(res);
+app.get("/assets/:name", (req, res) => {
+  !assets[req.params.name]
+  ? res.status(404).send("Not found in assets.json")
+  : request(assets[req.params.name]).pipe(res);
 });
 
 app.get("/osm/:s/:z/:x/:y.png", (req, res) => {

@@ -24,12 +24,12 @@
     />
     <link
       rel="stylesheet"
-      href="./leaflet.css.min"
+      href="./assets/leaflet.min.css"
       integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
       crossorigin=""
     />
     <script
-      src="./leaflet.js.min"
+      src="./assets/leaflet.min.js"
       integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
       crossorigin=""
     ></script>
@@ -68,7 +68,7 @@
         var mymap = L.map("mapid").setView([CENTER]),
             r = [REFRESH];
         L.Marker.prototype.options.icon = L.icon({
-            iconUrl: '/images/marker-icon.png',
+            iconUrl: '/assets/marker-icon.png',
             iconSize: [25, 25]
         });
         L.tileLayer("https://stm.austinhuang.me/osm/{s}/{z}/{x}/{y}.png", {
