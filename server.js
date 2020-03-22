@@ -61,8 +61,12 @@ function update() {
                   r.vehicle.trip.tripId +
                   "," +
                   r.vehicle.trip.routeId +
-                  "-?,?,,0,," +
-                  r.vehicle.trip.startTime.replace(/:00$/g, ""),
+                  "-?,?,,0," +
+                  r.vehicle.trip.startTime.replace(/:00$/g, "") +
+                  ",https://osm.org/query?lat=" +
+                  r.vehicle.position.latitude +
+                  "&lon=" +
+                  r.vehicle.position.longitude,
                 "utf8",
                 e => console.error
               );
