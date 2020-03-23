@@ -337,7 +337,7 @@ app.get("/:school", (req, res) => {
                       r.vehicle.position.latitude +
                       ", " +
                       r.vehicle.position.longitude +
-                      '], {icon: greenIcon}).addTo(mymap).bindPopup("Bus ' +
+                      ']).addTo(mymap).bindPopup("Bus ' +
                       r.id +
                       ", which departed at " +
                       r.vehicle.trip.startTime +
