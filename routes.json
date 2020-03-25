@@ -16,8 +16,10 @@
         },
         "up": "u2",
         "down": "d5",
-        "uptime": 420000,
-        "downtime": 420000
+        "upFromId": "",
+        "upToId": "",
+        "downFromId": "",
+        "downToId": "54104?"
       }
     ],
     "period": [[7, 9], [13, 20]]
@@ -47,22 +49,13 @@
         },
         "up": "u6",
         "down": "d9",
-        "uptime": 420000,
-        "downtime": 480000
+        "upFromId": "54107",
+        "upToId": "57059",
+        "downFromId": "56956",
+        "downToId": "54107"
       }
     ],
     "period": [[6, 8], [11, 11], [15, 18]]
-  },
-  "rosemont": {
-    "name": "Collège de Rosemont",
-    "center": "[45.5564, -73.5699], 13",
-    "routes": [
-      {
-        "route": "18E",
-        "stops": {}
-      }
-    ],
-    "period": [[7, 18]]
   },
   "lcchs-pacc": {
     "name": "LCCHS / PACC",
@@ -123,24 +116,13 @@
         },
         "up": "u25",
         "down": "d24",
-        "uptime": 1020000,
-        "downtime": 1200000
+        "upFromId": "53952",
+        "upToId": "56959",
+        "downFromId": "???",
+        "downToId": "54101"
       }
     ],
     "period": [[7, 8], [16, 16]]
-  },
-  "regina-assumpta": {
-    "name": "Regina Assumpta",
-    "center": "[45.5594, -73.6516], 14",
-    "routes": [
-      {
-        "route": "121E",
-        "stops": {},
-        "up": "Sauvé Est / Papineau",
-        "down": "St-Laurent?"
-      }
-    ],
-    "period": [[7, 16]]
   },
   "college-de-montreal": {
     "name": "Collège de Montréal",
@@ -159,10 +141,92 @@
           "d8": "Berlioz / Landreville",
           "d8": "Berlioz / de l'Île-des-Sœurs"
         },
-        "up": "Sherbrooke / St-Marc",
-        "down": "Île-des-Sœurs"
+        "up": "",
+        "down": "",
+        "upFromId": "",
+        "upToId": "",
+        "downFromId": "",
+        "downToId": ""
       }
     ],
     "period": [[7, 8], [15, 16]]
+  },
+  "esmr": {
+    "name": "École Secondaire Monseigneur-Richard",
+    "center": "[45.4718, -73.5678], 13",
+    "routes": [
+      {
+        "route": "61E",
+        "stops": {
+        },
+        "up": "",
+        "down": "",
+        "upFromId": "56706",
+        "upToId": "56682",
+        "downFromId": "",
+        "downToId": ""
+      },
+      {
+        "route": "58E",
+        "stops": {
+        },
+        "up": "",
+        "down": "",
+        "upFromId": "?",
+        "upToId": "56682",
+        "downFromId": "56682",
+        "downToId": "57072"
+      },
+      {
+        "route": "108E",
+        "stops": {
+        },
+        "up": "",
+        "down": "",
+        "upFromId": "56703",
+        "upToId": "56682",
+        "downFromId": "56682",
+        "downToId": "56703"
+      }
+    ],
+    "period": [[7, 8], [15, 16]]
+  },
+  "college-francais": {
+    "name": "Collège Français (Montréal)",
+    "center": "[45.4718, -73.5678], 13",
+    "routes": [
+      {
+        "route": "51E",
+        "stops": {
+        },
+        "up": "6",
+        "down": "",
+        "upFromId": "54069",
+        "upToId": "53848",
+        "downFromId": "",
+        "downToId": ""
+      }
+    ],
+    "period": [[7, 8], [15, 15]]
+  },
+  "sainte-anne": {
+    "name": "Collège Sainte-Anne",
+    "center": "[45.4718, -73.5678], 13",
+    "routes": [
+      {
+        "route": "411E",
+        "stops": {
+          "u1": "Gare Beaconsfield",
+          "u2": "Saint-Louis / 12e Av."
+        },
+        "up": "2",
+        "down": "20",
+        "upFromId": "58485",
+        "upToId": "57238",
+        "downFromId": "61378",
+        "downToId": "58591"
+      }
+    ],
+    "period": [[7, 8], [15, 15]]
   }
 }

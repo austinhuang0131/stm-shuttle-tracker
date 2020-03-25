@@ -7,6 +7,15 @@ Inquiries? Feedbacks? Concerns?
 
 === C H A N G E L O G ===
 
+Version 0.1.0, 2020/03/??
+* Tracker
+- TripUpdates API implementation
+- Change of database structure
+* School
+- Temporarily adding Mgr-Richard and Collège Sainte-Anne
+
+--- 0.0.x ---
+
 Version 0.0.8, 2020/03/21
 * Tracker
 - Every image is now proxied

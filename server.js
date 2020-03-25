@@ -7,7 +7,6 @@ const express = require("express"),
   time = "EDT", // Change to EST for non-daylight saving time!!!
   sample = fs.readFileSync("./sample.html", "utf8"),
   routes = new DB.table("routes"),
-  list = require("./list.json"),
   routelist = require("./routes.json"),
   assets = require("./assets.json");
 var app = express(),
@@ -30,48 +29,90 @@ function update() {
       new Date().getDay() !== 6)
   )
     request(
-      "https://api.stm.info/pub/od/gtfs-rt/ic/v1/vehiclePositions",
+      "https://api.stm.info/pub/od/gtfs-rt/ic/v1/tripUpdates",
       {
         method: "POST",
         headers: { apikey: process.env.STM_API_KEY },
         encoding: null
       },
       (e, r, b) => {
-        let feed = GtfsRealtimeBindings.FeedMessage.decode(b);
-        Object.keys(routelist).map(s => {
-          let buses = feed.entity.filter(f =>
-            routelist[s].routes.find(r => r.route === f.vehicle.trip.routeId)
-          );
-          if (buses.length === 0) DB.set("old." + s, "yes");
-          else {
-            DB.set("time." + s, Date.now());
-            DB.set("old." + s, "no");
-            routes.set(s, buses);
+        let updt = GtfsRealtimeBindings.FeedMessage.decode(b);
+        request(
+          "https://api.stm.info/pub/od/gtfs-rt/ic/v1/vehiclePositions",
+          {
+            method: "POST",
+            headers: { apikey: process.env.STM_API_KEY },
+            encoding: null
+          },
+          (e, r, b2) => {
+            let feed = GtfsRealtimeBindings.FeedMessage.decode(b2);
+            Object.keys(routelist).map(s => {
+              let ups = updt.entity.filter(
+                  u =>
+                    routelist[s].routes.find(
+                      l =>
+                        l.upFromId === u.tripUpdate.stopTimeUpdate[0].stopId &&
+                        l.upToId ===
+                          u.tripUpdate.stopTimeUpdate[
+                            u.tripUpdate.stopTimeUpdate.length - 1
+                          ].stopId
+                    ).length === 1
+                ),
+                downs = updt.entity.filter(
+                  u =>
+                    routelist[s].routes.find(
+                      l =>
+                        l.downFromId ===
+                          u.tripUpdate.stopTimeUpdate[0].stopId &&
+                        l.downToId ===
+                          u.tripUpdate.stopTimeUpdate[
+                            u.tripUpdate.stopTimeUpdate.length - 1
+                          ].stopId
+                    ).length === 1
+                );
+              routes.set(s + ".tu.up", ups);
+              routes.set(s + ".tu.down", downs);
+              let upBuses = feed.entity.filter(f =>
+                  ups.find(
+                    t => t.tripUpdate.trip.tripId === f.vehicle.trip.tripId
+                  )
+                ),
+                downBuses = feed.entity.filter(f =>
+                  downs.find(
+                    t => t.tripUpdate.trip.tripId === f.vehicle.trip.tripId
+                  )
+                );
+              if (!(upBuses.length !== 0 && downBuses.length !== 0)) {
+                DB.set("time." + s, Date.now());
+                routes.set(s + ".loc.up", upBuses);
+                routes.set(s + ".loc.down", downBuses);
+              }
+            });
+            feed.entity
+              .filter(f => f.vehicle.trip.routeId.endsWith("E"))
+              .map(r => {
+                gtfstrip = fs.readFileSync("./trips.txt", "utf8");
+                if (gtfstrip.indexOf(r.vehicle.trip.tripId) === -1) {
+                  gtfsfile.write(
+                    "\n" +
+                      r.vehicle.trip.routeId +
+                      ",," +
+                      r.vehicle.trip.tripId +
+                      "," +
+                      r.vehicle.trip.routeId +
+                      "-?,?,,0," +
+                      r.vehicle.trip.startTime.replace(/:00$/g, "") +
+                      ",https://osm.org/query?lat=" +
+                      r.vehicle.position.latitude +
+                      "&lon=" +
+                      r.vehicle.position.longitude,
+                    "utf8",
+                    console.error
+                  );
+                }
+              });
           }
-        });
-        feed.entity
-          .filter(f => f.vehicle.trip.routeId.endsWith("E"))
-          .map(r => {
-            gtfstrip = fs.readFileSync("./trips.txt", "utf8");
-            if (gtfstrip.indexOf(r.vehicle.trip.tripId) === -1) {
-              gtfsfile.write(
-                "\n" +
-                  r.vehicle.trip.routeId +
-                  ",," +
-                  r.vehicle.trip.tripId +
-                  "," +
-                  r.vehicle.trip.routeId +
-                  "-?,?,,0," +
-                  r.vehicle.trip.startTime.replace(/:00$/g, "") +
-                  ",https://osm.org/query?lat=" +
-                  r.vehicle.position.latitude +
-                  "&lon=" +
-                  r.vehicle.position.longitude,
-                "utf8",
-                e => console.error
-              );
-            }
-          });
+        );
       }
     );
   else gtfsfile.end();
@@ -98,14 +139,27 @@ app.get("/trips.txt", (req, res) => {
 
 app.get("/assets/:name", (req, res) => {
   !assets[req.params.name]
-  ? res.status(404).send("Not found in assets.json")
-  : request(assets[req.params.name]).pipe(res);
+    ? res.status(404).send("Not found in assets.json")
+    : request(assets[req.params.name]).pipe(res);
 });
 
 app.get("/osm/:s/:z/:x/:y.png", (req, res) => {
-  if (parseInt(req.params.z) < 10) return res.status(400).send("Zoom below 10 is rejected.");
-  else if ((parseInt(req.params.x) / (2 ** (parseInt(req.params.z) - 10))) < 301 || (parseInt(req.params.x) / (2 ** (parseInt(req.params.z) - 10))) > 303) return res.status(400).send("Out of Montreal (x must be between 301 and 303 on zoom 10)");
-  else if ((parseInt(req.params.y) / (2 ** (parseInt(req.params.z) - 10))) < 365 || (parseInt(req.params.y) / (2 ** (parseInt(req.params.z) - 10))) > 367) return res.status(400).send("Out of Montreal (y must be between 365 and 367 on zoom 10)");
+  if (parseInt(req.params.z) < 10)
+    return res.status(400).send("Zoom below 10 is rejected.");
+  else if (
+    parseInt(req.params.x) / 2 ** (parseInt(req.params.z) - 10) < 301 ||
+    parseInt(req.params.x) / 2 ** (parseInt(req.params.z) - 10) > 303
+  )
+    return res
+      .status(400)
+      .send("Out of Montreal (x must be between 301 and 303 on zoom 10)");
+  else if (
+    parseInt(req.params.y) / 2 ** (parseInt(req.params.z) - 10) < 365 ||
+    parseInt(req.params.y) / 2 ** (parseInt(req.params.z) - 10) > 367
+  )
+    return res
+      .status(400)
+      .send("Out of Montreal (y must be between 365 and 367 on zoom 10)");
   request(
     `https://${req.params.s}.tile.openstreetmap.org/${req.params.z}/${req.params.x}/${req.params.y}.png`,
     { headers: { "User-Agent": "I am caching for https://stm.austinhuang.me" } }
@@ -113,7 +167,7 @@ app.get("/osm/:s/:z/:x/:y.png", (req, res) => {
 });
 
 app.get("/:school", (req, res) => {
-  if (!list[req.params.school]) res.status(404).send("Invalid school.");
+  if (!routelist[req.params.school]) res.status(404).send("Invalid school.");
   else if (
     (time === "EDT" &&
       !routelist[req.params.school].period.find(
@@ -133,8 +187,7 @@ app.get("/:school", (req, res) => {
     res.status(503).sendFile(__dirname + "/unavailable.html");
   else
     routes.fetch(req.params.school).then(async x => {
-      let t = await DB.fetch("time." + req.params.school),
-        old = await DB.fetch("old." + req.params.school);
+      let t = await DB.fetch("time." + req.params.school);
       if (!x)
         res
           .status(501)
@@ -146,10 +199,10 @@ app.get("/:school", (req, res) => {
           sample
             .replace(
               "[BUSES]",
-              x
+              [...x.loc.up, ...x.loc.down]
                 .map(r => {
                   let route = routelist[req.params.school].routes.find(
-                    x => x.route === r.vehicle.trip.routeId
+                    y => y.route === y.vehicle.trip.routeId
                   );
                   if (
                     list[req.params.school].up.includes(
@@ -182,13 +235,15 @@ app.get("/:school", (req, res) => {
                           )) +
                       '</td></tr><tr><td align=\\"right\\">' +
                       route.stops[
-                        (list[req.params.school].up.includes(
-                          r.vehicle.trip.tripId
+                        (x.loc.up.find(
+                          n => n.vehicle.trip.tripId === r.vehicle.trip.tripId
                         )
                           ? "u"
                           : "d") + r.vehicle.currentStopSequence
                       ] +
-                      '</td><td align=\\"center\\">' +
+                      "(" +
+                      r.vehicle.currentStopSequence +
+                      ')</td><td align=\\"center\\">' +
                       (r.vehicle.currentStatus === "STOPPED_AT"
                         ? "⬤</td><td>📡 " +
                           new Date(r.vehicle.timestamp * 1000).toLocaleString(
@@ -204,132 +259,94 @@ app.get("/:school", (req, res) => {
                           "</td>"
                         : "◯</td><td>" +
                           (route.uptime &&
-                          route.downtime &&
-                          ((list[req.params.school].up.includes(
-                            r.vehicle.trip.tripId
-                          ) &&
-                            route.up === "u" + r.vehicle.currentStopSequence) ||
-                            (list[req.params.school].down.includes(
-                              r.vehicle.trip.tripId
+                            route.downtime &&
+                            (x.loc.up.find(
+                              n =>
+                                n.vehicle.trip.tripId === r.vehicle.trip.tripId
                             ) &&
-                              route.down ===
-                                "d" + r.vehicle.currentStopSequence))
-                            ? "🔮 [" +
-                              new Date(
-                                new Date(
-                                  new Date()
-                                    .toLocaleString("en-US", {
-                                      timeZone: "America/Montreal"
-                                    })
-                                    .split(",")[0] +
-                                    " " +
-                                    r.vehicle.trip.startTime +
-                                    " " +
-                                    time
-                                ).getTime() + route.downtime
-                              ).toLocaleString("en-US", {
-                                hour12: false,
-                                timeZone: "America/Montreal",
-                                hour: "2-digit",
-                                minute: "2-digit"
-                              }) +
-                              "]"
-                            : "") +
-                          "</td>") +
-                      '</tr><tr><td></td><td align=\\"center\\">↓</td><td></td></tr>' +
-                      (list[req.params.school].up.includes(
-                        r.vehicle.trip.tripId
-                      ) && route.up !== "u" + r.vehicle.currentStopSequence // up, not last stop?
-                        ? '<tr><td align=\\"right\\">' +
-                          route.stops[route.up] +
-                          '</td><td align=\\"center\\">◯</td><td>' +
-                          (route.uptime
-                            ? "🔮 [" +
-                              new Date(
-                                new Date(
-                                  new Date()
-                                    .toLocaleString("en-US", {
-                                      timeZone: "America/Montreal"
-                                    })
-                                    .split(",")[0] +
-                                    " " +
-                                    r.vehicle.trip.startTime +
-                                    " " +
-                                    time
-                                ).getTime() + route.uptime
-                              ).toLocaleString("en-US", {
-                                hour12: false,
-                                timeZone: "America/Montreal",
-                                hour: "2-digit",
-                                minute: "2-digit"
-                              }) +
-                              "]"
-                            : "") +
-                          '</td></tr><tr><td></td><td align=\\"center\\">↓</td><td></td></tr>'
-                        : list[req.params.school].down.includes(
-                            r.vehicle.trip.tripId
-                          ) &&
-                          route.down !== "d" + r.vehicle.currentStopSequence // down, not last stop?
-                        ? '<tr><td align=\\"right\\">' +
-                          route.stops[route.down] +
-                          '</td><td align=\\"center\\">◯</td><td>' +
-                          (route.downtime
-                            ? "🔮 [" +
-                              new Date(
-                                new Date(
-                                  new Date()
-                                    .toLocaleString("en-US", {
-                                      timeZone: "America/Montreal"
-                                    })
-                                    .split(",")[0] +
-                                    " " +
-                                    r.vehicle.trip.startTime +
-                                    " " +
-                                    time
-                                ).getTime() + route.downtime
-                              ).toLocaleString("en-US", {
-                                hour12: false,
-                                timeZone: "America/Montreal",
-                                hour: "2-digit",
-                                minute: "2-digit"
-                              }) +
-                              "]"
-                            : "") +
-                          '</td></tr><tr><td></td><td align=\\"center\\">↓</td><td></td></tr>'
-                        : "") +
-                      // return trip
-                      '<tr><td align=\\"right\\">' +
-                      (list[req.params.school].up.includes(
-                        r.vehicle.trip.tripId
-                      )
-                        ? route.stops[route.down]
-                        : route.stops[route.up]) +
-                      '</td><td align=\\"center\\">○</td><td>' +
-                      (route.uptime && route.downtime
+                              route.up === "u" + r.vehicle.currentStopSequence))
                         ? "🔮 [" +
                           new Date(
-                            new Date(
-                              new Date()
+                            x.tu.up.find(
+                              n => n.trip.tripId === r.vehicle.trip.tripId
+                            ).stopTimeUpdate[
+                              parseInt(r.vehicle.currentStopSequence) - 1
+                            ].arrival.time
+                          )
+                            .toLocaleString("en-US", {
+                              timeZone: "America/Montreal"
+                            })
+                            .split(",")[0] +
+                          "]"
+                        : x.loc.down.find(
+                            n => n.vehicle.trip.tripId === r.vehicle.trip.tripId
+                          ) &&
+                          route.down === "d" + r.vehicle.currentStopSequence
+                        ? "🔮 [" +
+                          new Date(
+                            x.tu.down.find(
+                              n => n.trip.tripId === r.vehicle.trip.tripId
+                            ).stopTimeUpdate[
+                              parseInt(r.vehicle.currentStopSequence) - 1
+                            ].arrival.time
+                          )
+                            .toLocaleString("en-US", {
+                              timeZone: "America/Montreal"
+                            })
+                            .split(",")[0] +
+                          "]"
+                        : "") +
+                      "</td>" +
+                      (x.loc.up.find(
+                        n => n.vehicle.trip.tripId === r.vehicle.trip.tripId
+                      ) && route.up !== "u" + r.vehicle.currentStopSequence // up, not last stop?
+                        ? '</tr><tr><td></td><td align=\\"center\\">↓</td><td></td></tr><tr><td align=\\"right\\">' +
+                          route.stops[route.up] +
+                          '</td><td align=\\"center\\">◯</td><td>' +
+                          (x.tu.up.find(
+                            n => n.trip.tripId === r.vehicle.trip.tripId
+                          ).stopTimeUpdate[parseInt(route.up.substring(1)) - 1]
+                            ? "🔮 [" +
+                              new Date(
+                                x.tu.up.find(
+                                  n => n.trip.tripId === r.vehicle.trip.tripId
+                                ).stopTimeUpdate[
+                                  parseInt(route.up.substring(1)) - 1
+                                ].arrival.time
+                              )
                                 .toLocaleString("en-US", {
                                   timeZone: "America/Montreal"
                                 })
                                 .split(",")[0] +
-                                " " +
-                                r.vehicle.trip.startTime +
-                                " " +
-                                time
-                            ).getTime() +
-                              route.uptime +
-                              route.downtime
-                          ).toLocaleString("en-US", {
-                            hour12: false,
-                            timeZone: "America/Montreal",
-                            hour: "2-digit",
-                            minute: "2-digit"
-                          }) +
-                          "]"
-                        : "") +
-                      '</td></tr></table>");'
+                              "]"
+                            : "") +
+                          '</td></tr><tr><td></td><td align=\\"center\\">↓</td><td></td></tr>'
+                        : x.loc.down.find(
+                            n => n.vehicle.trip.tripId === r.vehicle.trip.tripId
+                          ) &&
+                          route.down !== "d" + r.vehicle.currentStopSequence // down, not last stop?
+                        ? '</tr><tr><td></td><td align=\\"center\\">↓</td><td></td></tr><tr><td align=\\"right\\">' +
+                          route.stops[route.down] +
+                          '</td><td align=\\"center\\">◯</td><td>' +
+                          (x.tu.down.find(
+                            n => n.trip.tripId === r.vehicle.trip.tripId
+                          ).stopTimeUpdate[parseInt(route.up.substring(1)) - 1]
+                            ? "🔮 [" +
+                              new Date(
+                                x.tu.up.find(
+                                  n => n.trip.tripId === r.vehicle.trip.tripId
+                                ).stopTimeUpdate[
+                                  parseInt(route.up.substring(1)) - 1
+                                ].arrival.time
+                              )
+                                .toLocaleString("en-US", {
+                                  timeZone: "America/Montreal"
+                                })
+                                .split(",")[0] +
+                              "]"
+                            : "")
+                        : "</tr>") +
+                      '</table>");'
                     );
                   else
                     return (
