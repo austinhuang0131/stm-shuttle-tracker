@@ -47,31 +47,28 @@ function update() {
           (e, r, b2) => {
             let feed = GtfsRealtimeBindings.FeedMessage.decode(b2);
             Object.keys(routelist).map(async s => {
-              let ups = updt.entity.filter(
-                  u =>
-                    routelist[s].routes.find(
-                      l =>
-                        l.upFromId === u.tripUpdate.stopTimeUpdate[0].stopId &&
-                        l.upToId ===
-                          u.tripUpdate.stopTimeUpdate[
-                            u.tripUpdate.stopTimeUpdate.length - 1
-                          ].stopId
-                    )
+              let ups = updt.entity.filter(u =>
+                  routelist[s].routes.find(
+                    l =>
+                      l.upFromId === u.tripUpdate.stopTimeUpdate[0].stopId &&
+                      l.upToId ===
+                        u.tripUpdate.stopTimeUpdate[
+                          u.tripUpdate.stopTimeUpdate.length - 1
+                        ].stopId
+                  )
                 ),
-                downs = updt.entity.filter(
-                  u =>
-                    routelist[s].routes.find(
-                      l =>
-                        l.downFromId ===
-                          u.tripUpdate.stopTimeUpdate[0].stopId &&
-                        l.downToId ===
-                          u.tripUpdate.stopTimeUpdate[
-                            u.tripUpdate.stopTimeUpdate.length - 1
-                          ].stopId
-                    )
+                downs = updt.entity.filter(u =>
+                  routelist[s].routes.find(
+                    l =>
+                      l.downFromId === u.tripUpdate.stopTimeUpdate[0].stopId &&
+                      l.downToId ===
+                        u.tripUpdate.stopTimeUpdate[
+                          u.tripUpdate.stopTimeUpdate.length - 1
+                        ].stopId
+                  )
                 ),
                 d = await routes.fetch(s);
-              if (!d) d = {tu: {}, loc: {}};
+              if (!d) d = { tu: {}, loc: {} };
               d.tu.up = ups;
               d.tu.down = downs;
               let upBuses = feed.entity.filter(f =>
@@ -218,7 +215,7 @@ app.get("/:school", (req, res) => {
                       r.vehicle.position.latitude +
                       ", " +
                       r.vehicle.position.longitude +
-                      ']).addTo(mymap).bindPopup("<table style=\\"border-width:0px;\\"><tr><td align=\\"right\\">Bus #' +
+                      '], {icon: bus}).addTo(mymap).bindPopup("<table style=\\"border-width:0px;\\"><tr><td align=\\"right\\">Bus #' +
                       r.id +
                       '</td><td align=\\"center\\">▼</td><td>🗒️ ' +
                       r.vehicle.trip.startTime.replace(/:00$/g, "") +
@@ -371,6 +368,95 @@ app.get("/:school", (req, res) => {
                       r.vehicle.trip.tripId +
                       '");'
                     );
+                })
+                .join("\n")
+            )
+            .replace(
+              "[STOPS]",
+              routelist[req.params.school].routes
+                .map(route => {
+                  let string = [];
+                  if (route.upFromLoc)
+                    string.push(
+                      "L.marker([" +
+                        route.upFromLoc +
+                        '], {icon: bus}).addTo(mymap).bindPopup("<table style=\\"border-width:0px;\\"><tr><td align=\\"right\\">🚍</td><td align=\\"center\\">→</td><td>' +
+                        route.stops[route.up] +
+                        "</td></tr><tr>" +
+                        x.tu.up
+                          .map(
+                            t =>
+                              '<td align=\\"right\\">' +
+                              new Date(
+                                parseInt(
+                                  t.tripUpdate.stopTimeUpdate[0].departure
+                                    .time + "000"
+                                )
+                              )
+                                .toLocaleString("en-US", {
+                                  timeZone: "America/Montreal"
+                                })
+                                .split(",")[0] +
+                              " (🗒️ " +
+                              t.tripUpdate.trip.startTime.replace(/:00$/g, "") +
+                              ")</td><td></td><td>" +
+                              new Date(
+                                parseInt(
+                                  t.tripUpdate.stopTimeUpdate[
+                                    parseInt(route.up.substring(1))
+                                  ].departure.time + "000"
+                                )
+                              )
+                                .toLocaleString("en-US", {
+                                  timeZone: "America/Montreal"
+                                })
+                                .split(",")[0] +
+                              "</td>"
+                          )
+                          .join("</tr><tr>") +
+                        '</tr></table>");'
+                    );
+                  if (route.downFromLoc)
+                    string.push(
+                      "L.marker([" +
+                        route.downFromLoc +
+                        '], {icon: bus}).addTo(mymap).bindPopup("<table style=\\"border-width:0px;\\"><tr><td align=\\"right\\">🚍</td><td align=\\"center\\">→</td><td>' +
+                        route.stops[route.down] +
+                        "</td></tr><tr>" +
+                        x.tu.up
+                          .map(
+                            t =>
+                              '<td align=\\"right\\">' +
+                              new Date(
+                                parseInt(
+                                  t.tripUpdate.stopTimeUpdate[0].departure
+                                    .time + "000"
+                                )
+                              )
+                                .toLocaleString("en-US", {
+                                  timeZone: "America/Montreal"
+                                })
+                                .split(",")[0] +
+                              " (🗒️ " +
+                              t.tripUpdate.trip.startTime.replace(/:00$/g, "") +
+                              ")</td><td></td><td>" +
+                              new Date(
+                                parseInt(
+                                  t.tripUpdate.stopTimeUpdate[
+                                    parseInt(route.down.substring(1))
+                                  ].departure.time + "000"
+                                )
+                              )
+                                .toLocaleString("en-US", {
+                                  timeZone: "America/Montreal"
+                                })
+                                .split(",")[0] +
+                              "</td>"
+                          )
+                          .join("</tr><tr>") +
+                        '</tr></table>");'
+                    );
+                  return string.join("\n");
                 })
                 .join("\n")
             )

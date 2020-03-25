@@ -1,5 +1,8 @@
 {
-  "marker-icon.png": "https://cdn.glitch.com/f760b15e-1eb8-484a-838a-6431059cae3c%2Fbus.png?v=1583781456239",
+  "bus.png": "https://cdn.glitch.com/f760b15e-1eb8-484a-838a-6431059cae3c%2Fbus.png?v=1583781456239",
+  "marker-icon.png": "https://unpkg.com/leaflet@1.6.0/dist/images/marker-icon.png",
+  "marker-icon-2x.png": "https://unpkg.com/leaflet@1.6.0/dist/images/marker-icon-2x.png",
+  "marker-shadow.png": "https://unpkg.com/leaflet@1.6.0/dist/images/marker-shadow.png",
   "leaflet.min.css": "https://unpkg.com/leaflet@1.6.0/dist/leaflet.css",
   "leaflet.min.js": "https://unpkg.com/leaflet@1.6.0/dist/leaflet.js",
   "open-source.svg": "https://badges.frapsoft.com/os/v3/open-source.svg?v=103",

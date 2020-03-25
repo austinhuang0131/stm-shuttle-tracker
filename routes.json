@@ -19,7 +19,9 @@
         "upFromId": "",
         "upToId": "",
         "downFromId": "",
-        "downToId": "54104?"
+        "downToId": "54104?",
+        "upFromLoc": "45.4741460, -73.6035240",
+        "downFromLoc": "45.4802602, -73.6120597"
       }
     ],
     "period": [[7, 9], [13, 20]]
@@ -52,7 +54,9 @@
         "upFromId": "54107",
         "upToId": "57059",
         "downFromId": "56956",
-        "downToId": "54107"
+        "downToId": "54107",
+        "upFromLoc": "45.4463910, -73.6040210",
+        "downFromLoc": "45.4363730, -73.6124950"
       }
     ],
     "period": [[6, 8], [11, 11], [15, 18]]
@@ -119,7 +123,9 @@
         "upFromId": "53952",
         "upToId": "56959",
         "downFromId": "???",
-        "downToId": "54101"
+        "downToId": "54101",
+        "upFromLoc": "45.4569580, -73.5814890",
+        "downFromLoc": "45.4238420, -73.6112890"
       }
     ],
     "period": [[7, 8], [16, 16]]
