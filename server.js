@@ -56,7 +56,7 @@ function update() {
                           u.tripUpdate.stopTimeUpdate[
                             u.tripUpdate.stopTimeUpdate.length - 1
                           ].stopId
-                    ).length === 1
+                    )
                 ),
                 downs = updt.entity.filter(
                   u =>
@@ -68,7 +68,7 @@ function update() {
                           u.tripUpdate.stopTimeUpdate[
                             u.tripUpdate.stopTimeUpdate.length - 1
                           ].stopId
-                    ).length === 1
+                    )
                 );
               routes.set(s + ".tu.up", ups);
               routes.set(s + ".tu.down", downs);
