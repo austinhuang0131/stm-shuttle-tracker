@@ -7,9 +7,9 @@ Inquiries? Feedbacks? Concerns?
 
 === C H A N G E L O G ===
 
-Version 0.1.0, 2020/03/??
+Version 0.1.0, 2020/03/25
 * Tracker
-- TripUpdates API implementation
+- TripUpdates API implementation: Adding marker at termini to show upcoming departures
 - Change of database structure
 * School
 - Temporarily adding Mgr-Richard and Collège Sainte-Anne
