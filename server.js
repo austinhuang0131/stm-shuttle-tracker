@@ -357,8 +357,8 @@ app.get("/:school", (req, res) => {
                         ']).addTo(mymap).bindPopup("<table style=\\"border-width:0px;\\"><tr><td align=\\"right\\">🚍</td><td align=\\"center\\">→</td><td>' +
                         route.stops[route.up] +
                         "</td></tr><tr>" +
-                        x.tu.up.length === 0
-                        ? '<td align=\\"right\\">Pas de bus / No buses</td>'
+                        (x.tu.up.length === 0
+                        ? '<td align=\\"right\\">Pas de bus</td><td /><td>No buses</td>'
                         : x.tu.up
                           .map(
                             t =>
@@ -389,7 +389,7 @@ app.get("/:school", (req, res) => {
                                 .split(",")[0] +
                               "</td>"
                           )
-                          .join("</tr><tr>") +
+                          .join("</tr><tr>")) +
                         '</tr></table>");'
                     );
                   if (route.downFromLoc)
@@ -399,8 +399,8 @@ app.get("/:school", (req, res) => {
                         ']).addTo(mymap).bindPopup("<table style=\\"border-width:0px;\\"><tr><td align=\\"right\\">🚍</td><td align=\\"center\\">→</td><td>' +
                         route.stops[route.down] +
                         "</td></tr><tr>" +
-                        x.tu.down.length === 0
-                        ? '<td align=\\"right\\">Pas de bus / No buses</td>'
+                        (x.tu.down.length === 0
+                        ? '<td align=\\"right\\">Pas de bus</td><td /><td>No buses</td>'
                         : x.tu.down
                           .map(
                             t =>
@@ -431,7 +431,7 @@ app.get("/:school", (req, res) => {
                                 .split(",")[0] +
                               "</td>"
                           )
-                          .join("</tr><tr>") +
+                          .join("</tr><tr>")) +
                         '</tr></table>");'
                     );
                   return string.join("\n");
