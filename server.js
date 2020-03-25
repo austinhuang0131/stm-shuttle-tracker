@@ -70,8 +70,8 @@ function update() {
                           ].stopId
                     )
                 );
-              routes.set(s + ".tu.up", ups);
-              routes.set(s + ".tu.down", downs);
+              if (ups.length !== 0) routes.set(s + ".tu.up", ups);
+              if (downs.length !== 0) routes.set(s + ".tu.down", downs);
               let upBuses = feed.entity.filter(f =>
                   ups.find(
                     t => t.tripUpdate.trip.tripId === f.vehicle.trip.tripId
@@ -82,7 +82,7 @@ function update() {
                     t => t.tripUpdate.trip.tripId === f.vehicle.trip.tripId
                   )
                 );
-              if (!(upBuses.length !== 0 && downBuses.length !== 0)) {
+              if (!(upBuses.length === 0 && downBuses.length === 0)) {
                 DB.set("time." + s, Date.now());
                 routes.set(s + ".loc.up", upBuses);
                 routes.set(s + ".loc.down", downBuses);
