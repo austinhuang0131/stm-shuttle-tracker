@@ -204,12 +204,6 @@ app.get("/:school", (req, res) => {
                   let route = routelist[req.params.school].routes.find(
                     y => y.route === y.vehicle.trip.routeId
                   );
-                  if (
-                    list[req.params.school].up.includes(
-                      r.vehicle.trip.tripId
-                    ) ||
-                    list[req.params.school].down.includes(r.vehicle.trip.tripId)
-                  )
                     return (
                       "L.marker([" +
                       r.vehicle.position.latitude +
@@ -348,26 +342,6 @@ app.get("/:school", (req, res) => {
                         : "</tr>") +
                       '</table>");'
                     );
-                  else
-                    return (
-                      "L.marker([" +
-                      r.vehicle.position.latitude +
-                      ", " +
-                      r.vehicle.position.longitude +
-                      ']).addTo(mymap).bindPopup("Bus ' +
-                      r.id +
-                      ", which departed at " +
-                      r.vehicle.trip.startTime +
-                      " is currently " +
-                      (r.vehicle.currentStatus === "STOPPED_AT"
-                        ? "at"
-                        : "going to") +
-                      " stop no. " +
-                      r.vehicle.currentStopSequence +
-                      " with trip #" +
-                      r.vehicle.trip.tripId +
-                      '");'
-                    );
                 })
                 .join("\n")
             )
@@ -380,10 +354,12 @@ app.get("/:school", (req, res) => {
                     string.push(
                       "L.marker([" +
                         route.upFromLoc +
-                        '], {icon: bus}).addTo(mymap).bindPopup("<table style=\\"border-width:0px;\\"><tr><td align=\\"right\\">🚍</td><td align=\\"center\\">→</td><td>' +
+                        ']).addTo(mymap).bindPopup("<table style=\\"border-width:0px;\\"><tr><td align=\\"right\\">🚍</td><td align=\\"center\\">→</td><td>' +
                         route.stops[route.up] +
                         "</td></tr><tr>" +
-                        x.tu.up
+                        x.tu.up.length === 0
+                        ? '<td align=\\"right\\">Pas de bus / No buses</td>'
+                        : x.tu.up
                           .map(
                             t =>
                               '<td align=\\"right\\">' +
@@ -420,10 +396,12 @@ app.get("/:school", (req, res) => {
                     string.push(
                       "L.marker([" +
                         route.downFromLoc +
-                        '], {icon: bus}).addTo(mymap).bindPopup("<table style=\\"border-width:0px;\\"><tr><td align=\\"right\\">🚍</td><td align=\\"center\\">→</td><td>' +
+                        ']).addTo(mymap).bindPopup("<table style=\\"border-width:0px;\\"><tr><td align=\\"right\\">🚍</td><td align=\\"center\\">→</td><td>' +
                         route.stops[route.down] +
                         "</td></tr><tr>" +
-                        x.tu.up
+                        x.tu.down.length === 0
+                        ? '<td align=\\"right\\">Pas de bus / No buses</td>'
+                        : x.tu.down
                           .map(
                             t =>
                               '<td align=\\"right\\">' +
