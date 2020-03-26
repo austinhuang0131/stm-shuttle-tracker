@@ -367,26 +367,29 @@ app.get("/:school", (req, res) => {
                                     )
                                   )
                                     .toLocaleString("en-US", {
-                                      timeZone: "America/Montreal"
-                                    })
-                                    .split(",")[0] +
+                                      hour12: false,
+                                      timeZone: "America/Montreal",
+                                      hour: "2-digit",
+                                      minute: "2-digit",
+                                      second: "2-digit"
+                                    }) +
                                   " (🗒️ " +
-                                  t.tripUpdate.trip.startTime.replace(
-                                    /:00$/g,
-                                    ""
-                                  ) +
+                                  t.tripUpdate.trip.startTime +
                                   ")</td><td /><td>" +
                                   new Date(
                                     parseInt(
                                       t.tripUpdate.stopTimeUpdate[
-                                        parseInt(route.up.substring(1))
+                                        parseInt(route.up.substring(1)) - 1
                                       ].departure.time + "000"
                                     )
                                   )
                                     .toLocaleString("en-US", {
-                                      timeZone: "America/Montreal"
-                                    })
-                                    .split(", ")[1] +
+                                      hour12: false,
+                                      timeZone: "America/Montreal",
+                                      hour: "2-digit",
+                                      minute: "2-digit",
+                                      second: "2-digit"
+                                    }) +
                                   "</td>"
                               )
                               .join("</tr><tr>")) +
@@ -414,26 +417,29 @@ app.get("/:school", (req, res) => {
                                     )
                                   )
                                     .toLocaleString("en-US", {
-                                      timeZone: "America/Montreal"
-                                    })
-                                    .split(",")[1] +
+                                      hour12: false,
+                                      timeZone: "America/Montreal",
+                                      hour: "2-digit",
+                                      minute: "2-digit",
+                                      second: "2-digit"
+                                    }) +
                                   " (🗒️ " +
-                                  t.tripUpdate.trip.startTime.replace(
-                                    /:00$/g,
-                                    ""
-                                  ) +
+                                  t.tripUpdate.trip.startTime +
                                   ")</td><td /><td>" +
                                   new Date(
                                     parseInt(
                                       t.tripUpdate.stopTimeUpdate[
-                                        parseInt(route.down.substring(1))
+                                        parseInt(route.down.substring(1)) - 1
                                       ].departure.time + "000"
                                     )
                                   )
                                     .toLocaleString("en-US", {
-                                      timeZone: "America/Montreal"
-                                    })
-                                    .split(", ")[1] +
+                                      hour12: false,
+                                      timeZone: "America/Montreal",
+                                      hour: "2-digit",
+                                      minute: "2-digit",
+                                      second: "2-digit"
+                                    }) +
                                   "</td>"
                               )
                               .join("</tr><tr>")) +

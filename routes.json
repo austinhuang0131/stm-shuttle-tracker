@@ -199,45 +199,75 @@
   },
   "college-francais": {
     "name": "Collège Français (Montréal)",
-    "center": "[45.4718, -73.5678], 13",
+    "center": "[45.4718,-73.5678],13",
     "routes": [
       {
         "route": "51E",
         "stops": {
+          "u1": "Station Laurier Sud",
+          "u2": "St-Joseph / St-Denis",
+          "u3": "St-Joseph / de Bullion",
+          "u4": "St-Joseph / St-Laurent",
+          "u5": "???",
+          "u6": "Collège Français"
         },
         "up": "u6",
         "down": "d?",
         "upFromId": "54069",
         "upToId": "53848",
         "downFromId": "",
-        "downToId": ""
+        "downToId": "",
+        "upFromLoc": "45.5265472, -73.5865528",
+        "downFromLoc": "45.5215975, -73.5965011"
       }
     ],
     "period": [[7, 8], [15, 15]]
   },
   "sainte-anne": {
     "name": "Collège Sainte-Anne",
-    "center": "[45.4718, -73.5678], 13",
+    "center": "[45.4376,-73.7728],12",
     "routes": [
       {
         "route": "411E",
         "stops": {
           "u1": "Gare Beaconsfield",
-          "u2": "Saint-Louis / 12e Av."
+          "u2": "Saint-Louis / 12e Av.",
+          "d1": "Collège Sainte-Anne",
+          "d2": "Gare Dorval",
+          "d3": "Gare Pine Beach",
+          "d4": "Gare Pointe-Claire",
+          "d5": "A20 Ouest / St-Jean",
+          "d6": "A20 / Cartier",
+          "d7": "St-Charles / Amherst",
+          "d8": "Gare Beaconsfield",
+          "d9": "Gare Beaurepaire",
+          "d10": "Gare Baie-d'Urfé",
+          "d11": "Morgan / Surrey",
+          "d12": "Morgan / Victoria",
+          "d13": "Morgan / Westchester",
+          "d14": "Morgan / Lakeshore",
+          "d15": "Lakeshore / No. 20551",
+          "d16": "Lakeshore / Churchill",
+          "d17": "Lakeshore / No. 20713",
+          "d18": "Lakeshore / St-Andrew's",
+          "d19": "Lakeshore / No. 20846",
+          "d20": "Terminus Macdonald"
         },
         "up": "u2",
         "down": "d20",
         "upFromId": "58485",
         "upToId": "57238",
         "downFromId": "61378",
-        "downToId": "58591"
+        "downToId": "58591",
+        "upFromLoc": "45.434737,-73.848722",
+        "downFromLoc": "45.4319084,-73.6748258"
       }
     ],
     "period": [[7, 8], [15, 15]]
   },
   "james-lyng": {
     "name": "James Lyng High School",
-    "center": "[45.4745, -73.5891], 14",
+    "center": "[45.4745,-73.5891],14",
     "routes": [
       {
         "route": "191E",
@@ -251,8 +281,8 @@
         "upToId": "51774",
         "downFromId": "51775",
         "downToId": "61333",
-        "upFromLoc": "45.4833400, -73.5794630",
-        "downFromLoc": "45.4684710, -73.5957910"
+        "upFromLoc": "45.4833400,-73.5794630",
+        "downFromLoc": "45.4684710,-73.5957910"
       }
     ],
     "period": [[7, 15]]

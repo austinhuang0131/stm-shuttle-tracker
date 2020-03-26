@@ -7,11 +7,17 @@ Inquiries? Feedbacks? Concerns?
 
 === C H A N G E L O G ===
 
+Version 0.1.1, 2020/03/26
+* Tracker
+- Hotfix for 0.1.0 regarding formats and stuff
+* School
+- Temporarily adding James Lyng
+
 Version 0.1.0, 2020/03/25
 * Tracker
 - TripUpdates API implementation: Adding marker at termini to show upcoming departures
 - Change of database structure
-* School
+* Schools
 - Temporarily adding Mgr-Richard and Collège Sainte-Anne
 
 --- 0.0.x ---
