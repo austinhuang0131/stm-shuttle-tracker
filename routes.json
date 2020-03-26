@@ -165,8 +165,8 @@
         "route": "61E",
         "stops": {
         },
-        "up": "",
-        "down": "",
+        "up": "u?",
+        "down": "d?",
         "upFromId": "56706",
         "upToId": "56682",
         "downFromId": "",
@@ -187,8 +187,8 @@
         "route": "108E",
         "stops": {
         },
-        "up": "",
-        "down": "",
+        "up": "u?",
+        "down": "d?",
         "upFromId": "56703",
         "upToId": "56682",
         "downFromId": "56682",
@@ -205,8 +205,8 @@
         "route": "51E",
         "stops": {
         },
-        "up": "6",
-        "down": "",
+        "up": "u6",
+        "down": "d?",
         "upFromId": "54069",
         "upToId": "53848",
         "downFromId": "",
@@ -225,8 +225,8 @@
           "u1": "Gare Beaconsfield",
           "u2": "Saint-Louis / 12e Av."
         },
-        "up": "2",
-        "down": "20",
+        "up": "u2",
+        "down": "d20",
         "upFromId": "58485",
         "upToId": "57238",
         "downFromId": "61378",
@@ -234,5 +234,27 @@
       }
     ],
     "period": [[7, 8], [15, 15]]
+  },
+  "james-lyng": {
+    "name": "James Lyng High School",
+    "center": "[45.4745, -73.5891], 14",
+    "routes": [
+      {
+        "route": "191E",
+        "stops": {
+          "u10": "Notre-Dame / Carillon",
+          "d11": "Station Lionel-Groulx"
+        },
+        "up": "u10",
+        "down": "d11",
+        "upFromId": "61561",
+        "upToId": "51774",
+        "downFromId": "51775",
+        "downToId": "61333",
+        "upFromLoc": "45.4833400, -73.5794630",
+        "downFromLoc": "45.4684710, -73.5957910"
+      }
+    ],
+    "period": [[7, 15]]
   }
 }

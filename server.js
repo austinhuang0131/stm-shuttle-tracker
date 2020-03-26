@@ -81,11 +81,9 @@ function update() {
                     t => t.tripUpdate.trip.tripId === f.vehicle.trip.tripId
                   )
                 );
-              if (!(upBuses.length !== 0 && downBuses.length !== 0)) {
-                DB.set("time." + s, Date.now());
-                d.loc.up = upBuses;
-                d.loc.down = downBuses;
-              }
+              DB.set("time." + s, Date.now());
+              d.loc.up = upBuses;
+              d.loc.down = downBuses;
               routes.set(s, d);
             });
             feed.entity
@@ -204,144 +202,141 @@ app.get("/:school", (req, res) => {
                   let route = routelist[req.params.school].routes.find(
                     y => y.route === y.vehicle.trip.routeId
                   );
-                    return (
-                      "L.marker([" +
-                      r.vehicle.position.latitude +
-                      ", " +
-                      r.vehicle.position.longitude +
-                      '], {icon: bus}).addTo(mymap).bindPopup("<table style=\\"border-width:0px;\\"><tr><td align=\\"right\\">Bus #' +
-                      r.id +
-                      '</td><td align=\\"center\\">▼</td><td>🗒️ ' +
-                      r.vehicle.trip.startTime.replace(/:00$/g, "") +
-                      '</td></tr><tr><td></td><td align=\\"center\\">↓</td><td>' +
-                      (r.vehicle.currentStatus === "STOPPED_AT"
-                        ? ""
-                        : "📡 " +
-                          new Date(r.vehicle.timestamp * 1000).toLocaleString(
-                            "en-US",
-                            {
-                              hour12: false,
-                              timeZone: "America/Montreal",
-                              hour: "2-digit",
-                              minute: "2-digit",
-                              second: "2-digit"
-                            }
-                          )) +
-                      '</td></tr><tr><td align=\\"right\\">' +
-                      route.stops[
-                        (x.loc.up.find(
-                          n => n.vehicle.trip.tripId === r.vehicle.trip.tripId
-                        )
-                          ? "u"
-                          : "d") + r.vehicle.currentStopSequence
-                      ] +
-                      "(" +
-                      r.vehicle.currentStopSequence +
-                      ')</td><td align=\\"center\\">' +
-                      (r.vehicle.currentStatus === "STOPPED_AT"
-                        ? "⬤</td><td>📡 " +
-                          new Date(r.vehicle.timestamp * 1000).toLocaleString(
-                            "en-US",
-                            {
-                              hour12: false,
-                              timeZone: "America/Montreal",
-                              hour: "2-digit",
-                              minute: "2-digit",
-                              second: "2-digit"
-                            }
-                          ) +
-                          "</td>"
-                        : "◯</td><td>" +
-                          (route.uptime &&
-                            route.downtime &&
-                            (x.loc.up.find(
-                              n =>
-                                n.vehicle.trip.tripId === r.vehicle.trip.tripId
-                            ) &&
-                              route.up === "u" + r.vehicle.currentStopSequence))
-                        ? "🔮 [" +
-                          new Date(
-                            x.tu.up.find(
-                              n => n.trip.tripId === r.vehicle.trip.tripId
-                            ).stopTimeUpdate[
-                              parseInt(r.vehicle.currentStopSequence) - 1
-                            ].arrival.time
-                          )
-                            .toLocaleString("en-US", {
-                              timeZone: "America/Montreal"
-                            })
-                            .split(",")[0] +
-                          "]"
-                        : x.loc.down.find(
-                            n => n.vehicle.trip.tripId === r.vehicle.trip.tripId
-                          ) &&
-                          route.down === "d" + r.vehicle.currentStopSequence
-                        ? "🔮 [" +
-                          new Date(
-                            x.tu.down.find(
-                              n => n.trip.tripId === r.vehicle.trip.tripId
-                            ).stopTimeUpdate[
-                              parseInt(r.vehicle.currentStopSequence) - 1
-                            ].arrival.time
-                          )
-                            .toLocaleString("en-US", {
-                              timeZone: "America/Montreal"
-                            })
-                            .split(",")[0] +
-                          "]"
-                        : "") +
-                      "</td>" +
+                  return (
+                    "L.marker([" +
+                    r.vehicle.position.latitude +
+                    ", " +
+                    r.vehicle.position.longitude +
+                    '], {icon: bus}).addTo(mymap).bindPopup("<table style=\\"border-width:0px;\\"><tr><td align=\\"right\\">Bus #' +
+                    r.id +
+                    '</td><td align=\\"center\\">▼</td><td>🗒️ ' +
+                    r.vehicle.trip.startTime.replace(/:00$/g, "") +
+                    '</td></tr><tr><td /><td align=\\"center\\">↓</td><td>' +
+                    (r.vehicle.currentStatus === "STOPPED_AT"
+                      ? ""
+                      : "📡 " +
+                        new Date(r.vehicle.timestamp * 1000).toLocaleString(
+                          "en-US",
+                          {
+                            hour12: false,
+                            timeZone: "America/Montreal",
+                            hour: "2-digit",
+                            minute: "2-digit",
+                            second: "2-digit"
+                          }
+                        )) +
+                    '</td></tr><tr><td align=\\"right\\">' +
+                    route.stops[
                       (x.loc.up.find(
                         n => n.vehicle.trip.tripId === r.vehicle.trip.tripId
-                      ) && route.up !== "u" + r.vehicle.currentStopSequence // up, not last stop?
-                        ? '</tr><tr><td></td><td align=\\"center\\">↓</td><td></td></tr><tr><td align=\\"right\\">' +
-                          route.stops[route.up] +
-                          '</td><td align=\\"center\\">◯</td><td>' +
-                          (x.tu.up.find(
-                            n => n.trip.tripId === r.vehicle.trip.tripId
-                          ).stopTimeUpdate[parseInt(route.up.substring(1)) - 1]
-                            ? "🔮 [" +
-                              new Date(
-                                x.tu.up.find(
-                                  n => n.trip.tripId === r.vehicle.trip.tripId
-                                ).stopTimeUpdate[
-                                  parseInt(route.up.substring(1)) - 1
-                                ].arrival.time
-                              )
-                                .toLocaleString("en-US", {
-                                  timeZone: "America/Montreal"
-                                })
-                                .split(",")[0] +
-                              "]"
-                            : "") +
-                          '</td></tr><tr><td></td><td align=\\"center\\">↓</td><td></td></tr>'
-                        : x.loc.down.find(
+                      )
+                        ? "u"
+                        : "d") + r.vehicle.currentStopSequence
+                    ] +
+                    "(" +
+                    r.vehicle.currentStopSequence +
+                    ')</td><td align=\\"center\\">' +
+                    (r.vehicle.currentStatus === "STOPPED_AT"
+                      ? "⬤</td><td>📡 " +
+                        new Date(r.vehicle.timestamp * 1000).toLocaleString(
+                          "en-US",
+                          {
+                            hour12: false,
+                            timeZone: "America/Montreal",
+                            hour: "2-digit",
+                            minute: "2-digit",
+                            second: "2-digit"
+                          }
+                        ) +
+                        "</td>"
+                      : "◯</td><td>" +
+                        (route.uptime &&
+                          route.downtime &&
+                          (x.loc.up.find(
                             n => n.vehicle.trip.tripId === r.vehicle.trip.tripId
                           ) &&
-                          route.down !== "d" + r.vehicle.currentStopSequence // down, not last stop?
-                        ? '</tr><tr><td></td><td align=\\"center\\">↓</td><td></td></tr><tr><td align=\\"right\\">' +
-                          route.stops[route.down] +
-                          '</td><td align=\\"center\\">◯</td><td>' +
-                          (x.tu.down.find(
+                            route.up === "u" + r.vehicle.currentStopSequence))
+                      ? "🔮 [" +
+                        new Date(
+                          x.tu.up.find(
                             n => n.trip.tripId === r.vehicle.trip.tripId
-                          ).stopTimeUpdate[parseInt(route.up.substring(1)) - 1]
-                            ? "🔮 [" +
-                              new Date(
-                                x.tu.up.find(
-                                  n => n.trip.tripId === r.vehicle.trip.tripId
-                                ).stopTimeUpdate[
-                                  parseInt(route.up.substring(1)) - 1
-                                ].arrival.time
-                              )
-                                .toLocaleString("en-US", {
-                                  timeZone: "America/Montreal"
-                                })
-                                .split(",")[0] +
-                              "]"
-                            : "")
-                        : "</tr>") +
-                      '</table>");'
-                    );
+                          ).stopTimeUpdate[
+                            parseInt(r.vehicle.currentStopSequence) - 1
+                          ].arrival.time
+                        )
+                          .toLocaleString("en-US", {
+                            timeZone: "America/Montreal"
+                          })
+                          .split(",")[0] +
+                        "]"
+                      : x.loc.down.find(
+                          n => n.vehicle.trip.tripId === r.vehicle.trip.tripId
+                        ) && route.down === "d" + r.vehicle.currentStopSequence
+                      ? "🔮 [" +
+                        new Date(
+                          x.tu.down.find(
+                            n => n.trip.tripId === r.vehicle.trip.tripId
+                          ).stopTimeUpdate[
+                            parseInt(r.vehicle.currentStopSequence) - 1
+                          ].arrival.time
+                        )
+                          .toLocaleString("en-US", {
+                            timeZone: "America/Montreal"
+                          })
+                          .split(",")[0] +
+                        "]"
+                      : "") +
+                    "</td>" +
+                    (x.loc.up.find(
+                      n => n.vehicle.trip.tripId === r.vehicle.trip.tripId
+                    ) && route.up !== "u" + r.vehicle.currentStopSequence // up, not last stop?
+                      ? '</tr><tr><td /><td align=\\"center\\">↓</td><td /></tr><tr><td align=\\"right\\">' +
+                        route.stops[route.up] +
+                        '</td><td align=\\"center\\">◯</td><td>' +
+                        (x.tu.up.find(
+                          n => n.trip.tripId === r.vehicle.trip.tripId
+                        ).stopTimeUpdate[parseInt(route.up.substring(1)) - 1]
+                          ? "🔮 [" +
+                            new Date(
+                              x.tu.up.find(
+                                n => n.trip.tripId === r.vehicle.trip.tripId
+                              ).stopTimeUpdate[
+                                parseInt(route.up.substring(1)) - 1
+                              ].arrival.time
+                            )
+                              .toLocaleString("en-US", {
+                                timeZone: "America/Montreal"
+                              })
+                              .split(",")[0] +
+                            "]"
+                          : "") +
+                        '</td></tr><tr><td /><td align=\\"center\\">↓</td><td /></tr>'
+                      : x.loc.down.find(
+                          n => n.vehicle.trip.tripId === r.vehicle.trip.tripId
+                        ) && route.down !== "d" + r.vehicle.currentStopSequence // down, not last stop?
+                      ? '</tr><tr><td /><td align=\\"center\\">↓</td><td /></tr><tr><td align=\\"right\\">' +
+                        route.stops[route.down] +
+                        '</td><td align=\\"center\\">◯</td><td>' +
+                        (x.tu.down.find(
+                          n => n.trip.tripId === r.vehicle.trip.tripId
+                        ).stopTimeUpdate[parseInt(route.up.substring(1)) - 1]
+                          ? "🔮 [" +
+                            new Date(
+                              x.tu.up.find(
+                                n => n.trip.tripId === r.vehicle.trip.tripId
+                              ).stopTimeUpdate[
+                                parseInt(route.up.substring(1)) - 1
+                              ].arrival.time
+                            )
+                              .toLocaleString("en-US", {
+                                timeZone: "America/Montreal"
+                              })
+                              .split(",")[0] +
+                            "]"
+                          : "")
+                      : "</tr>") +
+                    '</table>");'
+                  );
                 })
                 .join("\n")
             )
@@ -354,84 +349,94 @@ app.get("/:school", (req, res) => {
                     string.push(
                       "L.marker([" +
                         route.upFromLoc +
-                        ']).addTo(mymap).bindPopup("<table style=\\"border-width:0px;\\"><tr><td align=\\"right\\">🚍</td><td align=\\"center\\">→</td><td>' +
+                        ']).addTo(mymap).bindPopup("<table style=\\"border-width:0px;\\"><tr><td align=\\"right\\">' +
+                        route.route +
+                        ' 🚍</td><td align=\\"center\\">→</td><td>' +
                         route.stops[route.up] +
                         "</td></tr><tr>" +
                         (x.tu.up.length === 0
-                        ? '<td align=\\"right\\">Pas de bus</td><td /><td>No buses</td>'
-                        : x.tu.up
-                          .map(
-                            t =>
-                              '<td align=\\"right\\">' +
-                              new Date(
-                                parseInt(
-                                  t.tripUpdate.stopTimeUpdate[0].departure
-                                    .time + "000"
-                                )
+                          ? '<td align=\\"right\\">Pas de bus</td><td /><td>No buses</td>'
+                          : x.tu.up
+                              .map(
+                                t =>
+                                  '<td align=\\"right\\">' +
+                                  new Date(
+                                    parseInt(
+                                      t.tripUpdate.stopTimeUpdate[0].departure
+                                        .time + "000"
+                                    )
+                                  )
+                                    .toLocaleString("en-US", {
+                                      timeZone: "America/Montreal"
+                                    })
+                                    .split(",")[0] +
+                                  " (🗒️ " +
+                                  t.tripUpdate.trip.startTime.replace(
+                                    /:00$/g,
+                                    ""
+                                  ) +
+                                  ")</td><td /><td>" +
+                                  new Date(
+                                    parseInt(
+                                      t.tripUpdate.stopTimeUpdate[
+                                        parseInt(route.up.substring(1))
+                                      ].departure.time + "000"
+                                    )
+                                  )
+                                    .toLocaleString("en-US", {
+                                      timeZone: "America/Montreal"
+                                    })
+                                    .split(", ")[1] +
+                                  "</td>"
                               )
-                                .toLocaleString("en-US", {
-                                  timeZone: "America/Montreal"
-                                })
-                                .split(",")[0] +
-                              " (🗒️ " +
-                              t.tripUpdate.trip.startTime.replace(/:00$/g, "") +
-                              ")</td><td></td><td>" +
-                              new Date(
-                                parseInt(
-                                  t.tripUpdate.stopTimeUpdate[
-                                    parseInt(route.up.substring(1))
-                                  ].departure.time + "000"
-                                )
-                              )
-                                .toLocaleString("en-US", {
-                                  timeZone: "America/Montreal"
-                                })
-                                .split(",")[0] +
-                              "</td>"
-                          )
-                          .join("</tr><tr>")) +
+                              .join("</tr><tr>")) +
                         '</tr></table>");'
                     );
                   if (route.downFromLoc)
                     string.push(
                       "L.marker([" +
                         route.downFromLoc +
-                        ']).addTo(mymap).bindPopup("<table style=\\"border-width:0px;\\"><tr><td align=\\"right\\">🚍</td><td align=\\"center\\">→</td><td>' +
+                        ']).addTo(mymap).bindPopup("<table style=\\"border-width:0px;\\"><tr><td align=\\"right\\">' +
+                        route.route +
+                        ' 🚍</td><td align=\\"center\\">→</td><td>' +
                         route.stops[route.down] +
                         "</td></tr><tr>" +
                         (x.tu.down.length === 0
-                        ? '<td align=\\"right\\">Pas de bus</td><td /><td>No buses</td>'
-                        : x.tu.down
-                          .map(
-                            t =>
-                              '<td align=\\"right\\">' +
-                              new Date(
-                                parseInt(
-                                  t.tripUpdate.stopTimeUpdate[0].departure
-                                    .time + "000"
-                                )
+                          ? '<td align=\\"right\\">Pas de bus</td><td /><td>No buses</td>'
+                          : x.tu.down
+                              .map(
+                                t =>
+                                  '<td align=\\"right\\">' +
+                                  new Date(
+                                    parseInt(
+                                      t.tripUpdate.stopTimeUpdate[0].departure
+                                        .time + "000"
+                                    )
+                                  )
+                                    .toLocaleString("en-US", {
+                                      timeZone: "America/Montreal"
+                                    })
+                                    .split(",")[1] +
+                                  " (🗒️ " +
+                                  t.tripUpdate.trip.startTime.replace(
+                                    /:00$/g,
+                                    ""
+                                  ) +
+                                  ")</td><td /><td>" +
+                                  new Date(
+                                    parseInt(
+                                      t.tripUpdate.stopTimeUpdate[
+                                        parseInt(route.down.substring(1))
+                                      ].departure.time + "000"
+                                    )
+                                  )
+                                    .toLocaleString("en-US", {
+                                      timeZone: "America/Montreal"
+                                    })
+                                    .split(", ")[1] +
+                                  "</td>"
                               )
-                                .toLocaleString("en-US", {
-                                  timeZone: "America/Montreal"
-                                })
-                                .split(",")[0] +
-                              " (🗒️ " +
-                              t.tripUpdate.trip.startTime.replace(/:00$/g, "") +
-                              ")</td><td></td><td>" +
-                              new Date(
-                                parseInt(
-                                  t.tripUpdate.stopTimeUpdate[
-                                    parseInt(route.down.substring(1))
-                                  ].departure.time + "000"
-                                )
-                              )
-                                .toLocaleString("en-US", {
-                                  timeZone: "America/Montreal"
-                                })
-                                .split(",")[0] +
-                              "</td>"
-                          )
-                          .join("</tr><tr>")) +
+                              .join("</tr><tr>")) +
                         '</tr></table>");'
                     );
                   return string.join("\n");
