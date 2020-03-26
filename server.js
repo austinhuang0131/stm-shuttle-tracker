@@ -325,8 +325,8 @@ app.get("/:school", (req, res) => {
                               x.tu.up.find(
                                 n => n.trip.tripId === r.vehicle.trip.tripId
                               ).stopTimeUpdate[
-                                parseInt(route.up.substring(1)) - 1
-                              ].arrival.time
+                                parseInt(route.down.substring(1)) - 1
+                              ].arrival.time + "000"
                             )
                               .toLocaleString("en-US", {
                                 timeZone: "America/Montreal"
@@ -399,7 +399,6 @@ app.get("/:school", (req, res) => {
                         '</tr></table>");'
                     );
                 }).join("\n");
-
                   if (routelist[req.params.school].downFromLoc)
                     upFroms += "\nL.marker([" +
                     routelist[req.params.school].downFromLoc +
@@ -435,12 +434,12 @@ app.get("/:school", (req, res) => {
                                   ")</td><td /><td>" +
                                   (
                                   t.tripUpdate.stopTimeUpdate[
-                                        parseInt(route.up.substring(1)) - 1
+                                        parseInt(route.down.substring(1)) - 1
                                       ].departure
                                   ? new Date(
                                     parseInt(
                                       t.tripUpdate.stopTimeUpdate[
-                                        parseInt(route.up.substring(1)) - 1
+                                        parseInt(route.down.substring(1)) - 1
                                       ].departure.time + "000"
                                     )
                                   ).toLocaleString("en-US", {
