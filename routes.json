@@ -20,11 +20,11 @@
         "upToId": "",
         "downFromId": "",
         "downToId": "54104?",
-        "upFromLoc": "45.4741460, -73.6035240",
-        "downFromLoc": "45.4802602, -73.6120597"
+        "upFromLoc": "45.4741460, -73.6035240"
       }
     ],
-    "period": [[7, 9], [13, 20]]
+    "period": [[7, 9], [13, 20]],
+    "downFromLoc": "45.4802602, -73.6120597"
   },
   "andre-laurendeau": {
     "name": "Cégep André-Laurendeau",
@@ -55,11 +55,11 @@
         "upToId": "57059",
         "downFromId": "56956",
         "downToId": "54107",
-        "upFromLoc": "45.4463910, -73.6040210",
-        "downFromLoc": "45.4363730, -73.6124950"
+        "upFromLoc": "45.4463910, -73.6040210"
       }
     ],
-    "period": [[6, 8], [11, 11], [15, 18]]
+    "period": [[6, 8], [11, 11], [15, 18]],
+    "downFromLoc": "45.4363730, -73.6124950"
   },
   "lcchs-pacc": {
     "name": "LCCHS / PACC",
@@ -124,11 +124,11 @@
         "upToId": "56959",
         "downFromId": "???",
         "downToId": "54101",
-        "upFromLoc": "45.4569580, -73.5814890",
-        "downFromLoc": "45.4238420, -73.6112890"
+        "upFromLoc": "45.4569580, -73.5814890"
       }
     ],
-    "period": [[7, 8], [16, 16]]
+    "period": [[7, 8], [16, 16]],
+    "downFromLoc": "45.4238420, -73.6112890"
   },
   "college-de-montreal": {
     "name": "Collège de Montréal",
@@ -195,6 +195,7 @@
         "downToId": "56703"
       }
     ],
+    "downFromLoc": "45.4700780, -73.5621240",
     "period": [[7, 8], [15, 16]]
   },
   "college-francais": {
@@ -217,10 +218,10 @@
         "upToId": "53848",
         "downFromId": "",
         "downToId": "",
-        "upFromLoc": "45.5265472, -73.5865528",
-        "downFromLoc": "45.5215975, -73.5965011"
+        "upFromLoc": "45.5265472, -73.5865528"
       }
     ],
+    "downFromLoc": "45.5215975, -73.5965011",
     "period": [[7, 8], [15, 15]]
   },
   "sainte-anne": {
@@ -259,10 +260,10 @@
         "upToId": "57238",
         "downFromId": "61378",
         "downToId": "58591",
-        "upFromLoc": "45.434737,-73.848722",
-        "downFromLoc": "45.4319084,-73.6748258"
+        "upFromLoc": "45.434737,-73.848722"
       }
     ],
+    "downFromLoc": "45.4319084,-73.6748258",
     "period": [[7, 8], [15, 15]]
   },
   "james-lyng": {
@@ -281,10 +282,10 @@
         "upToId": "51774",
         "downFromId": "51775",
         "downToId": "61333",
-        "upFromLoc": "45.4833400,-73.5794630",
-        "downFromLoc": "45.4684710,-73.5957910"
+        "upFromLoc": "45.4833400,-73.5794630"
       }
     ],
+    "downFromLoc": "45.4684710,-73.5957910",
     "period": [[7, 15]]
   }
 }

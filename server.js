@@ -341,12 +341,10 @@ app.get("/:school", (req, res) => {
                 .join("\n")
             )
             .replace(
-              "[STOPS]",
-              routelist[req.params.school].routes
-                .map(route => {
-                  let string = [];
+              "[STOPS]", () => {
+                let upFroms = routelist[req.params.school].routes.map(route => {
                   if (route.upFromLoc)
-                    string.push(
+                    return(
                       "L.marker([" +
                         route.upFromLoc +
                         ']).addTo(mymap).bindPopup("<table style=\\"border-width:0px;\\"><tr><td align=\\"right\\">' +
@@ -357,6 +355,7 @@ app.get("/:school", (req, res) => {
                         (x.tu.up.length === 0
                           ? '<td align=\\"right\\">Pas de bus</td><td /><td>No buses</td>'
                           : x.tu.up
+                              .sort((a, b) => parseInt(a.tripUpdate.stopTimeUpdate[0].departure.time) - parseInt(b.tripUpdate.stopTimeUpdate[0].departure.time) )
                               .map(
                                 t =>
                                   '<td align=\\"right\\">' +
@@ -365,41 +364,49 @@ app.get("/:school", (req, res) => {
                                       t.tripUpdate.stopTimeUpdate[0].departure
                                         .time + "000"
                                     )
-                                  )
-                                    .toLocaleString("en-US", {
-                                      hour12: false,
-                                      timeZone: "America/Montreal",
-                                      hour: "2-digit",
-                                      minute: "2-digit",
-                                      second: "2-digit"
-                                    }) +
+                                  ).toLocaleString("en-US", {
+                                    hour12: false,
+                                    timeZone: "America/Montreal",
+                                    hour: "2-digit",
+                                    minute: "2-digit",
+                                    second: "2-digit"
+                                  }) +
                                   " (🗒️ " +
                                   t.tripUpdate.trip.startTime +
                                   ")</td><td /><td>" +
-                                  new Date(
+                                  (
+                                  t.tripUpdate.stopTimeUpdate[
+                                        parseInt(route.up.substring(1)) - 1
+                                      ].departure
+                                  ? new Date(
                                     parseInt(
                                       t.tripUpdate.stopTimeUpdate[
                                         parseInt(route.up.substring(1)) - 1
                                       ].departure.time + "000"
                                     )
-                                  )
-                                    .toLocaleString("en-US", {
-                                      hour12: false,
-                                      timeZone: "America/Montreal",
-                                      hour: "2-digit",
-                                      minute: "2-digit",
-                                      second: "2-digit"
-                                    }) +
+                                  ).toLocaleString("en-US", {
+                                    hour12: false,
+                                    timeZone: "America/Montreal",
+                                    hour: "2-digit",
+                                    minute: "2-digit",
+                                    second: "2-digit"
+                                  })
+                                    : "???"
+                                  ) +
                                   "</td>"
                               )
                               .join("</tr><tr>")) +
                         '</tr></table>");'
                     );
-                  if (route.downFromLoc)
-                    string.push(
-                      "L.marker([" +
-                        route.downFromLoc +
-                        ']).addTo(mymap).bindPopup("<table style=\\"border-width:0px;\\"><tr><td align=\\"right\\">' +
+                }).join("\n");
+
+                  if (routelist[req.params.school].downFromLoc)
+                    upFroms += "\nL.marker([" +
+                    routelist[req.params.school].downFromLoc +
+                    ']).addTo(mymap).bindPopup("' +
+                    routelist[req.params.school].routes.map(
+                      route =>
+                        '<table style=\\"border-width:0px;\\"><tr><td align=\\"right\\">' +
                         route.route +
                         ' 🚍</td><td align=\\"center\\">→</td><td>' +
                         route.stops[route.down] +
@@ -407,6 +414,7 @@ app.get("/:school", (req, res) => {
                         (x.tu.down.length === 0
                           ? '<td align=\\"right\\">Pas de bus</td><td /><td>No buses</td>'
                           : x.tu.down
+                              .sort((a, b) => parseInt(a.tripUpdate.stopTimeUpdate[0].departure.time) - parseInt(b.tripUpdate.stopTimeUpdate[0].departure.time) )
                               .map(
                                 t =>
                                   '<td align=\\"right\\">' +
@@ -415,39 +423,43 @@ app.get("/:school", (req, res) => {
                                       t.tripUpdate.stopTimeUpdate[0].departure
                                         .time + "000"
                                     )
-                                  )
-                                    .toLocaleString("en-US", {
-                                      hour12: false,
-                                      timeZone: "America/Montreal",
-                                      hour: "2-digit",
-                                      minute: "2-digit",
-                                      second: "2-digit"
-                                    }) +
+                                  ).toLocaleString("en-US", {
+                                    hour12: false,
+                                    timeZone: "America/Montreal",
+                                    hour: "2-digit",
+                                    minute: "2-digit",
+                                    second: "2-digit"
+                                  }) +
                                   " (🗒️ " +
                                   t.tripUpdate.trip.startTime +
                                   ")</td><td /><td>" +
-                                  new Date(
+                                  (
+                                  t.tripUpdate.stopTimeUpdate[
+                                        parseInt(route.up.substring(1)) - 1
+                                      ].departure
+                                  ? new Date(
                                     parseInt(
                                       t.tripUpdate.stopTimeUpdate[
-                                        parseInt(route.down.substring(1)) - 1
+                                        parseInt(route.up.substring(1)) - 1
                                       ].departure.time + "000"
                                     )
-                                  )
-                                    .toLocaleString("en-US", {
-                                      hour12: false,
-                                      timeZone: "America/Montreal",
-                                      hour: "2-digit",
-                                      minute: "2-digit",
-                                      second: "2-digit"
-                                    }) +
+                                  ).toLocaleString("en-US", {
+                                    hour12: false,
+                                    timeZone: "America/Montreal",
+                                    hour: "2-digit",
+                                    minute: "2-digit",
+                                    second: "2-digit"
+                                  })
+                                    : "???"
+                                  ) +
                                   "</td>"
                               )
                               .join("</tr><tr>")) +
-                        '</tr></table>");'
-                    );
-                  return string.join("\n");
-                })
-                .join("\n")
+                        '</tr></table>'
+                    ).join("") +
+                    '");';
+                  return upFroms;
+                }
             )
             .replace(
               "[TIME]",
