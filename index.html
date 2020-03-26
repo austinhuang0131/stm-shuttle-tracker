@@ -16,24 +16,25 @@
     <meta name="og:title" content="STM Shuttle (School bus) Tracker" />
     <meta
       name="og:description"
-      content="Track STM &quot;École&quot; (school) buses, with real-time schedule prediction!"
+      content='Track STM "École" (school) buses, with real-time schedule prediction!'
     />
     <meta
       name="description"
-      content="Track STM &quot;École&quot; (school) buses, with real-time schedule prediction!"
+      content='Track STM "École" (school) buses, with real-time schedule prediction!'
     />
   </head>
   <body>
     <div lang="en" id="en1">
       <button type="button" onclick="refresh(1)">Français</button>
       <p>
-        <b>Spread the info, not the virus!</b> Stop partying and stay home! <a href="https://quebec.ca/en/coronavirus">Quebec.ca/en/Coronavirus</a>
+        <b>Spread the info, not the virus!</b> Stop partying and stay home!
+        <a href="https://quebec.ca/en/coronavirus">Quebec.ca/en/Coronavirus</a>
       </p>
-      <hr>
+      <hr />
       <p><i>https://stm.austinhuang.me</i></p>
       <p>
-        Tracks STM "École" buses. Provides real-time location, stop sequence
-        and arrival predictions, through STM's GTFS-Realtime API.
+        Tracks STM "École" buses. Provides real-time location, stop sequence and
+        arrival predictions, through STM's GTFS-Realtime API.
       </p>
       <p>
         This unofficial service is voluntarily offered to the following cégeps:
@@ -42,13 +43,16 @@
     <div lang="fr" id="fr1" style="display:none;">
       <button onclick="refresh(0)">English</button>
       <p>
-        <b>Propage l'info, pas le virus!</b> Arrêtez des partys et restez à la maison! <a href="https://quebec.ca/coronavirus">Quebec.ca/Coronavirus</a>
+        <b>Propage l'info, pas le virus!</b> Arrêtez des partys et restez à la
+        maison!
+        <a href="https://quebec.ca/coronavirus">Quebec.ca/Coronavirus</a>
       </p>
-      <hr>
+      <hr />
       <p><i>https://stm.austinhuang.me</i></p>
       <p>
         Tracer les bus "École" de la STM. Exposer l'emplacement, le séquence
-        d'arrêt et des arrivées prevues, fournit par l'API GTFS-Realtime de la STM.
+        d'arrêt et des arrivées prevues, fournit par l'API GTFS-Realtime de la
+        STM.
       </p>
       <p>
         Ce service non-officiel est offrert volontairement à ces cégeps:
@@ -62,39 +66,72 @@
         <a href="/andre-laurendeau">Cégep André-Laurendeau 113E</a>
       </li>
     </ul>
-    <p lang="fr" id="fr2" style="display:none;">Et aussi ces écoles secondaires: (Version ALPHA)</p>
-    <p lang="en" id="en2">As well as the following high schools: (ALPHA Version)</p>
+    <p lang="fr" id="fr2" style="display:none;">
+      Et aussi ces écoles secondaires: (Version ALPHA)
+    </p>
+    <p lang="en" id="en2">
+      As well as the following high schools: (ALPHA Version)
+    </p>
     <ul>
       <li>
-        <a href="/college-de-montreal">Collège de Montréal 168E</a>
+        <a href="/james-lyng">James Lyng <small>High School</small> 191E</a>
       </li>
       <li>
         <a href="/lcchs-pacc">LaSalle Comprehensive / PACC 112E</a>
       </li>
+      <li>
+        <a href="/esmr"
+          ><small>École Secondaire</small> Monseigneur-Richard 58E / 61E /
+          108E</a
+        >
+      </li>
     </ul>
     <div lang="en" id="en3">
-      <p>Read the <a href="./faq">FAQ</a>, follow the <a href="./changelog">change log</a>, and monitor the <a href="https://status.austinhuang.me/">uptime</a>!</p>
       <p>
-        Contact me: <a href="https://instagram.com/austinhuang.me">Instagram @austinhuang.me</a> / <a href="mailto:im@austinhuang.me">Email <code>im@austinhuang.me</code></a>
+        Read the <a href="./faq">FAQ</a>, follow the
+        <a href="./changelog">change log</a>, and monitor the
+        <a href="https://status.austinhuang.me/">uptime</a>!
+      </p>
+      <p>
+        Contact me:
+        <a href="https://instagram.com/austinhuang.me"
+          >Instagram @austinhuang.me</a
+        >
+        /
+        <a href="mailto:im@austinhuang.me"
+          >Email <code>im@austinhuang.me</code></a
+        >
       </p>
       <p>Made by <a href="https://austinhuang.me">Austin Huang</a>.</p>
       <p>Proudly hosted by:</p>
     </div>
     <div lang="fr" id="fr3" style="display:none;">
-      <p>Lisez le <a href="./faq">FAQ</a> et suivez les <a href="./changelog">mises à jour</a>! (Anglais seulement)</p>
       <p>
-        Me contacter: <a href="https://instagram.com/austinhuang.me">Instagram @austinhuang.me</a> / <a href="mailto:im@austinhuang.me">Courrier électronique <code>im@austinhuang.me</code></a>
+        Lisez le <a href="./faq">FAQ</a> et suivez les
+        <a href="./changelog">mises à jour</a>! (Anglais seulement)
+      </p>
+      <p>
+        Me contacter:
+        <a href="https://instagram.com/austinhuang.me"
+          >Instagram @austinhuang.me</a
+        >
+        /
+        <a href="mailto:im@austinhuang.me"
+          >Courrier électronique <code>im@austinhuang.me</code></a
+        >
       </p>
       <p>Réalisée par <a href="https://austinhuang.me">Austin Huang</a>.</p>
       <p>Fièrement opéré par:</p>
     </div>
-    <a href="https://theendlessweb.com"><img src="/assets/endless.png" height="40"/></a>
-    <hr>
+    <a href="https://theendlessweb.com"
+      ><img src="/assets/endless.png" height="40"
+    /></a>
+    <hr />
     <a href="https://github.com/ellerbrock/open-source-badges"
-      ><img
-        src="/assets/open-source.svg"
-        alt="Love Open Source!"/></a
-    ><a href="https://status.austinhuang.me"><img alt="Uptime Robot ratio (30 days)" src="/assets/status.svg"></a>
+      ><img src="/assets/open-source.svg" alt="Love Open Source!"/></a
+    ><a href="https://status.austinhuang.me"
+      ><img alt="Uptime Robot ratio (30 days)" src="/assets/status.svg"
+    /></a>
     <br />
     <a href="https://forthebadge.com/"
       ><img
@@ -103,14 +140,14 @@
         src="/assets/uses-html.svg"
         alt="Uses HTML"/><img
         src="/assets/built-with-love.svg"
-        alt="Built with <3"/><img
-        src="/assets/for-you.svg"
-        alt="For you!"
+        alt="Built with <3"/><img src="/assets/for-you.svg" alt="For you!"
     /></a>
     <p>
       <small
-        >By using this tool, you agree to the <a href="/faq#terms">terms and privacy policy</a>.
-        Data are sourced directly from the STM. Tracker licensed under <a
+        >By using this tool, you agree to the
+        <a href="/faq#terms">terms and privacy policy</a>. Data are sourced
+        directly from the STM. Tracker licensed under
+        <a
           rel="license"
           href="http://creativecommons.org/licenses/by-nc-sa/4.0/"
           >CC BY-NC-SA 4.0.</a
@@ -126,8 +163,7 @@
           document.getElementById("en1").style.display = "none";
           document.getElementById("en2").style.display = "none";
           document.getElementById("en3").style.display = "none";
-        }
-        else if (x === 0) {
+        } else if (x === 0) {
           document.getElementById("fr1").style.display = "none";
           document.getElementById("fr2").style.display = "none";
           document.getElementById("fr3").style.display = "none";

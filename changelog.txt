@@ -10,15 +10,17 @@ Inquiries? Feedbacks? Concerns?
 Version 0.1.1, 2020/03/26
 * Tracker
 - Hotfix for 0.1.0 regarding formats and stuff
-* School
-- Temporarily adding James Lyng
+* Schools
+- Permanently adding James Lyng and Mgr-Richard
+- Temporarily adding Collège Français, thanks to a contributor
 
 Version 0.1.0, 2020/03/25
 * Tracker
 - TripUpdates API implementation: Adding marker at termini to show upcoming departures
 - Change of database structure
 * Schools
-- Temporarily adding Mgr-Richard and Collège Sainte-Anne
+- Temporarily adding Mgr-Richard
+- Temporarily adding Collège Sainte-Anne (411E only), thanks to a contributor
 
 --- 0.0.x ---
 
