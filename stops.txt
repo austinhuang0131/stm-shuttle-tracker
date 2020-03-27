@@ -1,1 +1,24 @@
 stop_id,stop_code,stop_name,stop_lat,stop_lon,stop_url,location_type,parent_station,wheelchair_boarding
+61378,61378,411E trip 215460787 route 61378 => 57422 depart 20200327 15:05,,,https://github.com/austinhuang0131/stm-shuttle-tracker/wiki/Fake-STM-Stops,0,,0
+60348,60348,55E trip 212860641 route 60348 => 51007 depart 20200327 15:25,,,https://github.com/austinhuang0131/stm-shuttle-tracker/wiki/Fake-STM-Stops,0,,0
+60360,60360,28E trip 212837350 route 60360 => 53756 depart 20200327 14:52,,,https://github.com/austinhuang0131/stm-shuttle-tracker/wiki/Fake-STM-Stops,0,,0
+60374,60374,171E trip 215459886 route 60374 => 55624 depart 20200327 15:18,,,https://github.com/austinhuang0131/stm-shuttle-tracker/wiki/Fake-STM-Stops,0,,0
+54036,54036,187E trip 212834092 route 54036 => 53563 depart 20200327 15:23,,,https://github.com/austinhuang0131/stm-shuttle-tracker/wiki/Fake-STM-Stops,0,,0
+59259,59259,92E trip 212859533 route 59259 => 59259 depart 20200327 14:52,,,https://github.com/austinhuang0131/stm-shuttle-tracker/wiki/Fake-STM-Stops,0,,0
+61706,61706,119E trip 215460273 route 61706 => 61706 depart 20200327 15:25,,,https://github.com/austinhuang0131/stm-shuttle-tracker/wiki/Fake-STM-Stops,0,,0
+60374,60374,171E trip 214176148 route 60374 => 55712 depart 20200327 15:11,,,https://github.com/austinhuang0131/stm-shuttle-tracker/wiki/Fake-STM-Stops,0,,0
+61597,61597,185E trip 213546814 route 61597 => 53241 depart 20200327 15:15,,,https://github.com/austinhuang0131/stm-shuttle-tracker/wiki/Fake-STM-Stops,0,,0
+59259,59259,92E trip 212861563 route 59259 => 59259 depart 20200327 14:55,,,https://github.com/austinhuang0131/stm-shuttle-tracker/wiki/Fake-STM-Stops,0,,0
+56682,56682,58E trip 213936385 route 56682 => 56682 depart 20200327 15:28,,,https://github.com/austinhuang0131/stm-shuttle-tracker/wiki/Fake-STM-Stops,0,,0
+61353,61353,449E trip 213545798 route 61353 => 61353 depart 20200327 15:35,,,https://github.com/austinhuang0131/stm-shuttle-tracker/wiki/Fake-STM-Stops,0,,0
+54324,54324,49E trip 212835590 route 54324 => 54324 depart 20200327 15:35,,,https://github.com/austinhuang0131/stm-shuttle-tracker/wiki/Fake-STM-Stops,0,,0
+60354,60354,179E trip 215460495 route 60354 => 60354 depart 20200327 15:40,,,https://github.com/austinhuang0131/stm-shuttle-tracker/wiki/Fake-STM-Stops,0,,0
+61365,61365,186E trip 212835942 route 61365 => 61365 depart 20200327 15:42,,,https://github.com/austinhuang0131/stm-shuttle-tracker/wiki/Fake-STM-Stops,0,,0
+61841,61841,121E trip 214176836 route 61706 => 61841 depart 20200327 15:35,,,https://github.com/austinhuang0131/stm-shuttle-tracker/wiki/Fake-STM-Stops,0,,0
+61615,61615,106E trip 213937661 route 61615 => 61615 depart 20200327 16:00,,,https://github.com/austinhuang0131/stm-shuttle-tracker/wiki/Fake-STM-Stops,0,,0
+61837,61837,69E trip 214178209 route 61837 => 61837 depart 20200327 16:04,,,https://github.com/austinhuang0131/stm-shuttle-tracker/wiki/Fake-STM-Stops,0,,0
+54265,54265,49E trip 212836264 route 53914 => 54265 depart 20200327 16:05,,,https://github.com/austinhuang0131/stm-shuttle-tracker/wiki/Fake-STM-Stops,0,,0
+61341,61341,105E trip 215458387 route 61341 => 61341 depart 20200327 16:10,,,https://github.com/austinhuang0131/stm-shuttle-tracker/wiki/Fake-STM-Stops,0,,0
+61875,61875,187E trip 212833798 route 53913 => 61875 depart 20200327 16:05,,,https://github.com/austinhuang0131/stm-shuttle-tracker/wiki/Fake-STM-Stops,0,,0
+61362,61362,160E trip 215458342 route 61362 => 56197 depart 20200327 16:15,,,https://github.com/austinhuang0131/stm-shuttle-tracker/wiki/Fake-STM-Stops,0,,0
+61535,61535,49E trip 212836264 route 53914 => 61535 depart 20200327 16:05,,,https://github.com/austinhuang0131/stm-shuttle-tracker/wiki/Fake-STM-Stops,0,,0

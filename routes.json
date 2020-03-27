@@ -232,7 +232,7 @@
           "d34": "Raymond / Lévis-Sauvé",
           "d35": "George / Albert-Couture"
         },
-        "up": "u31",
+        "up": "u32",
         "down": "d35",
         "upFromId": "57072",
         "upToId": "56682",
@@ -287,8 +287,8 @@
           "d16": "Bannantyne / Brown",
           "d17": "Bannantyne / Allard",
           "d18": "Bannantyne / Rolland",
-          "d19": "Parc Hadley (Bannantyne / Stephens)",
-          "u1": "Parc Hadley (Bannantyne / Stephens)",
+          "d19": "Parc Hadley<br />(Bannantyne / Stephens)",
+          "u1": "Parc Hadley<br />(Bannantyne / Stephens)",
           "u2": "Bannantyne / Allard",
           "u3": "Bannantyne / Brault",
           "u4": "Bannantyne / Moffat",
@@ -385,7 +385,7 @@
       }
     ],
     "downFromLoc": "45.4319084,-73.6748258",
-    "period": [[7, 8], [15, 15]]
+    "period": [[7, 8], [14, 15]]
   },
   "james-lyng": {
     "name": "James Lyng High School",

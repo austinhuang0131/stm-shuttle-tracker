@@ -97,58 +97,72 @@ function update() {
                   u.tripUpdate.trip.routeId.endsWith("I")
               )
               .map(t => {
-                t.tripUpdate.stopTimeUpdate
-                  .filter(s => s.scheduleRelationship === "SCHEDULED")
-                  .map(s => {
-                    if (realstops.indexOf(s.stopId) === -1) {
-                      gtfsstop = fs.readFileSync("./stops.txt", "utf8");
-                      if (
-                        gtfsstop.indexOf(s.stopId + "," + s.stopId + ",") === -1
-                      )
-                        stopfile.write(
+                t.tripUpdate.stopTimeUpdate.map(s => {
+                  if (realstops.indexOf(s.stopId) === -1) {
+                    gtfsstop = fs.readFileSync("./stops.txt", "utf8");
+                    if (
+                      gtfsstop.indexOf(s.stopId + "," + s.stopId + ",") === -1
+                    )
+                      stopfile.write(
+                        s.stopId +
+                          "," +
                           s.stopId +
-                            "," +
-                            s.stopId +
-                            "," +
-                            t.tripUpdate.trip.routeId +
-                            " trip " +
-                            t.tripUpdate.trip.tripId +
-                            " route " +
-                            t.tripUpdate.stopTimeUpdate[0].stopId +
-                            " => " +
-                            t.tripUpdate.stopTimeUpdate[
-                              t.tripUpdate.stopTimeUpdate.length - 1
-                            ].stopId +
-                            " depart " +
-                            t.tripUpdate.trip.startDate +
-                            " " +
-                            t.tripUpdate.trip.startTime.replace(/:00$/g, "") +
-                            ",,,https://github.com/austinhuang0131/stm-shuttle-tracker/wiki/Fake-STM-Stops,0,,0\n",
-                          "utf8",
-                          console.error
-                        );
-                    }
-                  });
-                return t;
-              })
+                          "," +
+                          t.tripUpdate.trip.routeId +
+                          " trip " +
+                          t.tripUpdate.trip.tripId +
+                          " route " +
+                          t.tripUpdate.stopTimeUpdate[0].stopId +
+                          " => " +
+                          t.tripUpdate.stopTimeUpdate[
+                            t.tripUpdate.stopTimeUpdate.length - 1
+                          ].stopId +
+                          " depart " +
+                          t.tripUpdate.trip.startDate +
+                          " " +
+                          t.tripUpdate.trip.startTime.replace(/:00$/g, "") +
+                          ",,,https://github.com/austinhuang0131/stm-shuttle-tracker/wiki/Fake-STM-Stops,0,,0\n",
+                        "utf8",
+                        console.error
+                      );
+                  }
+                });
+              });
+            updt.entity
+              .filter(
+                u =>
+                  u.tripUpdate.trip.routeId.endsWith("E") ||
+                  u.tripUpdate.trip.routeId.endsWith("I")
+              )
               .map(r => {
-                if (gtfstrip.indexOf(r.tripUpdate.trip.tripId) === -1) {
+                gtfstrip = fs.readFileSync("./trips.txt", "utf8");
+                if (
+                  gtfstrip.indexOf(r.tripUpdate.trip.tripId) === -1 &&
+                  r.tripUpdate.stopTimeUpdate.length > 1 &&
+                  r.tripUpdate.stopTimeUpdate.filter(
+                    u => u.scheduleRelationship === 0
+                  ).length === r.tripUpdate.stopTimeUpdate.length
+                ) {
                   gtfsfile.write(
                     r.tripUpdate.trip.routeId +
-                      ",20M-ECOLE-00-S," +
+                      ",20M-" +
+                      (r.tripUpdate.trip.routeId.endsWith("I")
+                        ? "INDUSTRIEL"
+                        : "ECOLE") +
+                      "-00-S," +
                       r.tripUpdate.trip.tripId +
                       "," +
                       r.tripUpdate.trip.routeId +
                       "-?,?,,0," +
-                      t.tripUpdate.stopTimeUpdate[0].stopId +
+                      r.tripUpdate.stopTimeUpdate[0].stopId +
                       " => " +
-                      t.tripUpdate.stopTimeUpdate[
-                        t.tripUpdate.stopTimeUpdate.length - 1
+                      r.tripUpdate.stopTimeUpdate[
+                        r.tripUpdate.stopTimeUpdate.length - 1
                       ].stopId +
                       "," +
-                      t.tripUpdate.trip.startDate +
+                      r.tripUpdate.trip.startDate +
                       " " +
-                      t.tripUpdate.trip.startTime.replace(/:00$/g, "") +
+                      r.tripUpdate.trip.startTime.replace(/:00$/g, "") +
                       "\n",
                     "utf8",
                     console.error
@@ -462,11 +476,11 @@ app.get("/:school", (req, res) => {
                 upFroms +=
                   "\nL.marker([" +
                   routelist[req.params.school].downFromLoc +
-                  ']).addTo(mymap).bindPopup("' +
+                  ']).addTo(mymap).bindPopup("<table style=\\"border-width:0px;\\">' +
                   routelist[req.params.school].routes
                     .map(
                       route =>
-                        '<table style=\\"border-width:0px;\\"><tr><td align=\\"right\\">' +
+                        '<tr><td align=\\"right\\">' +
                         route.route +
                         ' 🚍</td><td align=\\"center\\">→</td><td>' +
                         route.stops[route.down] +
@@ -505,7 +519,7 @@ app.get("/:school", (req, res) => {
                                   ")</td><td /><td>" +
                                   (t.tripUpdate.stopTimeUpdate[
                                     parseInt(route.down.substring(1)) - 1
-                                  ].departure
+                                  ]
                                     ? new Date(
                                         parseInt(
                                           t.tripUpdate.stopTimeUpdate[
@@ -524,10 +538,10 @@ app.get("/:school", (req, res) => {
                                   "</td>"
                               )
                               .join("</tr><tr>")) +
-                        "</tr></table>"
+                        "</tr>"
                     )
                     .join("") +
-                  '");';
+                  '</table>");';
               return upFroms;
             })
             .replace(
