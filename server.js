@@ -13,11 +13,20 @@ const express = require("express"),
 var app = express(),
   gtfsfile = fs.createWriteStream("./trips.txt", { flags: "a" }),
   stopfile = fs.createWriteStream("./stops.txt", { flags: "a" }),
-  gtfstrip = fs.readFileSync("./trips.txt", "utf8"),
-  gtfsstop = fs.readFileSync("./stops.txt", "utf8");
+  gtfstrips = fs.createReadStream("./trips.txt"),
+  gtfsstops = fs.createReadStream("./stops.txt");
 var listener = app.listen(process.env.PORT, function() {
   console.log("Your app is listening on port " + listener.address().port);
 });
+
+function streamToString(stream) {
+  const chunks = [];
+  return new Promise((resolve, reject) => {
+    stream.on("data", chunk => chunks.push(chunk));
+    stream.on("error", reject);
+    stream.on("end", () => resolve(Buffer.concat(chunks).toString("utf8")));
+  });
+}
 
 function update() {
   if (
@@ -98,34 +107,37 @@ function update() {
               )
               .map(t => {
                 t.tripUpdate.stopTimeUpdate.map(s => {
-                  if (realstops.indexOf(s.stopId) === -1) {
-                    gtfsstop = fs.readFileSync("./stops.txt", "utf8");
-                    if (
-                      gtfsstop.indexOf(s.stopId + "," + s.stopId + ",") === -1
-                    )
-                      stopfile.write(
-                        s.stopId +
-                          "," +
-                          s.stopId +
-                          "," +
-                          t.tripUpdate.trip.routeId +
-                          " trip " +
-                          t.tripUpdate.trip.tripId +
-                          " route " +
-                          t.tripUpdate.stopTimeUpdate[0].stopId +
-                          " => " +
-                          t.tripUpdate.stopTimeUpdate[
-                            t.tripUpdate.stopTimeUpdate.length - 1
-                          ].stopId +
-                          " depart " +
-                          t.tripUpdate.trip.startDate +
-                          " " +
-                          t.tripUpdate.trip.startTime.replace(/:00$/g, "") +
-                          ",,,https://github.com/austinhuang0131/stm-shuttle-tracker/wiki/Fake-STM-Stops,0,,0\n",
-                        "utf8",
-                        console.error
-                      );
-                  }
+                  if (realstops.indexOf(s.stopId) === -1)
+                    streamToString(gtfsstops)
+                      .then(gtfsstop => {
+                        if (
+                          gtfsstop.indexOf(s.stopId + "," + s.stopId + ",") ===
+                          -1
+                        )
+                          stopfile.write(
+                            s.stopId +
+                              "," +
+                              s.stopId +
+                              "," +
+                              t.tripUpdate.trip.routeId +
+                              " trip " +
+                              t.tripUpdate.trip.tripId +
+                              " route " +
+                              t.tripUpdate.stopTimeUpdate[0].stopId +
+                              " => " +
+                              t.tripUpdate.stopTimeUpdate[
+                                t.tripUpdate.stopTimeUpdate.length - 1
+                              ].stopId +
+                              " depart " +
+                              t.tripUpdate.trip.startDate +
+                              " " +
+                              t.tripUpdate.trip.startTime.replace(/:00$/g, "") +
+                              ",,,https://github.com/austinhuang0131/stm-shuttle-tracker/wiki/Fake-STM-Stops,0,,0\n",
+                            "utf8",
+                            console.error
+                          );
+                      })
+                      .catch(console.error);
                 });
               });
             updt.entity
@@ -135,39 +147,41 @@ function update() {
                   u.tripUpdate.trip.routeId.endsWith("I")
               )
               .map(r => {
-                gtfstrip = fs.readFileSync("./trips.txt", "utf8");
-                if (
-                  gtfstrip.indexOf(r.tripUpdate.trip.tripId) === -1 &&
-                  r.tripUpdate.stopTimeUpdate.length > 1 &&
-                  r.tripUpdate.stopTimeUpdate.filter(
-                    u => u.scheduleRelationship === 0
-                  ).length === r.tripUpdate.stopTimeUpdate.length
-                ) {
-                  gtfsfile.write(
-                    r.tripUpdate.trip.routeId +
-                      ",20M-" +
-                      (r.tripUpdate.trip.routeId.endsWith("I")
-                        ? "INDUSTRIEL"
-                        : "ECOLE") +
-                      "-00-S," +
-                      r.tripUpdate.trip.tripId +
-                      "," +
-                      r.tripUpdate.trip.routeId +
-                      "-?,?,,0," +
-                      r.tripUpdate.stopTimeUpdate[0].stopId +
-                      " => " +
-                      r.tripUpdate.stopTimeUpdate[
-                        r.tripUpdate.stopTimeUpdate.length - 1
-                      ].stopId +
-                      "," +
-                      r.tripUpdate.trip.startDate +
-                      " " +
-                      r.tripUpdate.trip.startTime.replace(/:00$/g, "") +
-                      "\n",
-                    "utf8",
-                    console.error
-                  );
-                }
+                streamToString(gtfstrips)
+                  .then(gtfstrip => {
+                    if (
+                      gtfstrip.indexOf(r.tripUpdate.trip.tripId) === -1 &&
+                      r.tripUpdate.stopTimeUpdate.length > 1 &&
+                      r.tripUpdate.stopTimeUpdate.filter(
+                        u => u.scheduleRelationship === 0
+                      ).length === r.tripUpdate.stopTimeUpdate.length
+                    )
+                      gtfsfile.write(
+                        r.tripUpdate.trip.routeId +
+                          ",20M-" +
+                          (r.tripUpdate.trip.routeId.endsWith("I")
+                            ? "INDUSTRIEL"
+                            : "ECOLE") +
+                          "-00-S," +
+                          r.tripUpdate.trip.tripId +
+                          "," +
+                          r.tripUpdate.trip.routeId +
+                          "-?,?,,0," +
+                          r.tripUpdate.stopTimeUpdate[0].stopId +
+                          " => " +
+                          r.tripUpdate.stopTimeUpdate[
+                            r.tripUpdate.stopTimeUpdate.length - 1
+                          ].stopId +
+                          "," +
+                          r.tripUpdate.trip.startDate +
+                          " " +
+                          r.tripUpdate.trip.startTime.replace(/:00$/g, "") +
+                          "\n",
+                        "utf8",
+                        console.error
+                      );
+                  })
+                  .catch(console.error);
               });
           }
         );
