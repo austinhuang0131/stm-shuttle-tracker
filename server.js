@@ -135,7 +135,7 @@ function update() {
                 if (gtfstrip.indexOf(r.tripUpdate.trip.tripId) === -1) {
                   gtfsfile.write(
                     r.tripUpdate.trip.routeId +
-                      ",," +
+                      ",20M-ECOLE-00-S," +
                       r.tripUpdate.trip.tripId +
                       "," +
                       r.tripUpdate.trip.routeId +
