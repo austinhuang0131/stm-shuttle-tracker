@@ -8,10 +8,13 @@ const express = require("express"),
   sample = fs.readFileSync("./sample.html", "utf8"),
   routes = new DB.table("routes"),
   routelist = require("./routes.json"),
+  realstops = require("./stops.json"),
   assets = require("./assets.json");
 var app = express(),
   gtfsfile = fs.createWriteStream("./trips.txt", { flags: "a" }),
-  gtfstrip = fs.readFileSync("./trips.txt", "utf8");
+  stopfile = fs.createWriteStream("./stops.txt", { flags: "a" }),
+  gtfstrip = fs.readFileSync("./trips.txt", "utf8"),
+  gtfsstop = fs.readFileSync("./stops.txt", "utf8");
 var listener = app.listen(process.env.PORT, function() {
   console.log("Your app is listening on port " + listener.address().port);
 });
@@ -86,24 +89,67 @@ function update() {
               d.loc.down = downBuses;
               routes.set(s, d);
             });
-            feed.entity
-              .filter(f => f.vehicle.trip.routeId.endsWith("E"))
+
+            updt.entity
+              .filter(
+                u =>
+                  u.tripUpdate.trip.routeId.endsWith("E") ||
+                  u.tripUpdate.trip.routeId.endsWith("I")
+              )
+              .map(t => {
+                t.tripUpdate.stopTimeUpdate
+                  .filter(s => s.scheduleRelationship === "SCHEDULED")
+                  .map(s => {
+                    if (realstops.indexOf(s.stopId) === -1) {
+                      gtfsstop = fs.readFileSync("./stops.txt", "utf8");
+                      if (
+                        gtfsstop.indexOf(s.stopId + "," + s.stopId + ",") === -1
+                      )
+                        stopfile.write(
+                          s.stopId +
+                            "," +
+                            s.stopId +
+                            "," +
+                            t.tripUpdate.trip.routeId +
+                            " trip " +
+                            t.tripUpdate.trip.tripId +
+                            " route " +
+                            t.tripUpdate.stopTimeUpdate[0].stopId +
+                            " => " +
+                            t.tripUpdate.stopTimeUpdate[
+                              t.tripUpdate.stopTimeUpdate.length - 1
+                            ].stopId +
+                            " depart " +
+                            t.tripUpdate.trip.startDate +
+                            " " +
+                            t.tripUpdate.trip.startTime.replace(/:00$/g, "") +
+                            ",,,https://github.com/austinhuang0131/stm-shuttle-tracker/wiki/Fake-STM-Stops,0,,0\n",
+                          "utf8",
+                          console.error
+                        );
+                    }
+                  });
+                return t;
+              })
               .map(r => {
-                gtfstrip = fs.readFileSync("./trips.txt", "utf8");
-                if (gtfstrip.indexOf(r.vehicle.trip.tripId) === -1) {
+                if (gtfstrip.indexOf(r.tripUpdate.trip.tripId) === -1) {
                   gtfsfile.write(
-                    "\n" +
-                      r.vehicle.trip.routeId +
+                    r.tripUpdate.trip.routeId +
                       ",," +
-                      r.vehicle.trip.tripId +
+                      r.tripUpdate.trip.tripId +
                       "," +
-                      r.vehicle.trip.routeId +
+                      r.tripUpdate.trip.routeId +
                       "-?,?,,0," +
-                      r.vehicle.trip.startTime.replace(/:00$/g, "") +
-                      ",https://osm.org/query?lat=" +
-                      r.vehicle.position.latitude +
-                      "&lon=" +
-                      r.vehicle.position.longitude,
+                      t.tripUpdate.stopTimeUpdate[0].stopId +
+                      " => " +
+                      t.tripUpdate.stopTimeUpdate[
+                        t.tripUpdate.stopTimeUpdate.length - 1
+                      ].stopId +
+                      "," +
+                      t.tripUpdate.trip.startDate +
+                      " " +
+                      t.tripUpdate.trip.startTime.replace(/:00$/g, "") +
+                      "\n",
                     "utf8",
                     console.error
                   );
@@ -113,7 +159,6 @@ function update() {
         );
       }
     );
-  else gtfsfile.end();
 }
 
 setInterval(update, 30000);
@@ -260,7 +305,7 @@ app.get("/:school", (req, res) => {
                         new Date(
                           x.tu.up.find(
                             n => n.trip.tripId === r.vehicle.trip.tripId
-                          ).stopTimeUpdate[
+                          ).tripUpdate.stopTimeUpdate[
                             parseInt(r.vehicle.currentStopSequence) - 1
                           ].arrival.time
                         )
@@ -276,7 +321,7 @@ app.get("/:school", (req, res) => {
                         new Date(
                           x.tu.down.find(
                             n => n.trip.tripId === r.vehicle.trip.tripId
-                          ).stopTimeUpdate[
+                          ).tripUpdate.stopTimeUpdate[
                             parseInt(r.vehicle.currentStopSequence) - 1
                           ].arrival.time
                         )
@@ -295,12 +340,16 @@ app.get("/:school", (req, res) => {
                         '</td><td align=\\"center\\">◯</td><td>' +
                         (x.tu.up.find(
                           n => n.trip.tripId === r.vehicle.trip.tripId
-                        ).stopTimeUpdate[parseInt(route.up.substring(1)) - 1]
+                        ).tripUpdate.stopTimeUpdate[
+                          parseInt(route.up.substring(1)) - 1
+                        ]
                           ? "🔮 [" +
                             new Date(
                               x.tu.up.find(
-                                n => n.trip.tripId === r.vehicle.trip.tripId
-                              ).stopTimeUpdate[
+                                n =>
+                                  n.tripUpdate.trip.tripId ===
+                                  r.vehicle.trip.tripId
+                              ).tripUpdate.stopTimeUpdate[
                                 parseInt(route.up.substring(1)) - 1
                               ].arrival.time
                             )
@@ -319,12 +368,16 @@ app.get("/:school", (req, res) => {
                         '</td><td align=\\"center\\">◯</td><td>' +
                         (x.tu.down.find(
                           n => n.trip.tripId === r.vehicle.trip.tripId
-                        ).stopTimeUpdate[parseInt(route.up.substring(1)) - 1]
+                        ).tripUpdate.stopTimeUpdate[
+                          parseInt(route.up.substring(1)) - 1
+                        ]
                           ? "🔮 [" +
                             new Date(
                               x.tu.up.find(
-                                n => n.trip.tripId === r.vehicle.trip.tripId
-                              ).stopTimeUpdate[
+                                n =>
+                                  n.tripUpdate.trip.tripId ===
+                                  r.vehicle.trip.tripId
+                              ).tripUpdate.stopTimeUpdate[
                                 parseInt(route.down.substring(1)) - 1
                               ].arrival.time + "000"
                             )
@@ -340,70 +393,79 @@ app.get("/:school", (req, res) => {
                 })
                 .join("\n")
             )
-            .replace(
-              "[STOPS]", () => {
-                let upFroms = routelist[req.params.school].routes.map(route => {
+            .replace("[STOPS]", () => {
+              let upFroms = routelist[req.params.school].routes
+                .map(route => {
                   if (route.upFromLoc)
-                    return(
+                    return (
                       "L.marker([" +
-                        route.upFromLoc +
-                        ']).addTo(mymap).bindPopup("<table style=\\"border-width:0px;\\"><tr><td align=\\"right\\">' +
-                        route.route +
-                        ' 🚍</td><td align=\\"center\\">→</td><td>' +
-                        route.stops[route.up] +
-                        "</td></tr><tr>" +
-                        (x.tu.up.length === 0
-                          ? '<td align=\\"right\\">Pas de bus</td><td /><td>No buses</td>'
-                          : x.tu.up
-                              .sort((a, b) => parseInt(a.tripUpdate.stopTimeUpdate[0].departure.time) - parseInt(b.tripUpdate.stopTimeUpdate[0].departure.time) )
-                              .map(
-                                t =>
-                                  '<td align=\\"right\\">' +
-                                  new Date(
-                                    parseInt(
-                                      t.tripUpdate.stopTimeUpdate[0].departure
-                                        .time + "000"
-                                    )
-                                  ).toLocaleString("en-US", {
-                                    hour12: false,
-                                    timeZone: "America/Montreal",
-                                    hour: "2-digit",
-                                    minute: "2-digit",
-                                    second: "2-digit"
-                                  }) +
-                                  " (🗒️ " +
-                                  t.tripUpdate.trip.startTime +
-                                  ")</td><td /><td>" +
-                                  (
-                                  t.tripUpdate.stopTimeUpdate[
-                                        parseInt(route.up.substring(1)) - 1
-                                      ].departure
+                      route.upFromLoc +
+                      ']).addTo(mymap).bindPopup("<table style=\\"border-width:0px;\\"><tr><td align=\\"right\\">' +
+                      route.route +
+                      ' 🚍</td><td align=\\"center\\">→</td><td>' +
+                      route.stops[route.up] +
+                      "</td></tr><tr>" +
+                      (x.tu.up.length === 0
+                        ? '<td align=\\"right\\">Pas de bus</td><td /><td>No buses</td>'
+                        : x.tu.up
+                            .sort(
+                              (a, b) =>
+                                parseInt(
+                                  a.tripUpdate.stopTimeUpdate[0].departure.time
+                                ) -
+                                parseInt(
+                                  b.tripUpdate.stopTimeUpdate[0].departure.time
+                                )
+                            )
+                            .map(
+                              t =>
+                                '<td align=\\"right\\">' +
+                                new Date(
+                                  parseInt(
+                                    t.tripUpdate.stopTimeUpdate[0].departure
+                                      .time + "000"
+                                  )
+                                ).toLocaleString("en-US", {
+                                  hour12: false,
+                                  timeZone: "America/Montreal",
+                                  hour: "2-digit",
+                                  minute: "2-digit",
+                                  second: "2-digit"
+                                }) +
+                                " (🗒️ " +
+                                t.tripUpdate.trip.startTime +
+                                ")</td><td /><td>" +
+                                (t.tripUpdate.stopTimeUpdate[
+                                  parseInt(route.up.substring(1)) - 1
+                                ].departure
                                   ? new Date(
-                                    parseInt(
-                                      t.tripUpdate.stopTimeUpdate[
-                                        parseInt(route.up.substring(1)) - 1
-                                      ].departure.time + "000"
-                                    )
-                                  ).toLocaleString("en-US", {
-                                    hour12: false,
-                                    timeZone: "America/Montreal",
-                                    hour: "2-digit",
-                                    minute: "2-digit",
-                                    second: "2-digit"
-                                  })
-                                    : "???"
-                                  ) +
-                                  "</td>"
-                              )
-                              .join("</tr><tr>")) +
-                        '</tr></table>");'
+                                      parseInt(
+                                        t.tripUpdate.stopTimeUpdate[
+                                          parseInt(route.up.substring(1)) - 1
+                                        ].departure.time + "000"
+                                      )
+                                    ).toLocaleString("en-US", {
+                                      hour12: false,
+                                      timeZone: "America/Montreal",
+                                      hour: "2-digit",
+                                      minute: "2-digit",
+                                      second: "2-digit"
+                                    })
+                                  : "???") +
+                                "</td>"
+                            )
+                            .join("</tr><tr>")) +
+                      '</tr></table>");'
                     );
-                }).join("\n");
-                  if (routelist[req.params.school].downFromLoc)
-                    upFroms += "\nL.marker([" +
-                    routelist[req.params.school].downFromLoc +
-                    ']).addTo(mymap).bindPopup("' +
-                    routelist[req.params.school].routes.map(
+                })
+                .join("\n");
+              if (routelist[req.params.school].downFromLoc)
+                upFroms +=
+                  "\nL.marker([" +
+                  routelist[req.params.school].downFromLoc +
+                  ']).addTo(mymap).bindPopup("' +
+                  routelist[req.params.school].routes
+                    .map(
                       route =>
                         '<table style=\\"border-width:0px;\\"><tr><td align=\\"right\\">' +
                         route.route +
@@ -413,7 +475,17 @@ app.get("/:school", (req, res) => {
                         (x.tu.down.length === 0
                           ? '<td align=\\"right\\">Pas de bus</td><td /><td>No buses</td>'
                           : x.tu.down
-                              .sort((a, b) => parseInt(a.tripUpdate.stopTimeUpdate[0].departure.time) - parseInt(b.tripUpdate.stopTimeUpdate[0].departure.time) )
+                              .sort(
+                                (a, b) =>
+                                  parseInt(
+                                    a.tripUpdate.stopTimeUpdate[0].departure
+                                      .time
+                                  ) -
+                                  parseInt(
+                                    b.tripUpdate.stopTimeUpdate[0].departure
+                                      .time
+                                  )
+                              )
                               .map(
                                 t =>
                                   '<td align=\\"right\\">' +
@@ -432,34 +504,33 @@ app.get("/:school", (req, res) => {
                                   " (🗒️ " +
                                   t.tripUpdate.trip.startTime +
                                   ")</td><td /><td>" +
-                                  (
-                                  t.tripUpdate.stopTimeUpdate[
-                                        parseInt(route.down.substring(1)) - 1
-                                      ].departure
-                                  ? new Date(
-                                    parseInt(
-                                      t.tripUpdate.stopTimeUpdate[
-                                        parseInt(route.down.substring(1)) - 1
-                                      ].departure.time + "000"
-                                    )
-                                  ).toLocaleString("en-US", {
-                                    hour12: false,
-                                    timeZone: "America/Montreal",
-                                    hour: "2-digit",
-                                    minute: "2-digit",
-                                    second: "2-digit"
-                                  })
-                                    : "???"
-                                  ) +
+                                  (t.tripUpdate.stopTimeUpdate[
+                                    parseInt(route.down.substring(1)) - 1
+                                  ].departure
+                                    ? new Date(
+                                        parseInt(
+                                          t.tripUpdate.stopTimeUpdate[
+                                            parseInt(route.down.substring(1)) -
+                                              1
+                                          ].departure.time + "000"
+                                        )
+                                      ).toLocaleString("en-US", {
+                                        hour12: false,
+                                        timeZone: "America/Montreal",
+                                        hour: "2-digit",
+                                        minute: "2-digit",
+                                        second: "2-digit"
+                                      })
+                                    : "???") +
                                   "</td>"
                               )
                               .join("</tr><tr>")) +
-                        '</tr></table>'
-                    ).join("") +
-                    '");';
-                  return upFroms;
-                }
-            )
+                        "</tr></table>"
+                    )
+                    .join("") +
+                  '");';
+              return upFroms;
+            })
             .replace(
               "[TIME]",
               "<br><i>" +
