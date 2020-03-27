@@ -172,12 +172,11 @@ app.get("/faq", (req, res) => {
   res.sendFile(__dirname + "/faq.html");
 });
 
-app.get("/changelog", (req, res) => {
-  res.sendFile(__dirname + "/changelog.txt");
-});
-
-app.get("/trips.txt", (req, res) => {
-  res.sendFile(__dirname + "/trips.txt");
+app.get("/:name.txt", (req, res) => {
+  fs.access("./" + req.params.name + ".txt", fs.F_OK, err => {
+    if (err) res.status(404).send("File not found");
+    else res.sendFile(__dirname + "/" + req.params.name + ".txt");
+  });
 });
 
 app.get("/assets/:name", (req, res) => {
