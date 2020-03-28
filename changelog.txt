@@ -7,6 +7,10 @@ Inquiries? Feedbacks? Concerns?
 
 === C H A N G E L O G ===
 
+Version 0.1.2, 2020/03/28
+* Tracker
+- Complete revamp, stabilized vehicle tracking
+
 Version 0.1.1, 2020/03/26
 * Tracker
 - Hotfix for 0.1.0 regarding formats and stuff

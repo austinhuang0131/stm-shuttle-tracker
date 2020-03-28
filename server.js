@@ -32,9 +32,7 @@ function update() {
   if (
     (time === "EDT" &&
       new Date().getUTCHours() >= 10 &&
-      new Date().getUTCHours() <= 23 &&
-      new Date().getDay() !== 0 &&
-      new Date().getDay() !== 6) ||
+      new Date().getUTCHours() <= 23) ||
     (time === "EST" &&
       new Date().getUTCHours() >= 11 &&
       new Date().getDay() !== 0 &&
@@ -48,6 +46,7 @@ function update() {
         encoding: null
       },
       (e, r, b) => {
+        if (e || r.statusCode !== 200) return;
         let updt = GtfsRealtimeBindings.FeedMessage.decode(b);
         request(
           "https://api.stm.info/pub/od/gtfs-rt/ic/v1/vehiclePositions",
@@ -57,42 +56,75 @@ function update() {
             encoding: null
           },
           (e, r, b2) => {
+            if (e || r.statusCode !== 200) return console.error;
             let feed = GtfsRealtimeBindings.FeedMessage.decode(b2);
             Object.keys(routelist).map(async s => {
-              let ups = updt.entity.filter(u =>
-                  routelist[s].routes.find(
-                    l =>
-                      l.upFromId === u.tripUpdate.stopTimeUpdate[0].stopId &&
-                      l.upToId ===
-                        u.tripUpdate.stopTimeUpdate[
-                          u.tripUpdate.stopTimeUpdate.length - 1
-                        ].stopId
-                  )
+              let d = await routes.fetch(s),
+                ups = updt.entity.filter(
+                  u =>
+                    (routelist[s].routes.find(l => {
+                      return (
+                        l.upFromId === u.tripUpdate.stopTimeUpdate[0].stopId &&
+                        l.upToId ===
+                          u.tripUpdate.stopTimeUpdate[
+                            u.tripUpdate.stopTimeUpdate.length - 1
+                          ].stopId &&
+                        l.route === u.tripUpdate.trip.routeId
+                      );
+                    }) ||
+                      d.tr.up.indexOf(u.tripUpdate.trip.tripId) > -1) &&
+                    u.tripUpdate.stopTimeUpdate[0].departure &&
+                    u.tripUpdate.stopTimeUpdate[0].departure.time * 1000 +
+                      60000 >
+                      Date.now()
                 ),
-                downs = updt.entity.filter(u =>
-                  routelist[s].routes.find(
-                    l =>
-                      l.downFromId === u.tripUpdate.stopTimeUpdate[0].stopId &&
-                      l.downToId ===
-                        u.tripUpdate.stopTimeUpdate[
-                          u.tripUpdate.stopTimeUpdate.length - 1
-                        ].stopId
-                  )
-                ),
-                d = await routes.fetch(s);
-              if (!d) d = { tu: {}, loc: {} };
+                downs = updt.entity.filter(
+                  u =>
+                    (routelist[s].routes.find(l => {
+                      return (
+                        l.downFromId ===
+                          u.tripUpdate.stopTimeUpdate[0].stopId &&
+                        l.downToId ===
+                          u.tripUpdate.stopTimeUpdate[
+                            u.tripUpdate.stopTimeUpdate.length - 1
+                          ].stopId &&
+                        l.route === u.tripUpdate.trip.routeId
+                      );
+                    }) ||
+                      d.tr.down.indexOf(u.tripUpdate.trip.tripId) > -1) &&
+                    u.tripUpdate.stopTimeUpdate[0].departure &&
+                    u.tripUpdate.stopTimeUpdate[0].departure.time * 1000 +
+                      60000 >
+                      Date.now()
+                );
+              if (!d) d = { tu: {}, loc: {}, tr: {} };
               d.tu.up = ups;
               d.tu.down = downs;
-              let upBuses = feed.entity.filter(f =>
-                  ups.find(
-                    t => t.tripUpdate.trip.tripId === f.vehicle.trip.tripId
-                  )
+              d.tr = !d.tr ? {} : d.tr;
+              d.tr.up =
+                d.tr.up.length === 0
+                  ? ups.map(b => b.tripUpdate.trip.tripId)
+                  : [
+                      ...new Set([
+                        ...d.tr.up,
+                        ...ups.map(b => b.tripUpdate.trip.tripId)
+                      ])
+                    ];
+              d.tr.down =
+                d.tr.down.length === 0
+                  ? downs.map(b => b.tripUpdate.trip.tripId)
+                  : [
+                      ...new Set([
+                        ...d.tr.down,
+                        ...downs.map(b => b.tripUpdate.trip.tripId)
+                      ])
+                    ];
+              let upBuses = feed.entity.filter(
+                  f => d.tr.up.indexOf(f.vehicle.trip.tripId) > -1
                 ),
-                downBuses = feed.entity.filter(f =>
-                  downs.find(
-                    t => t.tripUpdate.trip.tripId === f.vehicle.trip.tripId
-                  )
-                );
+                downBuses = feed.entity.filter(f => {
+                  return d.tr.down.indexOf(f.vehicle.trip.tripId) > -1;
+                });
               DB.set("time." + s, Date.now());
               d.loc.up = upBuses;
               d.loc.down = downBuses;
@@ -272,7 +304,7 @@ app.get("/:school", (req, res) => {
               [...x.loc.up, ...x.loc.down]
                 .map(r => {
                   let route = routelist[req.params.school].routes.find(
-                    y => y.route === y.vehicle.trip.routeId
+                    y => y.route === r.vehicle.trip.routeId
                   );
                   return (
                     "L.marker([" +
@@ -282,7 +314,7 @@ app.get("/:school", (req, res) => {
                     '], {icon: bus}).addTo(mymap).bindPopup("<table style=\\"border-width:0px;\\"><tr><td align=\\"right\\">Bus #' +
                     r.id +
                     '</td><td align=\\"center\\">▼</td><td>🗒️ ' +
-                    r.vehicle.trip.startTime.replace(/:00$/g, "") +
+                    r.vehicle.trip.startTime +
                     '</td></tr><tr><td /><td align=\\"center\\">↓</td><td>' +
                     (r.vehicle.currentStatus === "STOPPED_AT"
                       ? ""
@@ -299,13 +331,11 @@ app.get("/:school", (req, res) => {
                         )) +
                     '</td></tr><tr><td align=\\"right\\">' +
                     route.stops[
-                      (x.loc.up.find(
-                        n => n.vehicle.trip.tripId === r.vehicle.trip.tripId
-                      )
+                      (x.tr.up.indexOf(r.vehicle.trip.tripId) > -1
                         ? "u"
                         : "d") + r.vehicle.currentStopSequence
                     ] +
-                    "(" +
+                    " (" +
                     r.vehicle.currentStopSequence +
                     ')</td><td align=\\"center\\">' +
                     (r.vehicle.currentStatus === "STOPPED_AT"
@@ -322,96 +352,141 @@ app.get("/:school", (req, res) => {
                         ) +
                         "</td>"
                       : "◯</td><td>" +
-                        (route.uptime &&
-                          route.downtime &&
-                          (x.loc.up.find(
-                            n => n.vehicle.trip.tripId === r.vehicle.trip.tripId
-                          ) &&
-                            route.up === "u" + r.vehicle.currentStopSequence))
-                      ? "🔮 [" +
-                        new Date(
-                          x.tu.up.find(
-                            n => n.trip.tripId === r.vehicle.trip.tripId
-                          ).tripUpdate.stopTimeUpdate[
-                            parseInt(r.vehicle.currentStopSequence) - 1
-                          ].arrival.time
-                        )
-                          .toLocaleString("en-US", {
-                            timeZone: "America/Montreal"
-                          })
-                          .split(",")[0] +
-                        "]"
-                      : x.loc.down.find(
-                          n => n.vehicle.trip.tripId === r.vehicle.trip.tripId
-                        ) && route.down === "d" + r.vehicle.currentStopSequence
-                      ? "🔮 [" +
-                        new Date(
-                          x.tu.down.find(
-                            n => n.trip.tripId === r.vehicle.trip.tripId
-                          ).tripUpdate.stopTimeUpdate[
-                            parseInt(r.vehicle.currentStopSequence) - 1
-                          ].arrival.time
-                        )
-                          .toLocaleString("en-US", {
-                            timeZone: "America/Montreal"
-                          })
-                          .split(",")[0] +
-                        "]"
-                      : "") +
-                    "</td>" +
-                    (x.loc.up.find(
-                      n => n.vehicle.trip.tripId === r.vehicle.trip.tripId
-                    ) && route.up !== "u" + r.vehicle.currentStopSequence // up, not last stop?
-                      ? '</tr><tr><td /><td align=\\"center\\">↓</td><td /></tr><tr><td align=\\"right\\">' +
-                        route.stops[route.up] +
-                        '</td><td align=\\"center\\">◯</td><td>' +
                         (x.tu.up.find(
-                          n => n.trip.tripId === r.vehicle.trip.tripId
-                        ).tripUpdate.stopTimeUpdate[
-                          parseInt(route.up.substring(1)) - 1
-                        ]
+                          n =>
+                            n.tripUpdate.trip.tripId === r.vehicle.trip.tripId
+                        ) && route.up === "u" + r.vehicle.currentStopSequence
                           ? "🔮 [" +
                             new Date(
                               x.tu.up.find(
                                 n =>
                                   n.tripUpdate.trip.tripId ===
                                   r.vehicle.trip.tripId
-                              ).tripUpdate.stopTimeUpdate[
-                                parseInt(route.up.substring(1)) - 1
-                              ].arrival.time
+                              ) &&
+                                x.tu.up.find(
+                                  n =>
+                                    n.tripUpdate.trip.tripId ===
+                                    r.vehicle.trip.tripId
+                                ).tripUpdate.stopTimeUpdate[
+                                  parseInt(r.vehicle.currentStopSequence) - 1
+                                ].arrival.time
                             )
                               .toLocaleString("en-US", {
                                 timeZone: "America/Montreal"
                               })
                               .split(",")[0] +
                             "]"
+                          : x.loc.down.find(
+                              n =>
+                                n.vehicle.trip.tripId === r.vehicle.trip.tripId
+                            ) &&
+                            route.down === "d" + r.vehicle.currentStopSequence
+                          ? "🔮 [" +
+                            new Date(
+                              x.tu.down
+                                .find(
+                                  n =>
+                                    n.tripUpdate.trip.tripId ===
+                                    r.vehicle.trip.tripId
+                                )
+                                .tripUpdate.stopTimeUpdate.find(
+                                  s =>
+                                    s.stopSequence ===
+                                    r.vehicle.currentStopSequence
+                                ).arrival.time * 1000
+                            ).toLocaleString("en-US", {
+                              hour12: false,
+                              timeZone: "America/Montreal",
+                              hour: "2-digit",
+                              minute: "2-digit",
+                              second: "2-digit"
+                            }) +
+                            "]"
+                          : "")) +
+                    "</td>" +
+                    (x.tr.up.indexOf(r.vehicle.trip.tripId) > -1 &&
+                    route.up !== "u" + r.vehicle.currentStopSequence // up, not last stop?
+                      ? '</tr><tr><td /><td align=\\"center\\">↓</td><td /></tr><tr><td align=\\"right\\">' +
+                        route.stops[route.up] +
+                        '</td><td align=\\"center\\">◯</td><td>' +
+                        (x.tu.up.find(
+                          n =>
+                            n.tripUpdate.trip.tripId === r.vehicle.trip.tripId
+                        ) &&
+                        x.tu.up
+                          .find(
+                            n =>
+                              n.tripUpdate.trip.tripId === r.vehicle.trip.tripId
+                          )
+                          .tripUpdate.stopTimeUpdate.find(
+                            s =>
+                              s.stopSequence === parseInt(route.up.substring(1))
+                          )
+                          ? "🔮 [" +
+                            new Date(
+                              x.tu.up
+                                .find(
+                                  n =>
+                                    n.tripUpdate.trip.tripId ===
+                                    r.vehicle.trip.tripId
+                                )
+                                .tripUpdate.stopTimeUpdate.find(
+                                  s =>
+                                    s.stopSequence ===
+                                    parseInt(route.up.substring(1))
+                                ).arrival.time * 1000
+                            )
+                              .toLocaleString("en-US", {
+                                hour12: false,
+                                timeZone: "America/Montreal",
+                                hour: "2-digit",
+                                minute: "2-digit",
+                                second: "2-digit"
+                              })
+                              .split(",")[0] +
+                            "]"
                           : "") +
-                        '</td></tr><tr><td /><td align=\\"center\\">↓</td><td /></tr>'
-                      : x.loc.down.find(
-                          n => n.vehicle.trip.tripId === r.vehicle.trip.tripId
-                        ) && route.down !== "d" + r.vehicle.currentStopSequence // down, not last stop?
+                        "</td></tr>"
+                      : x.tr.down.indexOf(r.vehicle.trip.tripId) > -1 &&
+                        route.down !== "d" + r.vehicle.currentStopSequence // down, not last stop?
                       ? '</tr><tr><td /><td align=\\"center\\">↓</td><td /></tr><tr><td align=\\"right\\">' +
                         route.stops[route.down] +
                         '</td><td align=\\"center\\">◯</td><td>' +
                         (x.tu.down.find(
-                          n => n.trip.tripId === r.vehicle.trip.tripId
-                        ).tripUpdate.stopTimeUpdate[
-                          parseInt(route.up.substring(1)) - 1
-                        ]
+                          n =>
+                            n.tripUpdate.trip.tripId === r.vehicle.trip.tripId
+                        ) &&
+                        x.tu.down
+                          .find(
+                            n =>
+                              n.tripUpdate.trip.tripId === r.vehicle.trip.tripId
+                          )
+                          .tripUpdate.stopTimeUpdate.find(s => {
+                            return (
+                              s.stopSequence ===
+                              parseInt(route.down.substring(1))
+                            );
+                          })
                           ? "🔮 [" +
                             new Date(
-                              x.tu.up.find(
-                                n =>
-                                  n.tripUpdate.trip.tripId ===
-                                  r.vehicle.trip.tripId
-                              ).tripUpdate.stopTimeUpdate[
-                                parseInt(route.down.substring(1)) - 1
-                              ].arrival.time + "000"
-                            )
-                              .toLocaleString("en-US", {
-                                timeZone: "America/Montreal"
-                              })
-                              .split(",")[0] +
+                              x.tu.down
+                                .find(
+                                  n =>
+                                    n.tripUpdate.trip.tripId ===
+                                    r.vehicle.trip.tripId
+                                )
+                                .tripUpdate.stopTimeUpdate.find(
+                                  s =>
+                                    s.stopSequence ===
+                                    parseInt(route.down.substring(1))
+                                ).arrival.time * 1000
+                            ).toLocaleString("en-US", {
+                              hour12: false,
+                              timeZone: "America/Montreal",
+                              hour: "2-digit",
+                              minute: "2-digit",
+                              second: "2-digit"
+                            }) +
                             "]"
                           : "")
                       : "</tr>") +
@@ -435,23 +510,22 @@ app.get("/:school", (req, res) => {
                       (x.tu.up.length === 0
                         ? '<td align=\\"right\\">Pas de bus</td><td /><td>No buses</td>'
                         : x.tu.up
+                            .filter(
+                              a =>
+                                a.tripUpdate.stopTimeUpdate.length ===
+                                parseInt(route.up.substring(1))
+                            )
                             .sort(
                               (a, b) =>
-                                parseInt(
-                                  a.tripUpdate.stopTimeUpdate[0].departure.time
-                                ) -
-                                parseInt(
-                                  b.tripUpdate.stopTimeUpdate[0].departure.time
-                                )
+                                a.tripUpdate.stopTimeUpdate[0].departure.time -
+                                b.tripUpdate.stopTimeUpdate[0].departure.time
                             )
                             .map(
                               t =>
                                 '<td align=\\"right\\">' +
                                 new Date(
-                                  parseInt(
-                                    t.tripUpdate.stopTimeUpdate[0].departure
-                                      .time + "000"
-                                  )
+                                  t.tripUpdate.stopTimeUpdate[0].departure
+                                    .time * 1000
                                 ).toLocaleString("en-US", {
                                   hour12: false,
                                   timeZone: "America/Montreal",
@@ -462,15 +536,17 @@ app.get("/:school", (req, res) => {
                                 " (🗒️ " +
                                 t.tripUpdate.trip.startTime +
                                 ")</td><td /><td>" +
-                                (t.tripUpdate.stopTimeUpdate[
-                                  parseInt(route.up.substring(1)) - 1
-                                ].departure
+                                (t.tripUpdate.stopTimeUpdate.find(
+                                  s =>
+                                    s.stopSequence ===
+                                    parseInt(route.down.substring(1))
+                                ).departure
                                   ? new Date(
-                                      parseInt(
-                                        t.tripUpdate.stopTimeUpdate[
-                                          parseInt(route.up.substring(1)) - 1
-                                        ].departure.time + "000"
-                                      )
+                                      t.tripUpdate.stopTimeUpdate.find(
+                                        s =>
+                                          s.stopSequence ===
+                                          parseInt(route.down.substring(1))
+                                      ).arrival.time * 1000
                                     ).toLocaleString("en-US", {
                                       hour12: false,
                                       timeZone: "America/Montreal",
@@ -502,25 +578,23 @@ app.get("/:school", (req, res) => {
                         (x.tu.down.length === 0
                           ? '<td align=\\"right\\">Pas de bus</td><td /><td>No buses</td>'
                           : x.tu.down
+                              .filter(
+                                a =>
+                                  a.tripUpdate.stopTimeUpdate.length ===
+                                  parseInt(route.down.substring(1))
+                              )
                               .sort(
                                 (a, b) =>
-                                  parseInt(
-                                    a.tripUpdate.stopTimeUpdate[0].departure
-                                      .time
-                                  ) -
-                                  parseInt(
-                                    b.tripUpdate.stopTimeUpdate[0].departure
-                                      .time
-                                  )
+                                  a.tripUpdate.stopTimeUpdate[0].departure
+                                    .time -
+                                  b.tripUpdate.stopTimeUpdate[0].departure.time
                               )
                               .map(
                                 t =>
                                   '<td align=\\"right\\">' +
                                   new Date(
-                                    parseInt(
-                                      t.tripUpdate.stopTimeUpdate[0].departure
-                                        .time + "000"
-                                    )
+                                    t.tripUpdate.stopTimeUpdate[0].departure
+                                      .time * 1000
                                   ).toLocaleString("en-US", {
                                     hour12: false,
                                     timeZone: "America/Montreal",
@@ -531,16 +605,17 @@ app.get("/:school", (req, res) => {
                                   " (🗒️ " +
                                   t.tripUpdate.trip.startTime +
                                   ")</td><td /><td>" +
-                                  (t.tripUpdate.stopTimeUpdate[
-                                    parseInt(route.down.substring(1)) - 1
-                                  ]
+                                  (t.tripUpdate.stopTimeUpdate.find(
+                                    s =>
+                                      s.stopSequence ===
+                                      parseInt(route.down.substring(1))
+                                  )
                                     ? new Date(
-                                        parseInt(
-                                          t.tripUpdate.stopTimeUpdate[
-                                            parseInt(route.down.substring(1)) -
-                                              1
-                                          ].departure.time + "000"
-                                        )
+                                        t.tripUpdate.stopTimeUpdate.find(
+                                          s =>
+                                            s.stopSequence ===
+                                            parseInt(route.down.substring(1))
+                                        ).departure.time * 1000
                                       ).toLocaleString("en-US", {
                                         hour12: false,
                                         timeZone: "America/Montreal",
