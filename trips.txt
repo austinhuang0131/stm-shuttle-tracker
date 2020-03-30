@@ -1,14 +1,14 @@
 route_id,service_id,trip_id,trip_headsign,direction_id,shape_id,wheelchair_accessible,note_fr,note_en
-103E,20M-ECOLE-00-S,215459186,103E-?,?,,0,56414 => 50626,20200327 15:35
+103E,20M-ECOLE-00-S,215459186,103E-O,1,,0,15:35 École Saint-Luc (principale) => Côte-St-Luc / Hudson,15:35 École Saint-Luc (main building) => Côte-St-Luc / Hudson
 104E,20M-ECOLE-00-S,213939033,104E-O,1,,0,15:20 École internationale de Montréal => Caldwell / des Maimonides,15:20 École internationale de Montréal => Caldwell / des Maimonides
 105E,20M-ECOLE-00-S,213575452,105E-E,0,,0,11:35 Concordia Loyola => Métro Vendôme,11:35 Concordia Loyola => Vendôme Metro
 105E,20M-ECOLE-00-S,215459192,105E-E,0,,0,16:10 Concordia Loyola => Métro Vendôme,16:10 Concordia Loyola => Vendôme Metro
 105E,20M-ECOLE-00-S,215458387,105E-E,0,,0,16:10 Greaves Adventist® Academy => Métro Vendôme,16:10 Greaves Adventist® Academy => Vendôme Metro
 106E,20M-ECOLE-00-S,213936153,106E-E,0,,0,15:10 École Secondaire Cavalier-de-LaSalle => Métro Angrignon,15:10 École Secondaire Cavalier-de-LaSalle => Angrignon Metro
 106E,20M-ECOLE-00-S,213939263,106E-E,0,,0,15:37 École Secondaire Cavalier-de-LaSalle => Métro Angrignon,15:37 École Secondaire Cavalier-de-LaSalle => Angrignon Metro
-106E,20M-ECOLE-00-S,213937661,106E-?,?,,0,61615 => 56834,20200327 16:00
+106E,20M-ECOLE-00-S,213937661,106E-?,?,,0,16:00 CEA LaSalle-Clément => Métro Angrignon,16:00 CEA LaSalle-Clément => Angrignon Metro
 108E,20M-ECOLE-00-S,213937459,108E-O,1,,0,15:28 École Secondaire Monseigneur-Richard => Parc Hadley (Bannantyne / Stephens),15:28 École Secondaire Monseigneur-Richard => Parc Hadley (Bannantyne / Stephens)
-112E,20M-ECOLE-00-S,213939627,112E-?,?,,0,15:35 LaSalle Community Comprehensive High School => Métro Jolicoeur,15:35 LaSalle Community Comprehensive High School => Jolicoeur Metro
+112E,20M-ECOLE-00-S,213939627,112E-E,0,,0,15:35 LaSalle Community Comprehensive High School => Métro Jolicoeur,15:35 LaSalle Community Comprehensive High School => Jolicoeur Metro
 113E,20M-ECOLE-00-S,213936829,113E-E,0,,0,16:19 Cégep André-Laurendeau => Métro Angrignon,16:19 Cégep André-Laurendeau => Angrignon Metro
 113E,20M-ECOLE-00-S,213939454,113E-E,0,,0,16:37 Cégep André-Laurendeau => Métro Angrignon,16:37 Cégep André-Laurendeau => Angrignon Metro
 113E,20M-ECOLE-00-S,213938878,113E-E,0,,0,16:55 Cégep André-Laurendeau => Métro Angrignon,16:55 Cégep André-Laurendeau => Angrignon Metro
@@ -18,35 +18,35 @@ route_id,service_id,trip_id,trip_headsign,direction_id,shape_id,wheelchair_acces
 113E,20M-ECOLE-00-S,213936537,113E-E,0,,0,17:58 Cégep André-Laurendeau => Métro Angrignon,17:58 Cégep André-Laurendeau => Angrignon Metro
 113E,20M-ECOLE-00-S,213939136,113E-E,0,,0,18:07 Cégep André-Laurendeau => Métro Angrignon,18:07 Cégep André-Laurendeau => Angrignon Metro
 113E,20M-ECOLE-00-S,213936798,113E-E,0,,0,18:14 Cégep André-Laurendeau => Métro Angrignon,18:14 Cégep André-Laurendeau => Angrignon Metro
-119E,20M-ECOLE-00-S,215458336,119E-S,1,,0,16:45 École Secondaire Pierre-Laporte => Métro Côte-des-Neiges,16:45 École Secondaire Pierre-Laporte => Côte-des-Neiges Metro
 119E,20M-ECOLE-00-S,215460273,119E-N,0,,0,15:25 École Secondaire Pierre-Laporte => Laird / Canora (Gare Mont-Royal),15:25 École Secondaire Pierre-Laporte => Laird / Canora (Mont-Royal Stn.)
-121E,20M-ECOLE-00-S,214176836,121E-?,?,,0,61706 => 56082,20200327 15:35
-121E,20M-ECOLE-00-S,214176722,121E-?,?,,0,61706 => 56082,20200327 15:35
-136E,20M-ECOLE-00-S,212840076,136E-?,?,,0,54945 => 54931,20200327 15:40
-139E,20M-ECOLE-00-S,214179434,139E-?,?,,0,50932 => 61779,20200327 15:53
-160E,20M-ECOLE-00-S,215458342,160E-?,?,,0,61362 => 56197,20200327 16:15
-162E,20M-ECOLE-00-S,215458380,162E-?,?,,0,50723 => 56422,20200327 15:15
-171E,20M-ECOLE-00-S,215459886,171E-?,?,,0,60374 => 55624,20200327 15:18
-171E,20M-ECOLE-00-S,214176148,171E-?,?,,0,60374 => 55712,20200327 15:11
+119E,20M-ECOLE-00-S,215458336,119E-S,1,,0,16:45 École Secondaire Pierre-Laporte => Métro Côte-des-Neiges,16:45 École Secondaire Pierre-Laporte => Côte-des-Neiges Metro
+121E,20M-ECOLE-00-S,214176836,121E-O,1,,0,61706 => 56082,20200327 15:35
+121E,20M-ECOLE-00-S,214176722,121E-O,1,,0,61706 => 56082,20200327 15:35
+136E,20M-ECOLE-00-S,212840076,136E-N,0,,0,15:40 Laurier Macdonald High School => des Grandes-Prairies / No. 5940,15:40 Laurier Macdonald High School => des Grandes-Prairies / No. 5940
+139E,20M-ECOLE-00-S,214179434,139E-N,0,,0,"15:53 Collège Reine-Marie => Henri-Bourassa / Pie-IX, via Gare St-Michel-Mtl-Nord","15:53 Collège Reine-Marie => Henri-Bourassa / Pie-IX, via St-Michel-Mtl-Nord Stn."
+160E,20M-ECOLE-00-S,215458342,160E-O,1,,0,61362 => 56197,20200327 16:15
+162E,20M-ECOLE-00-S,215458380,162E-O,1,,0,15:15 College Prep International => Kildare / Cavendish,15:15 College Prep International => Kildare / Cavendish
+171E,20M-ECOLE-00-S,215459886,171E-E,0,,0,15:18 École Secondaire St-Laurent => Métro Côte-Vertu,15:18 École Secondaire St-Laurent => Métro Côte-Vertu
+171E,20M-ECOLE-00-S,214176148,171E-E,0,,0,"15:11 École Secondaire St-Laurent => Métro Henri-Bourassa, via Métro Côte-Vertu","15:11 École Secondaire St-Laurent => Henri-Bourassa Metro, via Côte-Vertu Metro"
 179E,20M-ECOLE-00-S,215460495,179E-?,?,,0,60354 => 50249,20200327 15:40
-185E,20M-ECOLE-00-S,212839332,185E-?,?,,0,53482 => 53252,20200327 14:58
-185E,20M-ECOLE-00-S,213546814,185E-?,?,,0,61597 => 53241,20200327 15:15
+185E,20M-ECOLE-00-S,212839332,185E-?,?,,0,14:58 Bellerive / Baldwin (Collège Mont-Royal?) => Métro Honoré-Beaugrand,14:58 Bellerive / Baldwin (Collège Mont-Royal?) => Honoré-Beaugrand Metro
+185E,20M-ECOLE-00-S,213546814,185E-?,?,,0,15:15 Collège Mont-Royal => Métro Frontenac,15:15 Collège Mont-Royal => Frontenac Metro
 186E,20M-ECOLE-00-S,212835942,186E-O,1,,0,15:42 Polyvalente Pointe-Aux-Trembles => Métro Honoré-Beaugrand,15:42 Polyvalente Pointe-Aux-Trembles => Honoré-Beaugrand Metro
 186E,20M-ECOLE-00-S,212833877,186E-O,1,,0,15:45 Polyvalente Pointe-Aux-Trembles => Métro Honoré-Beaugrand,15:45 Polyvalente Pointe-Aux-Trembles => Honoré-Beaugrand Metro
+187E,20M-ECOLE-00-S,212834092,187E-O,1,,0,15:23 École Secondaire Daniel-Johnson => Métro Honoré-Beaugrand,15:23 École Secondaire Daniel-Johnson => Honoré-Beaugrand Metro
 187E,20M-ECOLE-00-S,212833798,187E-O,1,,0,"16:05 Collège Saint-Jean-Vianney => Métro Honoré-Beaugrand, via René-Lévesque","16:05 Collège Saint-Jean-Vianney => Honoré-Beaugrand Metro, via René-Lévesque"
 187E,20M-ECOLE-00-S,212835408,187E-O,1,,0,"16:15 Collège Saint-Jean-Vianney => Métro Honoré-Beaugrand, via René-Lévesque","16:15 Collège Saint-Jean-Vianney => Honoré-Beaugrand Metro, via René-Lévesque"
-187E,20M-ECOLE-00-S,212834092,187E-O,1,,0,15:23 École Secondaire Daniel-Johnson => Métro Honoré-Beaugrand,15:23 École Secondaire Daniel-Johnson => Honoré-Beaugrand Metro
 189E,20M-ECOLE-00-S,212833740,189E-E,0,,0,12:10 Notre-Dame / Marien => Polyvalente Pointe-Aux-Trembles,12:10 Notre-Dame / Marien => Polyvalente Pointe-Aux-Trembles
 189E,20M-ECOLE-00-S,212837623,189E-O,1,,0,"16:15 Collège Saint-Jean-Vianney => Métro Honoré-Beaugrand, via Notre-Dame","16:15 Collège Saint-Jean-Vianney => Honoré-Beaugrand Metro, via Notre-Dame"
-195E,20M-ECOLE-00-S,213939363,195E-?,?,,0,57139 => 57147,20200327 15:35
-202E,20M-ECOLE-00-S,215637292,202E-?,?,,0,16:15 École Dorval-Jean-XXIII => Métro du Collège,16:15 École Dorval-Jean-XXIII => du Collège Metro
+195E,20M-ECOLE-00-S,213939363,195E-?,?,,0,15:35 Lakeside Academy => Métro Angrignon,15:35 Lakeside Academy => Angrignon Metro
+202E,20M-ECOLE-00-S,215637292,202E-E,0,,0,16:15 École Dorval-Jean-XXIII => Métro du Collège,16:15 École Dorval-Jean-XXIII => du Collège Metro
 202I,20M-INDUSTRIEL-00-S,215635940,202I-?,?,,0,61541 => 57504,20200327 14:37
-215I,20M-INDUSTRIEL-00-S,215638362,215I-?,?,,0,55378 => 60288,20200327 15:15
+215I,20M-INDUSTRIEL-00-S,215638362,215I-E,0,,0,15:15 Henri-Bourassa / Halpern => Métro Côte-Vertu,15:15 Henri-Bourassa / Halpern => Côte-Vertu Metro
 28E,20M-ECOLE-00-S,212837350,28E-S,1,,0,14:52 Académie Dunton => Métro Honoré-Beaugrand,14:52 Académie Dunton => Honoré-Beaugrand Metro
-28I,20M-INDUSTRIEL-00-S,212836056,28I-?,?,,0,54708 => 54531,20200327 16:22
+28I,20M-INDUSTRIEL-00-S,212836056,28I-S,1,,0,16:22 Trajet complet de 28,16:22 28 full regular route
 407I,20M-INDUSTRIEL-00-S,215638907,407I-?,?,,0,58054 => 58050,20200327 15:31
 411E,20M-ECOLE-00-S,215460787,411E-O,1,,0,15:05 Collège Sainte-Anne => Terminus MacDonald,15:05 Collège Sainte-Anne => MacDonald Terminus
-449E,20M-ECOLE-00-S,213545798,449E-?,?,,0,61353 => 54567,20200327 15:35
+449E,20M-ECOLE-00-S,213545798,449E-N,0,,0,61353 => 54567,20200327 15:35
 48E,20M-ECOLE-00-S,212834301,48E-?,?,,0,54139 => 51590,20200327 12:22
 49E,20M-ECOLE-00-S,212833828,49E-?,?,,0,53133 => 60517,20200327 12:20
 49E,20M-ECOLE-00-S,212837614,49E-?,?,,0,53914 => 53280,20200327 16:13
@@ -54,30 +54,30 @@ route_id,service_id,trip_id,trip_headsign,direction_id,shape_id,wheelchair_acces
 49E,20M-ECOLE-00-S,212834247,49E-?,?,,0,53914 => 53910,20200327 16:05
 49E,20M-ECOLE-00-S,212835590,49E-?,?,,0,54324 => 60305,20200327 15:35
 49E,20M-ECOLE-00-S,212833577,49E-?,?,,0,55227 => 60539,20200327 15:30
-51E,20M-ECOLE-00-S,213546491,51E-?,?,,0,50716 => 50648,20200327 15:30
+51E,20M-ECOLE-00-S,213546491,51E-E,0,,0,"15:30 École Saint-Luc (Annexe 1) => Métro Laurier, via Métro Snowdon et UdeM","15:30 École Saint-Luc (Annex 1) => Laurier Metro, via Snowdon and UdeM Metro"
 55E,20M-ECOLE-00-S,212860641,55E-S,1,,0,15:25 École Lucien-Pagé => St-Laurent / St-Jacques (Métro Place-d'Armes),15:25 École Lucien-Pagé => St-Laurent / St-Jacques (Place-d'Armes Metro)
-57I,20M-INDUSTRIEL-00-S,213938327,57I-?,?,,0,52767 => 52716,20200327 16:04
-57I,20M-INDUSTRIEL-00-S,213938329,57I-?,?,,0,52767 => 52716,20200327 16:34
-57I,20M-INDUSTRIEL-00-S,213938331,57I-?,?,,0,52767 => 52716,20200327 17:04
+57I,20M-INDUSTRIEL-00-S,213938327,57I-E,0,,0,16:04 Shearer / Richardson => de Condé / du Centre,16:04 Shearer / Richardson => de Condé / du Centre
+57I,20M-INDUSTRIEL-00-S,213938329,57I-E,0,,0,16:34 Shearer / Richardson => de Condé / du Centre,16:34 Shearer / Richardson => de Condé / du Centre
+57I,20M-INDUSTRIEL-00-S,213938331,57I-E,0,,0,17:04 Shearer / Richardson => de Condé / du Centre,17:04 Shearer / Richardson => de Condé / du Centre
 58E,20M-ECOLE-00-S,213936385,58E-O,1,,0,15:28 École Secondaire Monseigneur-Richard => George / Albert-Couture,15:28 École Secondaire Monseigneur-Richard => George / Albert-Couture
 61I,20M-INDUSTRIEL-00-S,213936863,61I-O,1,,0,09:30 Métro McGill => Wellington / Robert-Bourassa (Cité du Multimédia),09:30 McGill Metro => Wellington / Robert-Bourassa (Cité du Multimédia)
 61I,20M-INDUSTRIEL-00-S,213936861,61I-O,1,,0,09:30 Métro McGill => Wellington / Robert-Bourassa (Cité du Multimédia),09:30 McGill Metro => Wellington / Robert-Bourassa (Cité du Multimédia)
 61I,20M-INDUSTRIEL-00-S,213936871,61I-E,0,,0,17:05 Wellington / Queen (Cité du Multimédia) => Métro McGill,17:05 Wellington / Queen (Cité du Multimédia) => McGill Metro
 61I,20M-INDUSTRIEL-00-S,213936873,61I-E,0,,0,17:39 Wellington / Queen (Cité du Multimédia) => Métro McGill,17:39 Wellington / Queen (Cité du Multimédia) => McGill Metro
-68E,20M-ECOLE-00-S,215635890,68E-?,?,,0,58140 => 58256,20200327 14:45
-68E,20M-ECOLE-00-S,215638271,68E-?,?,,0,60287 => 50145,20200327 15:44
-68E,20M-ECOLE-00-S,215638058,68E-?,?,,0,60294 => 58210,20200327 15:50
-69E,20M-ECOLE-00-S,214176143,69E-?,?,,0,55232 => 50150,20200327 11:14
-69E,20M-ECOLE-00-S,214178448,69E-?,?,,0,55232 => 55211,20200327 15:26
-69E,20M-ECOLE-00-S,214178127,69E-?,?,,0,55232 => 55211,20200327 15:43
-69E,20M-ECOLE-00-S,214178209,69E-?,?,,0,61837 => 50333,20200327 16:04
-69E,20M-ECOLE-00-S,214179580,69E-?,?,,0,61837 => 50333,20200327 16:10
-69E,20M-ECOLE-00-S,214179304,69E-?,?,,0,61837 => 50333,20200327 16:15
-85E,20M-ECOLE-00-S,212839333,85E-?,?,,0,54675 => 54677,20200327 15:44
-86E,20M-ECOLE-00-S,212836160,86E-?,?,,0,53570 => 53583,20200327 15:42
-86E,20M-ECOLE-00-S,212835771,86E-?,?,,0,53570 => 53736,20200327 11:45
-86E,20M-ECOLE-00-S,212836162,86E-?,?,,0,53914 => 53621,20200327 16:15
-86E,20M-ECOLE-00-S,212833868,86E-?,?,,0,60546 => 53630,20200327 12:05
+68E,20M-ECOLE-00-S,215635890,68E-O,1,,0,14:45 Pierrefonds Community High School => Cap-Saint-Jacques,14:45 Pierrefonds Community High School => Cap-Saint-Jacques
+68E,20M-ECOLE-00-S,215638271,68E-E,0,,0,15:44 Collège Beaubois => Grenet / Gouin,15:44 Collège Beaubois => Grenet / Gouin
+68E,20M-ECOLE-00-S,215638058,68E-O,1,,0,15:50 Collège Beaubois => de l’Anse à l’Orme / Timberlea Trail,15:50 Collège Beaubois => de l’Anse à l’Orme / Timberlea Trail
+69E,20M-ECOLE-00-S,214176143,69E-O,1,,0,"11:14 École Secondaire Henri-Bourassa => de Serres / Grenet, via Métro Henri-Bourassa","11:14 École Secondaire Henri-Bourassa => de Serres / Grenet, via Henri-Bourassa Metro"
+69E,20M-ECOLE-00-S,214178448,69E-O,1,,0,"15:26 École Secondaire Henri-Bourassa => de Serres / Grenet, via Métro Henri-Bourassa","15:26 École Secondaire Henri-Bourassa => de Serres / Grenet, via Henri-Bourassa Metro"
+69E,20M-ECOLE-00-S,214178127,69E-O,1,,0,"15:43 École Secondaire Henri-Bourassa => de Serres / Grenet, via Métro Henri-Bourassa","15:43 École Secondaire Henri-Bourassa => de Serres / Grenet, via Henri-Bourassa Metro"
+69E,20M-ECOLE-00-S,214178209,69E-O,1,,0,"16:04 École Sophie-Barat => de Serres / Grenet, via Métro Henri-Bourassa","16:04 École Sophie-Barat => de Serres / Grenet, via Henri-Bourassa Metro"
+69E,20M-ECOLE-00-S,214179580,69E-O,1,,0,"16:10 École Sophie-Barat => de Serres / Grenet, via Métro Henri-Bourassa","16:10 École Sophie-Barat => de Serres / Grenet, via Henri-Bourassa Metro"
+69E,20M-ECOLE-00-S,214179304,69E-O,1,,0,"16:15 École Sophie-Barat => de Serres / Grenet, via Métro Henri-Bourassa","16:15 École Sophie-Barat => de Serres / Grenet, via Henri-Bourassa Metro"
+85E,20M-ECOLE-00-S,212839333,85E-O,1,,0,15:44 École Secondaire d’Anjou => Métro Honoré-Beaugrand,15:44 École Secondaire d’Anjou => Honoré-Beaugrand Metro
+86E,20M-ECOLE-00-S,212835771,86E-E,0,,0,11:45 Polyvalente Pointe-Aux-Trembles => 100e Av / Bureau,11:45 Polyvalente Pointe-Aux-Trembles => 100e Av / Bureau
+86E,20M-ECOLE-00-S,212833868,86E-E,0,,0,12:05 St-Jean-Baptiste / Notre-Dame => Polyvalente Pointe-Aux-Trembles,12:05 St-Jean-Baptiste / Notre-Dame => Polyvalente Pointe-Aux-Trembles
+86E,20M-ECOLE-00-S,212836160,86E-E,0,,0,15:42 Polyvalente Pointe-Aux-Trembles => 100e Av / Bureau,15:42 Polyvalente Pointe-Aux-Trembles => 100e Av / Bureau
+86E,20M-ECOLE-00-S,212836162,86E-O,1,,0,16:15 Collège Saint-Jean-Vianney => St-Jean-Baptiste / Victoria,16:15 Collège Saint-Jean-Vianney => St-Jean-Baptiste / Victoria
 90E,20M-ECOLE-00-S,213936616,90E-O,1,,0,15:15 Westmount High School => Métro Vendôme,15:15 Westmount High School => Vendôme Metro
 121I,20M-INDUSTRIEL-00-S,215460339,121I-?,?,,0,50342 => 50354,20200327 17:07
 121I,20M-INDUSTRIEL-00-S,214176801,121I-?,?,,0,50439 => 50403,20200327 17:05
