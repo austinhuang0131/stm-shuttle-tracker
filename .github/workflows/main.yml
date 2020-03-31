@@ -14,3 +14,4 @@ jobs:
         ftp-server: ftp://austinhuang.staff.endl.site/
         ftp-username: austinhuang
         ftp-password: ${{ secrets.FTP_PASSWORD }}
+        local-dir: ./stm
