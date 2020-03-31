@@ -17,5 +17,31 @@
   "engines": {
     "node": "10.x"
   },
-  "license": "CC-BY-NC-SA-4.0"
+  "license": "CC-BY-NC-SA-4.0",
+  "eslintConfig": {
+    "extends": "eslint:recommended",
+    "parserOptions": {
+        "ecmaVersion": 8,
+        "sourceType": "script",
+        "ecmaFeatures": {
+            "jsx": false,
+            "experimentalObjectRestSpread": true
+        }
+    },
+    "env": {
+        "node": true
+    },
+    "rules": {
+        "indent": [
+            "error",
+            2
+        ],
+        "global-require": [
+            "error"
+        ],
+        "handle-callback-err": [
+            "error"
+        ]
+    }
+}
 }
