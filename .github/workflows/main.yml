@@ -14,4 +14,3 @@ jobs:
           ftp-server: ftp://austinhuang.staff.endl.site/
           ftp-username: github@austinhuang.staff.endl.site
           ftp-password: ${{ secrets.FTP_PASSWORD }}
-          git-ftp-args: --all
