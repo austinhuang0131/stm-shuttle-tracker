@@ -1,16 +1,14 @@
+name: Deploy via ftp
 on: push
-name: Publish
 jobs:
-  FTP-Deploy-Action:
-    name: FTP-Deploy-Action
+  deploy:
+    name: Deploy
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master
-        with:
-          fetch-depth: 2
-      - name: FTP-Deploy-Action
-        uses: SamKirkland/FTP-Deploy-Action@3.0.0
-        with:
-          ftp-server: ftp://austinhuang.staff.endl.site/
-          ftp-username: github@austinhuang.staff.endl.site
-          ftp-password: ${{ secrets.FTP_PASSWORD }}
+    - uses: actions/checkout@v2
+    - name: Upload ftp
+      uses: sebastianpopp/ftp-action@releases/v2
+      with:
+        host: ftp://austinhuang.staff.endl.site/
+        user: github@austinhuang.staff.endl.site
+        password: ${{ secrets.FTP_PASSWORD }}
