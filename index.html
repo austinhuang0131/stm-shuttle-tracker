@@ -22,8 +22,84 @@
       name="description"
       content='Track STM "École" (school) buses, with real-time schedule prediction!'
     />
+    <style>
+      .rainbow {
+        background-image: -webkit-gradient(
+          linear,
+          left top,
+          right top,
+          color-stop(0, #f22),
+          color-stop(0.15, #f2f),
+          color-stop(0.3, #22f),
+          color-stop(0.45, #2ff),
+          color-stop(0.6, #2f2),
+          color-stop(0.75, #2f2),
+          color-stop(0.9, #ff2),
+          color-stop(1, #f22)
+        );
+        background-image: gradient(
+          linear,
+          left top,
+          right top,
+          color-stop(0, #f22),
+          color-stop(0.15, #f2f),
+          color-stop(0.3, #22f),
+          color-stop(0.45, #2ff),
+          color-stop(0.6, #2f2),
+          color-stop(0.75, #2f2),
+          color-stop(0.9, #ff2),
+          color-stop(1, #f22)
+        );
+        color: transparent;
+        -webkit-background-clip: text;
+        background-clip: text;
+        font-size: larger;
+      }
+    </style>
   </head>
   <body>
+    <p>
+      La STM a
+      <a
+        href="http://www.stm.info/fr/presse/communiques/2020/covid-19---ajustements-a-l-offre-de-service-du-reseau-bus--metro-et-transport-adapte-de-la-stm"
+        >announcé</a
+      >
+      que les « lignes écoles » seront suspendus à partir de 30 mars.
+    </p>
+
+    <p>
+      The STM has
+      <a
+        href="http://www.stm.info/en/press/press-releases/2020/covid-19---adjustments-to-the-stm-s-bus--metro-and-paratransit-service"
+        >announced</a
+      >
+      that school buses are suspended starting March 30.
+    </p>
+
+    <p>
+      <span class="rainbow">#çavabienaller</span><br />
+      <span class="rainbow">#everythingwillbealright</span>
+    </p>
+
+    <p>
+      <small
+        >For transit enthusiasts, Endless Hosting, and other concerned parties:
+        The GTFS file generator is still required (for industrial extras), hence
+        the application itself is still running, and once I finish analyzing
+        stuff that I already have, I will post them on
+        <a href="https://github.com/austinhuang0131/stm-shuttle-tracker"
+          >GitHub</a
+        >
+        as usual. Questions?
+        <a href="https://austinhuang.me/contact">Contact me.</a></small
+      >
+    </p>
+
+    <p>
+      <small>For MSU president candidates: See group post.</small>
+    </p>
+
+    <!--
     <div lang="en" id="en1">
       <button type="button" onclick="refresh(1)">Français</button>
       <p>
@@ -154,6 +230,7 @@
         >.</small
       >
     </p>
+  -->
     <script>
       function refresh(x) {
         if (x === 1) {
