@@ -11,7 +11,7 @@
     "express": "^4.17.1",
     "gtfs-realtime-bindings": "0.0.5",
     "pretty-ms": "^6.0.1",
-    "quick.db": "^6.3.2",
+    "quick.db": "^7.1.0",
     "request": "^2.88.2"
   },
   "engines": {
