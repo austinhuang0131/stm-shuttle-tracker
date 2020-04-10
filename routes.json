@@ -508,5 +508,76 @@
     ],
     "downFromLoc": "45.4684710,-73.5957910",
     "period": [[7, 15]]
+  },
+  "dunton": {
+    "name": "Académie Dunton",
+    "center": "[45.5921,-73.5261],15",
+    "routes": [
+      {
+        "route": "28E",
+        "stops": {
+          "u1": "La Fontaine / Georges-Bizet",
+          "u2": "Liébert / Notre-Dame",
+          "u3": "Notre-Dame / Georges-Bizet",
+          "u4": "Honoré-Beaugrand / Notre-Dame",
+          "u5": "Honoré-Beaugrand / La Fontaine",
+          "u6": "Honoré-Beaugrand / Ontario",
+          "u7": "Honoré-Beaugrand / Tellier",
+          "u8": "Honoré-Beaugrand / Dubuisson",
+          "u9": "Honoré-Beaugrand / Hochelaga",
+          "u10": "Honoré-Beaugrand / Hochelaga",
+          "u11": "Honoré-Beaugrand / Pierre-de-Coubertin",
+          "u12": "Honoré-Beaugrand / Sainte-Claire",
+          "u13": "Honoré-Beaugrand / de Marseille",
+          "u14": "Honoré-Beaugrand / Roux",
+          "u15": "Académie Dunton",
+          "d1": "Académie Dunton",
+          "d2": "Chénier / Honoré-Beaugrand",
+          "d3": "Honoré-Beaugrand / Fonteneau",
+          "d4": "Station Honoré-Beaugrand (Nord)"
+        },
+        "up": "u15",
+        "down": "d4",
+        "upFromId": "53467",
+        "upToId": "60360",
+        "downFromId": "60360",
+        "downToId": "53756",
+        "upFromLoc": "45.5911177, -73.5117595"
+      }
+    ],
+    "downFromLoc": "45.5954240, -73.5440530",
+    "period": [[7, 8], [14, 15]]
+  },
+  "gaa": {
+    "name": "Greaves Adventist Academy",
+    "center": "[45.4673,-73.6155],15",
+    "routes": [
+      {
+        "route": "105E",
+        "stops": {
+          "u1": "Station Vendôme",
+          "u2": "Cavendish / No. 2525",
+          "d1": "Greaves Adventist Academy",
+          "d2": "Sherbrooke / Madison",
+          "d3": "Sherbrooke / Grand Boulevard",
+          "d4": "Sherbrooke / Hingston",
+          "d5": "Sherbrooke / de Clifton",
+          "d6": "Sherbrooke / Wilson",
+          "d7": "Sherbrooke / Oxford",
+          "d8": "Sherbrooke / Girouard",
+          "d9": "Sherbrooke / Décarie",
+          "d10": "Station Vendôme"
+        },
+        "up": "u2",
+        "down": "d10",
+        "upFromId": "53797",
+        "upToId": "51112",
+        "downFromId": "61341",
+        "downToId": "53936",
+        "upFromLoc": "45.4737650, -73.6042980"
+      }
+    ],
+    "downFromLoc": "45.4638771, -73.6228135",
+    "period": [[7, 8], [14, 15]]
   }
 }

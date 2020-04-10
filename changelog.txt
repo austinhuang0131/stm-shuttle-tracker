@@ -7,6 +7,10 @@ Inquiries? Feedbacks? Concerns?
 
 === C H A N G E L O G ===
 
+Version 0.1.5, 2020/04/10
+* Schools
+- Temporarily adding Académie Dunton and Greaves Adventist Academy
+
 Version 0.1.4, 2020/04/09
 * Schools
 - Temporarily adding Pierre-Laporte
