@@ -7,6 +7,10 @@ Inquiries? Feedbacks? Concerns?
 
 === C H A N G E L O G ===
 
+Version 0.1.4, 2020/04/09
+* Schools
+- Temporarily adding Pierre-Laporte
+
 Version 0.1.3, 2020/03/31
 * Tracker
 - Refactored code for smooth operation

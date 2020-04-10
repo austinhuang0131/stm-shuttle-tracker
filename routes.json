@@ -321,7 +321,7 @@
   },
   "college-francais": {
     "name": "Collège Français (Montréal)",
-    "center": "[45.4718,-73.5678],13",
+    "center": "[45.5252,-73.5920],15",
     "routes": [
       {
         "route": "51E",
@@ -344,6 +344,87 @@
     ],
     "downFromLoc": "45.5215975, -73.5965011",
     "period": [[7, 8], [15, 15]]
+  },
+  "pierre-laporte": {
+    "name": "École Secondaire Pierre-Laporte",
+    "center": "[45.5168,-73.6718],14",
+    "routes": [
+      {
+        "route": "121E",
+        "stops": {
+          "u1": "Henri-Bourassa / Grenet",
+          "u2": "Henri-Bourassa / de Londres",
+          "u3": "Henri-Bourassa / de Sorbonne",
+          "u4": "Henri-Bourassa / O-Brien",
+          "u5": "O’Brien / Clairoux",
+          "u6": "O’Brien / Poirier",
+          "u7": "O’Brien / Rochon",
+          "u8": "O’Brien / Côte-Vertu",
+          "u9": "Côte-Vertu / Dutrisac",
+          "u10": "Côte-Vertu / Montpellier",
+          "u11": "Côte-Vertu / Muir",
+          "u12": "Côte-Vertu / Jules-Poitras",
+          "u13": "Côte-Vertu / Grimard",
+          "u14": "???",
+          "u15": "???",
+          "d1": "Pierre-Laporte",
+          "d2": "Rockland / Vivian",
+          "d3": "Côte-Vertu / Grimard",
+          "d4": "Côte-Vertu / Jules-Poitras",
+          "d5": "Côte-Vertu / Muir",
+          "d6": "Côte-Vertu / Champigny",
+          "d7": "Côte-Vertu / Barré",
+          "d8": "Côte-Vertu / Dutrisac",
+          "d9": "Côte-Vertu / Ste-Croix",
+          "d10": "Rochon / O’Brien",
+          "d11": "O’Brien / Poirier",
+          "d12": "O’Brien / Cléroux",
+          "d13": "O’Brien / St-Germain",
+          "d14": "Henri-Bourassa / de Sorbonne",
+          "d15": "Henri-Bourassa / de Londres",
+          "d16": "Henri-Bourassa / Grenet"
+        },
+        "up": "u?",
+        "down": "d16",
+        "upFromId": "55461",
+        "upToId": "?",
+        "downFromId": "61706",
+        "downToId": "55458",
+        "upFromLoc": "45.5233340, -73.7047790"
+      },
+      {
+        "route": "119E",
+        "stops": {
+          "d1": "Pierre-Laporte",
+          "d2": "Laird / Canora (Gare Mont-Royal)",
+          "u2": "Pierre-Laporte",
+          "u1": "Laird / Canora (Gare Mont-Royal)"
+        },
+        "up": "u2",
+        "down": "d2",
+        "upFromId": "59676",
+        "upToId": "60361",
+        "downFromId": "61706",
+        "downToId": "59676",
+        "upFromLoc": "45.5169970, -73.6437610"
+      },
+      {
+        "route": "119E",
+        "stops": {
+          "d1": "Pierre-Laporte",
+          "d27": "Station Côte-des-Neiges"
+        },
+        "up": "u?",
+        "down": "d27",
+        "upFromId": "?",
+        "upToId": "?",
+        "downFromId": "56083",
+        "downToId": "51157",
+        "upFromLoc": "45.4966230, -73.6235020"
+      }
+    ],
+    "downFromLoc": "45.5235159, -73.6376082",
+    "period": [[7, 8], [15, 16]]
   },
   "sainte-anne": {
     "name": "Collège Sainte-Anne",
