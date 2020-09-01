@@ -23,3 +23,7 @@ stop_id,stop_code,stop_name,stop_lat,stop_lon,stop_url,location_type,parent_stat
 61362,61362,160E trip 215458342 route 61362 => 56197 depart 20200327 16:15,,,https://github.com/austinhuang0131/stm-shuttle-tracker/wiki/Fake-STM-Stops,0,,0
 61535,61535,49E trip 212836264 route 53914 => 61535 depart 20200327 16:05,,,https://github.com/austinhuang0131/stm-shuttle-tracker/wiki/Fake-STM-Stops,0,,0
 61616,61616,202I trip 216616640 route 61616 => 61616 depart 20200330 07:16,,,https://github.com/austinhuang0131/stm-shuttle-tracker/wiki/Fake-STM-Stops,0,,0
+61704,61704,139I trip 219758869 route 61704 => 61704 depart 20200519 15:39,,,https://github.com/austinhuang0131/stm-shuttle-tracker/wiki/Fake-STM-Stops,0,,0
+61704,61704,139I trip 219758871 route 61704 => 50794 depart 20200519 15:39,,,https://github.com/austinhuang0131/stm-shuttle-tracker/wiki/Fake-STM-Stops,0,,0
+61704,61704,139I trip 219758870 route 61704 => 51606 depart 20200519 15:39,,,https://github.com/austinhuang0131/stm-shuttle-tracker/wiki/Fake-STM-Stops,0,,0
+53133,53133,49E trip 221067730 route 53133 => 54324 depart 20200901 12:20,,,https://github.com/austinhuang0131/stm-shuttle-tracker/wiki/Fake-STM-Stops,0,,0
