@@ -1,7 +1,7 @@
-**Project suspended** since school buses don't run during COVID-19.
-
 # STM Shuttle Tracker
 Tracks STM "École" buses. [Try it out today!](https://stm.austinhuang.me)
+
+Much thanks to [@felixinx](https://github.com/felixinx) for data assistance!
 
 ## Rebuild procedure
 Please note that rehosting is only allowed for development purposes (e.g. improving this service).
