@@ -162,43 +162,35 @@ module.exports = time => {
                       })
                       .catch(console.error);
                 });
-              });
-            updt.entity
-              .filter(
-                u =>
-                  u.tripUpdate.trip.routeId.endsWith("E") ||
-                  u.tripUpdate.trip.routeId.endsWith("I")
-              )
-              .map(r => {
-                streamToString(gtfstrips)
+              streamToString(gtfstrips)
                   .then(gtfstrip => {
                     if (
-                      gtfstrip.indexOf(r.tripUpdate.trip.tripId) === -1 &&
-                      r.tripUpdate.stopTimeUpdate.length > 1 &&
-                      r.tripUpdate.stopTimeUpdate.filter(
+                      gtfstrip.indexOf(t.tripUpdate.trip.tripId) === -1 &&
+                      t.tripUpdate.stopTimeUpdate.length > 1 &&
+                      t.tripUpdate.stopTimeUpdate.filter(
                         u => u.scheduleRelationship === 0
-                      ).length === r.tripUpdate.stopTimeUpdate.length
+                      ).length === t.tripUpdate.stopTimeUpdate.length
                     )
                       gtfsfile.write(
-                        r.tripUpdate.trip.routeId +
+                        t.tripUpdate.trip.routeId +
                           ",20M-" +
-                          (r.tripUpdate.trip.routeId.endsWith("I")
+                          (t.tripUpdate.trip.routeId.endsWith("I")
                             ? "INDUSTRIEL"
                             : "ECOLE") +
                           "-00-S," +
-                          r.tripUpdate.trip.tripId +
+                          t.tripUpdate.trip.tripId +
                           "," +
-                          r.tripUpdate.trip.routeId +
+                          t.tripUpdate.trip.routeId +
                           "-?,?,,0," +
-                          r.tripUpdate.stopTimeUpdate[0].stopId +
+                          t.tripUpdate.stopTimeUpdate[0].stopId +
                           " => " +
-                          r.tripUpdate.stopTimeUpdate[
-                            r.tripUpdate.stopTimeUpdate.length - 1
+                          t.tripUpdate.stopTimeUpdate[
+                            t.tripUpdate.stopTimeUpdate.length - 1
                           ].stopId +
                           "," +
-                          r.tripUpdate.trip.startDate +
+                          t.tripUpdate.trip.startDate +
                           " " +
-                          r.tripUpdate.trip.startTime.replace(/:00$/g, "") +
+                          t.tripUpdate.trip.startTime.replace(/:00$/g, "") +
                           "\n",
                         "utf8",
                         console.error
