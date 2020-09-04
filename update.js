@@ -1,3 +1,21 @@
+/*
+    STM Shuttle Tracker
+    Copyright (C) 2020 Austin Huang <im@austinhuang.me> (https://austinhuang.me)
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+*/
+
 const request = require("request"),
   GtfsRealtimeBindings = require("gtfs-realtime-bindings").transit_realtime,
   DB = require("quick.db"),
@@ -5,9 +23,7 @@ const request = require("request"),
   routes = new DB.table("routes"),
   routelist = require("./routes.json"),
   realstops = require("./stops.json"),
-  gtfsfile = fs.createWriteStream("./trips.txt", { flags: "a" }),
   stopfile = fs.createWriteStream("./stops.txt", { flags: "a" }),
-  gtfstrips = fs.createReadStream("./trips.txt"),
   gtfsstops = fs.createReadStream("./stops.txt");
 
 function streamToString(stream) {
@@ -162,41 +178,6 @@ module.exports = time => {
                       })
                       .catch(console.error);
                 });
-              streamToString(gtfstrips)
-                  .then(gtfstrip => {
-                    if (
-                      gtfstrip.indexOf(t.tripUpdate.trip.tripId) === -1 &&
-                      t.tripUpdate.stopTimeUpdate.length > 1 &&
-                      t.tripUpdate.stopTimeUpdate.filter(
-                        u => u.scheduleRelationship === 0
-                      ).length === t.tripUpdate.stopTimeUpdate.length
-                    )
-                      gtfsfile.write(
-                        t.tripUpdate.trip.routeId +
-                          ",20M-" +
-                          (t.tripUpdate.trip.routeId.endsWith("I")
-                            ? "INDUSTRIEL"
-                            : "ECOLE") +
-                          "-00-S," +
-                          t.tripUpdate.trip.tripId +
-                          "," +
-                          t.tripUpdate.trip.routeId +
-                          "-?,?,,0," +
-                          t.tripUpdate.stopTimeUpdate[0].stopId +
-                          " => " +
-                          t.tripUpdate.stopTimeUpdate[
-                            t.tripUpdate.stopTimeUpdate.length - 1
-                          ].stopId +
-                          "," +
-                          t.tripUpdate.trip.startDate +
-                          " " +
-                          t.tripUpdate.trip.startTime.replace(/:00$/g, "") +
-                          "\n",
-                        "utf8",
-                        console.error
-                      );
-                  })
-                  .catch(console.error);
               });
           }
         );

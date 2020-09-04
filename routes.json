@@ -144,8 +144,7 @@
           "d5": "Berlioz / Terry-Fox",
           "d6": "Berlioz / Place du Soleil",
           "d7": "Berlioz / Place de la Fontaine",
-          "d8": "Berlioz / Landreville",
-          "d8": "Berlioz / de l'Île-des-Sœurs"
+          "d8": "Berlioz / Landreville"
         },
         "up": "",
         "down": "",
@@ -543,6 +542,22 @@
         "downFromId": "60360",
         "downToId": "53756",
         "upFromLoc": "45.5911177, -73.5117595"
+      },
+      {
+        "route": "18E",
+        "stops": {
+          "u1": "Station Honoré-Beaugrand (Sud)",
+          "u2": "Louis-Hippolyte-La Fontaine / Curatteau",
+          "u3": "Louis-Hippolyte-La Fontaine / Fonteneau",
+          "u4": "Académie Dunton"
+        },
+        "up": "u4",
+        "down": "d?",
+        "upFromId": "53275",
+        "upToId": "60360",
+        "downFromId": "60360",
+        "downToId": "?",
+        "upFromLoc": "45.59673,-73.53514"
       }
     ],
     "downFromLoc": "45.5954240, -73.5440530",
