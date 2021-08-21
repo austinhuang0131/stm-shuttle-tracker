@@ -1,6 +1,6 @@
 /*
     STM Shuttle Tracker
-    Copyright (C) 2020 Austin Huang <im@austinhuang.me> (https://austinhuang.me)
+    Copyright (C) 2020-2021 Austin Huang <im@austinhuang.me> (https://austinhuang.me)
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by

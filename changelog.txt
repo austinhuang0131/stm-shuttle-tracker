@@ -4,6 +4,10 @@ Inquiries? Feedbacks? Concerns? im@austinhuang.me
 
 === C H A N G E L O G ===
 
+Version 0.1.6, 2021/08/21
+* Tracker
+- Change license to GPLv3.
+
 Version 0.1.5, 2020/04/10
 * Schools
 - Temporarily adding Académie Dunton and Greaves Adventist Academy
