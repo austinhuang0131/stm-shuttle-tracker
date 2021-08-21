@@ -41,13 +41,13 @@
           "d6": "Des Trinitaires / D'Aragon",
           "d7": "Des Trinitaires / Jogues",
           "d8": "Des Trinitaires / Lamont",
-          "d9": "Métro Angrignon",
+          "d9": "Station Angrignon",
           "u6": "Cégep André-Laurendeau",
           "u5": "de la Vérendrye / Ducas",
           "u4": "Parc Angrignon",
           "u3": "Des Trinitaires / Dumas",
           "u2": "Des Trinitaires / Jogues",
-          "u1": "Métro Angrignon"
+          "u1": "Station Angrignon"
         },
         "up": "u6",
         "down": "d9",
@@ -465,7 +465,7 @@
       }
     ],
     "downFromLoc": "45.4319084,-73.6748258",
-    "period": [[7, 8], [14, 15]]
+    "period": [[6, 8], [14, 15]]
   },
   "james-lyng": {
     "name": "James Lyng High School",
@@ -593,6 +593,50 @@
       }
     ],
     "downFromLoc": "45.4638771, -73.6228135",
+    "period": [[7, 8], [14, 15]]
+  },
+  "saint-louis": {
+    "name": "Collège Saint-Louis",
+    "center": "[45.4350,-73.6491],14",
+    "routes": [
+      {
+        "route": "110E",
+        "stops": {
+          "u1": "morning trip 221217632/221218962"
+        },
+        "up": "u48",
+        "down": "d?",
+        "upFromId": "56973",
+        "upToId": "57186",
+        "downFromId": "?",
+        "downToId": "?",
+        "upFromLoc": "45.4283430, -73.6072790"
+      }
+    ],
+    "downFromLoc": "45.4370580, -73.6970720",
+    "period": [[7, 8], [14, 15]]
+  }
+  ,
+  "cavalier": {
+    "name": "École Sécondaire Cavalier-de-LaSalle",
+    "center": "[45.4336,-73.6149],13",
+    "routes": [
+      {
+        "route": "110E",
+        "stops": {
+          "u1": "Station Angrignon",
+          "u2": "morning trip 221218331/221218723"
+        },
+        "up": "u30",
+        "down": "d?",
+        "upFromId": "54106",
+        "upToId": "56814",
+        "downFromId": "?",
+        "downToId": "?",
+        "upFromLoc": "45.4463910, -73.6040210"
+      }
+    ],
+    "downFromLoc": "45.4169750, -73.6400030",
     "period": [[7, 8], [14, 15]]
   }
 }

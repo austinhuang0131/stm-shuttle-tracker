@@ -138,7 +138,7 @@ module.exports = time => {
               routes.set(s, d);
             });
 
-            updt.entity
+            /*updt.entity
               .filter(
                 u =>
                   u.tripUpdate.trip.routeId.endsWith("E") ||
@@ -178,7 +178,7 @@ module.exports = time => {
                       })
                       .catch(console.error);
                 });
-              });
+              });*/
           }
         );
       }
