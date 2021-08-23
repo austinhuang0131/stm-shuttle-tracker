@@ -1,3 +1,4 @@
 json.sqlite
 .glitch-assets
 .DS_Store
+node_modules

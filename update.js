@@ -46,9 +46,9 @@ module.exports = time => {
       new Date().getDay() !== 6)
   )
     request(
-      "https://api.stm.info/pub/od/gtfs-rt/ic/v1/tripUpdates",
+      "https://api.stm.info/pub/od/gtfs-rt/ic/v2/tripUpdates",
       {
-        method: "POST",
+        method: "GET",
         headers: { apikey: process.env.STM_API_KEY },
         encoding: null
       },
@@ -56,9 +56,9 @@ module.exports = time => {
         if (e || r.statusCode !== 200) return;
         let updt = GtfsRealtimeBindings.FeedMessage.decode(b);
         request(
-          "https://api.stm.info/pub/od/gtfs-rt/ic/v1/vehiclePositions",
+          "https://api.stm.info/pub/od/gtfs-rt/ic/v2/vehiclePositions",
           {
-            method: "POST",
+            method: "GET",
             headers: { apikey: process.env.STM_API_KEY },
             encoding: null
           },
