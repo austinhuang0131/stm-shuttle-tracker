@@ -26,14 +26,14 @@ const request = require("request"),
   stopfile = fs.createWriteStream("./stops.txt", { flags: "a" }),
   gtfsstops = fs.createReadStream("./stops.txt");
 
-function streamToString(stream) {
-  const chunks = [];
-  return new Promise((resolve, reject) => {
-    stream.on("data", chunk => chunks.push(chunk));
-    stream.on("error", reject);
-    stream.on("end", () => resolve(Buffer.concat(chunks).toString("utf8")));
-  });
-}
+// function streamToString(stream) {
+//   const chunks = [];
+//   return new Promise((resolve, reject) => {
+//     stream.on("data", chunk => chunks.push(chunk));
+//     stream.on("error", reject);
+//     stream.on("end", () => resolve(Buffer.concat(chunks).toString("utf8")));
+//   });
+// }
 
 module.exports = time => {
   if (
@@ -53,7 +53,7 @@ module.exports = time => {
         encoding: null
       },
       (e, r, b) => {
-        if (e || r.statusCode !== 200) return;
+        if (e || r.statusCode !== 200) return console.error(e);
         let updt = GtfsRealtimeBindings.FeedMessage.decode(b);
         request(
           "https://api.stm.info/pub/od/gtfs-rt/ic/v2/vehiclePositions",
@@ -63,11 +63,12 @@ module.exports = time => {
             encoding: null
           },
           (e, r, b2) => {
-            if (e || r.statusCode !== 200) return console.error;
+            if (e || r.statusCode !== 200) return console.error(e);
             let feed = GtfsRealtimeBindings.FeedMessage.decode(b2);
             Object.keys(routelist).map(async s => {
-              let d = await routes.fetch(s),
-                ups = updt.entity.filter(
+              let d = await routes.fetch(s);
+              if (!d) d = { tu: {}, loc: {}, tr: {} };
+              let ups = updt.entity.filter(
                   u =>
                     (routelist[s].routes.find(l => {
                       return (
@@ -79,7 +80,7 @@ module.exports = time => {
                         l.route === u.tripUpdate.trip.routeId
                       );
                     }) ||
-                      d.tr.up.indexOf(u.tripUpdate.trip.tripId) > -1) &&
+                      (d.tr.up && d.tr.up.indexOf(u.tripUpdate.trip.tripId) > -1)) &&
                     u.tripUpdate.stopTimeUpdate[0].departure &&
                     u.tripUpdate.stopTimeUpdate[0].departure.time * 1000 +
                       60000 >
@@ -98,18 +99,17 @@ module.exports = time => {
                         l.route === u.tripUpdate.trip.routeId
                       );
                     }) ||
-                      d.tr.down.indexOf(u.tripUpdate.trip.tripId) > -1) &&
+                    (d.tr.down && d.tr.down.indexOf(u.tripUpdate.trip.tripId) > -1)) &&
                     u.tripUpdate.stopTimeUpdate[0].departure &&
                     u.tripUpdate.stopTimeUpdate[0].departure.time * 1000 +
                       60000 >
                       Date.now()
                 );
-              if (!d) d = { tu: {}, loc: {}, tr: {} };
               d.tu.up = ups;
               d.tu.down = downs;
               d.tr = !d.tr ? {} : d.tr;
               d.tr.up =
-                d.tr.up.length === 0
+                (!d.tr.up || d.tr.up.length === 0)
                   ? ups.map(b => b.tripUpdate.trip.tripId)
                   : [
                       ...new Set([
@@ -118,7 +118,7 @@ module.exports = time => {
                       ])
                     ];
               d.tr.down =
-                d.tr.down.length === 0
+                (!d.tr.down || d.tr.down.length === 0)
                   ? downs.map(b => b.tripUpdate.trip.tripId)
                   : [
                       ...new Set([
